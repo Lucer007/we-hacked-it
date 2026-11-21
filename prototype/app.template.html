@@ -3,58 +3,52 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&family=Questrial&display=swap">
 <style>
 /* Layout: one phone-width app column (framed like a phone on wide screens); screens swap inside it,
    the card deck fills the middle, actions and tabs sit at the bottom. */
 /* The `hidden` attribute must win over the display rules below (.toast, .overlay, .tabs). */
 [hidden] { display: none !important; }
+/* Equiteas brand (from the pitch deck): one deliberate dark look in every theme. Deep green-black
+   ground with a green glow in the corners, glass panels, mint accent; Poppins for headings and
+   controls, Century Gothic (Questrial where it isn't installed) for running text. */
 :root {
-  --bg: #ECEEF5;
-  --surface: #FFFFFF;
-  --surface-2: #F5F6FA;
-  --ink: #141A2E;
-  --muted: #5A6179;
-  --line: #DEE2EC;
-  --accent: #2442D8;
-  --accent-ink: #FFFFFF;
-  --accent-soft: #E6EBFE;
-  --verified: #0B7350;
-  --verified-soft: #E2F3EA;
-  --pass: #B42318;
-  --overlay: rgba(14, 18, 34, 0.45);
-  --shadow: 0 20px 44px -22px rgba(20, 26, 46, 0.45);
-  --tile-1: #DCE4FF; --tile-2: #FFE3D6; --tile-3: #DDF2E7; --tile-4: #F3E1FA; --tile-5: #FFF0C9; --tile-6: #D9F0F6;
-  --tile-ink: #1B2244;
-  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+  --bg: #05100C;
+  --glow: #155B3F;
+  --glow-2: #0D372C;
+  --surface: #0F1C17;
+  --surface-2: #0A1611;
+  --surface-3: #13241D;
+  --surface-hi: #1D533C;
+  --ink: #F2F6F0;
+  --muted: #91A09B;
+  --line: #1E3129;
+  --line-strong: #2B4F43;
+  --accent: #5EE5A8;
+  --accent-ink: #04110B;
+  --accent-soft: #163A2C;
+  --accent-glow: rgba(94, 229, 168, 0.45);
+  --verified: #76D8AF;
+  --verified-soft: #12291F;
+  --pass: #FF8A7A;
+  --overlay: rgba(2, 8, 5, 0.7);
+  --shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.9);
+  --tile-1: #1D3B30; --tile-2: #3A3320; --tile-3: #183A3A; --tile-4: #2E2F45; --tile-5: #2F3A1E; --tile-6: #1F2F3F;
+  --tile-ink: #E8F2EC;
+  --font-display: "Poppins", "Century Gothic", system-ui, sans-serif;
+  --font-body: "Century Gothic", "Questrial", "Poppins", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r-card: 22px;
   --r-ctl: 12px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0C0F1C; --surface: #161A2C; --surface-2: #11152A; --ink: #EDEFF7; --muted: #A2A8C0; --line: #2A3049;
-    --accent: #7D92FF; --accent-ink: #0C0F1C; --accent-soft: #1F2752; --verified: #5FD3A3; --verified-soft: #13302A;
-    --pass: #FF8A7A; --overlay: rgba(0, 0, 0, 0.6); --shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.8);
-    --tile-1: #26306A; --tile-2: #4A2A22; --tile-3: #1E3B30; --tile-4: #3A2550; --tile-5: #46391A; --tile-6: #173B45;
-    --tile-ink: #EDEFF7;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0C0F1C; --surface: #161A2C; --surface-2: #11152A; --ink: #EDEFF7; --muted: #A2A8C0; --line: #2A3049;
-  --accent: #7D92FF; --accent-ink: #0C0F1C; --accent-soft: #1F2752; --verified: #5FD3A3; --verified-soft: #13302A;
-  --pass: #FF8A7A; --overlay: rgba(0, 0, 0, 0.6); --shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.8);
-  --tile-1: #26306A; --tile-2: #4A2A22; --tile-3: #1E3B30; --tile-4: #3A2550; --tile-5: #46391A; --tile-6: #173B45;
-  --tile-ink: #EDEFF7;
-  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
-  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45;
+  background: radial-gradient(70% 55% at 100% 0%, var(--glow) 0%, transparent 72%),
+              radial-gradient(60% 50% at 0% 100%, var(--glow-2) 0%, transparent 70%), var(--bg);
+  color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 0; overflow: hidden;
 }
@@ -66,7 +60,7 @@ a { color: var(--accent); }
 
 .app { max-width: 440px; height: 100%; margin: 0 auto; display: flex; flex-direction: column; position: relative; }
 @media (min-width: 720px) {
-  .app { height: calc(100% - 32px); margin-block: 16px; background: var(--surface-2); border: 1px solid var(--line);
+  .app { height: calc(100% - 32px); margin-block: 16px; background: linear-gradient(165deg, var(--surface-3) 0%, var(--bg) 60%); border: 1px solid var(--line-strong);
          border-radius: 30px; padding-inline: 18px; overflow: hidden; box-shadow: var(--shadow); }
 }
 
@@ -252,17 +246,43 @@ details.src a { font-size: 12.5px; }
 .steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
 .close { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); flex: none; }
 
+/* Brand layer: the deck's look on top of the base components. */
+.btn, .chip, .tab, .pill-btn, .q-btn, .option strong, .fact dd, .row dd, .verified, .link-btn, .stat strong,
+.eyebrow, .back-section h3, details.src summary, .ref, b, strong { font-family: var(--font-display); }
+.display, .cname, .big-amount { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.4px; }
+h1.display { font-size: 31px; line-height: 1.14; }
+h2.display { font-size: 26px; line-height: 1.15; }
+.hl { color: var(--accent); }
+.eyebrow, .back-section h3 { color: var(--accent); font-size: 11.5px; letter-spacing: 0.22em; }
+.brand { font-weight: 500; font-size: 22px; letter-spacing: -0.2px; gap: 8px; }
+.brand img { width: 30px; height: 30px; mix-blend-mode: screen;
+             -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%);
+             mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 71%); }
+.pill-btn { background: var(--surface); border-color: var(--line-strong); }
+.card { background: linear-gradient(160deg, var(--surface-3) 0%, var(--surface-2) 100%); border-color: var(--line-strong); }
+.fact { background: var(--surface); border: 1px solid var(--line); }
+.quote-block { background: linear-gradient(150deg, var(--surface-hi) 0%, var(--accent-soft) 100%); border: 1px solid var(--line-strong); }
+.rows, .notice, .option, .chip, .btn:not(.primary), .q-btn, .list li button, .ticker, .round:not(.like) { border-color: var(--line-strong); }
+.btn.primary { box-shadow: 0 12px 28px -14px var(--accent-glow); }
+.round.like { box-shadow: 0 14px 32px -12px var(--accent-glow); }
+.stat strong { font-weight: 600; }
+.hero-art { height: clamp(150px, 32vh, 290px); aspect-ratio: 640 / 490; max-width: 100%; align-self: flex-end; flex: none;
+            background: url("__HERO__") right top / cover no-repeat;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 64%, transparent 100%),
+                                linear-gradient(to right, transparent 0%, #000 32%, #000 94%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 64%, transparent 100%),
+                        linear-gradient(to right, transparent 0%, #000 32%, #000 94%, transparent 100%);
+            mask-composite: intersect; margin-bottom: -22px; }
+
 @media (prefers-reduced-motion: reduce) { .card, .progress-fill { transition: none !important; } }
 </style>
 
 <div class="app" id="app">
   <header class="topbar">
     <div class="brand">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
-        <rect x="8" y="2" width="15" height="19" rx="4" fill="var(--accent)" opacity="0.35"></rect>
-        <rect x="3" y="5" width="15" height="19" rx="4" fill="var(--accent)"></rect>
-      </svg>
-      Equiteas
+      <img src="__LOGO__" alt="" width="30" height="30">
+      equiteas
     </div>
     <button class="pill-btn" type="button" data-action="about" aria-haspopup="dialog">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -371,12 +391,9 @@ details.src a { font-size: 12.5px; }
 
   /* ---------------------------------------------------------------- screens */
   function welcome() {
-    var sample = ["NVDA", "KO", "TSLA"].map(function (id) { return BY_ID[id]; }).filter(Boolean);
     return '<section class="screen welcome">' +
-      '<div class="fan" aria-hidden="true">' + sample.map(function (c) {
-        return '<div class="mini">' + logo(c) + '<div class="bar"></div><div class="bar short"></div><div class="bar"></div></div>';
-      }).join("") + "</div>" +
-      '<h1 class="display">Meet companies before you meet their stock.</h1>' +
+      '<div class="hero-art" aria-hidden="true"></div>' +
+      '<h1 class="display">Get to know a company before you see its <span class="hl">stock price.</span></h1>' +
       '<p class="lead">Swipe through real companies by what they do and who runs them. Like one? Then see its ticker.</p>' +
       '<p class="fine">' + CARDS.length + " companies · every fact checked against its latest annual report</p>" +
       '<div class="btn-col"><button class="btn primary" type="button" data-action="start">Get started</button></div>' +

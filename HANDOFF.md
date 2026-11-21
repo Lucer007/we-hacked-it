@@ -47,8 +47,13 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   `dealdeck.duckdb` are unchanged.
 - **Buy wording:** the reveal button says just "Buy" and the order type is "Market order"; no
   mention of fractional shares (too complex for the pitch). The amount is still picked in euros.
+- **Design = the pitch deck's:** deep green-black, mint accent `#5EE5A8`, Poppins for headings and
+  controls, Century Gothic (Questrial fallback) for text, glass panels. The sprout logo and the
+  ribbon on the welcome screen are cut from the deck cover (`prototype/assets/`, inlined by
+  `build_prototype.py`). Welcome headline = deck tagline.
 - **No backend:** there is no FastAPI and no live DB connection. The page is static; the data is
-  read from `profile_cards.json` and DuckDB at build time and embedded in `index.html`. Free
+  read from `profile_cards.json` and DuckDB (`build_prototype.py` opens it read-only to re-check the
+  demo quotes) at build time and embedded in `index.html`. Free
   questions in "Ask" show a message saying the analyst agent answers them in the live app.
 - Bugs fixed in the template: the liked card came back on the Discover tab; re-rendering the
   same screen jumped to the top (wishlist button, buy checkbox). Locally, `hidden` elements
