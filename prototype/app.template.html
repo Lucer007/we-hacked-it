@@ -1,4 +1,5 @@
-<title>Dealdeck</title>
+<meta charset="utf-8">
+<title>Equiteas</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6,6 +7,8 @@
 <style>
 /* Layout: one phone-width app column (framed like a phone on wide screens); screens swap inside it,
    the card deck fills the middle, actions and tabs sit at the bottom. */
+/* The `hidden` attribute must win over the display rules below (.toast, .overlay, .tabs). */
+[hidden] { display: none !important; }
 :root {
   --bg: #ECEEF5;
   --surface: #FFFFFF;
@@ -259,7 +262,7 @@ details.src a { font-size: 12.5px; }
         <rect x="8" y="2" width="15" height="19" rx="4" fill="var(--accent)" opacity="0.35"></rect>
         <rect x="3" y="5" width="15" height="19" rx="4" fill="var(--accent)"></rect>
       </svg>
-      Dealdeck
+      Equiteas
     </div>
     <button class="pill-btn" type="button" data-action="about" aria-haspopup="dialog">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -539,7 +542,7 @@ details.src a { font-size: 12.5px; }
       '<dl class="rows"><div class="row"><dt>Pays a dividend</dt><dd>' + (div ? esc(div) : "Not in our data") + "</dd></div>" +
       '<div class="row"><dt>Size</dt><dd>' + esc(c.back.profile.size) + "</dd></div></dl>" +
       '<p class="notice">Shown because of your answers, not as a recommendation. This is not financial advice. Past results don’t predict future results; you can lose money.</p>' +
-      '<div class="btn-col"><button class="btn primary" type="button" data-action="buy">Buy a fraction</button>' +
+      '<div class="btn-col"><button class="btn primary" type="button" data-action="buy">Buy</button>' +
       '<button class="btn" type="button" data-action="wish"' + (inList ? " disabled" : "") + ">" + (inList ? "✓ In your wishlist" : "Add to wishlist") + "</button>" +
       '<button class="btn ghost" type="button" data-action="ask" data-id="' + esc(c.id) + '">Ask about ' + esc(c.name) + "</button>" +
       '<button class="btn ghost" type="button" data-action="keepSwiping">Keep swiping</button></div></section>';
@@ -557,7 +560,7 @@ details.src a { font-size: 12.5px; }
         var on = S.amount === v;
         return '<button type="button" class="chip select' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-action="amount" data-value="' + v + '">€' + v + "</button>";
       }).join("") + "</div>" +
-      '<dl class="rows"><div class="row"><dt>Company</dt><dd>' + esc(c.name) + '</dd></div><div class="row"><dt>Order type</dt><dd>Market, fractional share</dd></div>' +
+      '<dl class="rows"><div class="row"><dt>Company</dt><dd>' + esc(c.name) + '</dd></div><div class="row"><dt>Order type</dt><dd>Market order</dd></div>' +
       '<div class="row"><dt>Executed by</dt><dd>Licensed broker partner</dd></div></dl>' +
       '<p class="notice">This company appeared because of your own answers and swipes. We don’t recommend it and this isn’t financial advice. The value can go down as well as up.</p>' +
       '<label class="check" for="agree"><input type="checkbox" id="agree" data-action="agree"' + (S.agreed ? " checked" : "") + "> I understand this is my own decision and that I could lose money.</label>" +
@@ -654,7 +657,11 @@ details.src a { font-size: 12.5px; }
 
   /* ---------------------------------------------------------------- render */
   var SCREENS = { welcome: welcome, quiz: quiz, ready: ready, discover: discover, reveal: reveal, buy: buy, wishlist: wishlist, profile: profile };
+  var lastScreen = null;
   function render() {
+    // Re-rendering the same screen (wishlist button, amount, checkbox) keeps the scroll position.
+    var scrollTo = S.screen === lastScreen ? view.scrollTop : 0;
+    lastScreen = S.screen;
     view.innerHTML = SCREENS[S.screen]();
     var tabScreen = { discover: "discover", reveal: "discover", buy: "discover", wishlist: "wishlist", profile: "profile" }[S.screen];
     tabs.hidden = !tabScreen;
@@ -663,7 +670,7 @@ details.src a { font-size: 12.5px; }
       t.classList.toggle("on", on);
       if (on) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
     });
-    view.scrollTop = 0;
+    view.scrollTop = scrollTo;
     bindDrag();
   }
 
@@ -691,6 +698,7 @@ details.src a { font-size: 12.5px; }
     S.swipes++;
     S.history = [];
     S.revealId = c.id;
+    S.current = null; S.flipped = false;  // the Discover tab must not show the liked card again
     S.ordered = false; S.agreed = false;
     hideToast();
     S.screen = "reveal";
@@ -783,7 +791,7 @@ details.src a { font-size: 12.5px; }
     open: function (d) { S.revealId = d.id; S.screen = "reveal"; render(); },
     tab: function (d) {
       hideToast();
-      if (d.tab === "discover") { if (!S.current && !S.showTune && S.seen.length < CARDS.length) S.current = pickNext(); S.screen = "discover"; }
+      if (d.tab === "discover") { if (!S.current && !S.showTune) { advance(); return; } S.screen = "discover"; }
       else S.screen = d.tab;
       render();
     },

@@ -1,4 +1,4 @@
-# Handoff: Dealdeck (Sciences Po AI Hackathon)
+# Handoff: Equiteas (Sciences Po AI Hackathon)
 
 State on Saturday 21 November 2026. Read this first, then the READMEs it points to.
 
@@ -13,7 +13,7 @@ State on Saturday 21 November 2026. Read this first, then the READMEs it points 
 
 ## The product
 
-**Dealdeck**, a "Tinder for investing" for people new to investing. Users answer a few
+**Equiteas**, a "Tinder for investing" for people new to investing. Users answer a few
 preference questions, then swipe company cards that show facts (what the company does, CEO,
 employees, mission, risks, legal issues), never the ticker or price. A right swipe reveals the
 stock; a fractional buy goes through a licensed broker partner. Global scope, starting with
@@ -24,11 +24,11 @@ the S&P 500.
   **Still private: Théo must share it (Share menu) before submitting it as the prototype link.**
 - Older mockup, superseded: https://claude.ai/artifact/4JfFexnpsnjYmKrG1Hoait
 
-## What exists (nothing is committed yet)
+## What exists (committed and pushed to `main`)
 
 | Path | What it is | Status |
 |---|---|---|
-| `prototype/` | `app.template.html` → `build_prototype.py` → `index.html` (the published page). Edit the template, never `index.html`. | Built and published; not opened in a browser by Claude, only syntax-checked |
+| `prototype/` | `app.template.html` → `build_prototype.py` → `index.html` (the published page). Edit the template, never `index.html`. | Built, published (version 2) and tested end to end in Chrome on 21 Nov: questions, swipe, card back and sources, pass/undo, like, reveal, buy, wishlist, Ask (incl. the NVDA vs AMD question), Tune your feed, end of deck. No console errors. Not yet tried on a real phone |
 | `data_pipeline/sp500/sec.py` | SEC client (cache, rate limit, User-Agent) | Works |
 | `data_pipeline/sp500/build_sp500_cards.py` | Financial cards for the S&P 500 from SEC XBRL frames → `cards.json` | 492/503 companies; spot-checked against known figures |
 | `data_pipeline/sp500/build_db.py` | `dealdeck.duckdb`: companies, 5 years of annual data, balance sheets, 10-K passages | Works (12 reports chunked) |
@@ -41,6 +41,22 @@ the S&P 500.
 The 12 demo companies (10-K downloaded): NVDA, AMD, TSM, AAPL, MSFT, GOOGL, AMZN, WMT, TSLA,
 KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
 
+## Decisions on 21 Nov (morning)
+
+- **Name: Equiteas** (was Dealdeck). Renamed in the app and the docs; file names such as
+  `dealdeck.duckdb` are unchanged.
+- **Buy wording:** the reveal button says just "Buy" and the order type is "Market order"; no
+  mention of fractional shares (too complex for the pitch). The amount is still picked in euros.
+- **No backend:** there is no FastAPI and no live DB connection. The page is static; the data is
+  read from `profile_cards.json` and DuckDB at build time and embedded in `index.html`. Free
+  questions in "Ask" show a message saying the analyst agent answers them in the live app.
+- Bugs fixed in the template: the liked card came back on the Discover tab; re-rendering the
+  same screen jumped to the top (wishlist button, buy checkbox). Locally, `hidden` elements
+  showed (grey overlay) and accents broke because the template had no `[hidden]` rule and no
+  charset; the published wrapper already covered both.
+- Local preview: `cd prototype; python -m http.server 8791 --bind 127.0.0.1` then open
+  http://127.0.0.1:8791/index.html (port 8765 is taken by an old server on Théo's machine).
+
 ## Constraints and gotchas
 
 - **No Anthropic API key** (the hackathon gives Claude Pro only). Every AI output so far was
@@ -48,7 +64,7 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   on site for API credits; then run `analyst.py` on the demo questions and
   `build_profile_cards.py` (without `--assemble-only`), and fix what breaks at runtime.
 - **SEC www.sec.gov needs a contact email in the User-Agent.** Théo sets it himself in his
-  PowerShell terminal: `$env:SEC_USER_AGENT = "Dealdeck <his email>"`. A privacy hook blocks
+  PowerShell terminal: `$env:SEC_USER_AGENT = "Equiteas <his email>"`. A privacy hook blocks
   Claude from putting his email in commands. data.sec.gov (the XBRL API) works without it.
 - **No share-price source:** Stooq is behind an anti-bot check; don't work around it. The
   reveal screen says the price comes from the broker partner in the live app.
