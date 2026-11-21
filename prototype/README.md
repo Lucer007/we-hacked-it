@@ -36,5 +36,12 @@ Edit the page in `app.template.html`, never in `index.html` (it is overwritten).
 - **Free questions:** the text box explains that the analyst agent answers them in the live app.
   The listed questions are real: built from quotes checked against the reports.
 - **Buy:** no order is placed.
+- **Analyse my portfolio (Portfolio tab):** a scripted replay of the analyst agent, with no API
+  call. A robot hops you → sector → company on the map (about 8 s, "Skip" to jump), and each step
+  shows a tool name (`query_financials`, `search_filing`) with a prepared label. Then a short
+  concentration report. The percentages are computed from the holdings (a sector at 30% or more is
+  coral, 20–29% or several tech sectors adding up to 40% or more is amber, and so is a single
+  company at 15% or more). The TSMC link and the quote come from the Nvidia and AMD 10-Ks. The
+  report describes the portfolio and gives no advice. Code: `botAnalysis`, `startBot` in the template.
 - **Recommender:** sector weights from the answers, updated by each swipe (pass ×0.6, like ×1.3),
   with some randomness so other sectors still appear, and one "Tune your feed" card after 4 swipes.
