@@ -35,9 +35,10 @@ sys.path.insert(0, str(ROOT / "data_pipeline" / "sp500"))
 from build_prototype import DB_PATH, build_data, render_page  # noqa: E402
 
 STATE_DB = os.environ.get("EQUITEAS_STATE_DB", str(ROOT / "backend" / "app_state.duckdb"))
-DEMO_USER = "camille"
-# Sample holdings of the demo account ("I already have an account"), in euros.
-DEMO_PORTFOLIO = {"NVDA": 25, "AMD": 10, "MSFT": 10, "KO": 15, "LLY": 25, "JPM": 10}
+DEMO_USER = "warren"
+# Sample holdings of the demo account (sign in with Warren / admin), in euros. TSLA and GOOGL are left
+# out so a purchase during the demo adds a new sector to the portfolio map.
+DEMO_PORTFOLIO = {"NVDA": 40, "AMD": 20, "TSM": 15, "AAPL": 30, "MSFT": 25, "AMZN": 20, "WMT": 10, "KO": 20, "LLY": 25, "JPM": 15}
 
 DATA = build_data()
 CARDS = {card["id"]: card for card in DATA["cards"]}

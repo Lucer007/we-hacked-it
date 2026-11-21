@@ -33,6 +33,6 @@ Optional: `$env:ANTHROPIC_API_KEY = "..."` before starting turns on free questio
   read-only. After `git pull` everyone has the same companies, financials and report passages.
   Rebuild it with `python data_pipeline/sp500/build_db.py` and commit the new file.
 - `backend/app_state.duckdb` (orders, wishlist, swipes) is local to each developer and not in git.
-  It is created on first start with the demo account's sample portfolio (user `camille`).
+  It is created on first start with the demo account's portfolio (sign in with Warren / admin).
 - To share one live state between developers, point the API at MotherDuck (hosted DuckDB):
   `$env:MOTHERDUCK_TOKEN = "..."; $env:EQUITEAS_STATE_DB = "md:equiteas"`. No code change.

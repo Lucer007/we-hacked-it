@@ -74,7 +74,7 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   The page detects the API ("Live API" badge); on claude.ai it falls back to embedded data.
   `dealdeck.duckdb` is now in git for the co-developer; app state stays local. See `backend/README.md`.
 - **Portfolio tab** (was Wishlist): network map, you → sectors (size = number of companies) →
-  companies; sector table; wishlist below. Demo account Camille has a sample portfolio.
+  companies; sector table; wishlist below. Demo login: Warren / admin (10 companies in 6 sectors; TSLA and GOOGL left to buy live).
 
 ## Constraints and gotchas
 

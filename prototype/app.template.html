@@ -529,7 +529,10 @@ h2.display { font-size: 26px; line-height: 1.15; }
   // On claude.ai the page runs on its embedded data. Served by backend/app.py it uses the API:
   // cards, 5-year financials from DuckDB, orders, wishlist, swipes, portfolio by sector, analyst agent.
   var LIVE = false, HEALTH = null;
-  var DEMO_PORTFOLIO = { NVDA: 25, AMD: 10, MSFT: 10, KO: 15, LLY: 25, JPM: 10 };
+  // Demo account (sign in with Warren / admin): sample holdings in euros. TSLA and GOOGL are left out
+  // so a purchase during the demo adds a new sector to the portfolio map.
+  var DEMO_LOGIN = { user: "warren", password: "admin", name: "Warren" };
+  var DEMO_PORTFOLIO = { NVDA: 40, AMD: 20, TSM: 15, AAPL: 30, MSFT: 25, AMZN: 20, WMT: 10, KO: 20, LLY: 25, JPM: 15 };
   function api(path, body) {
     var opts = body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {};
     return fetch(path, opts).then(function (r) {
@@ -656,6 +659,25 @@ h2.display { font-size: 26px; line-height: 1.15; }
       '<p class="form-error" id="su-error" role="alert" hidden></p>' +
       '<button class="btn primary" type="submit" id="su-submit"' + (S.user.terms ? "" : " disabled") + ">Create account</button></form>" +
       '<p class="fine">Demo: nothing is sent or stored.</p></section>';
+  }
+  function login() {
+    return '<section class="screen"><button class="back-link" type="button" data-action="goto" data-screen="welcome">' + ICON.back + "Back</button>" +
+      '<h2 class="display">Welcome back</h2><p class="lead">Sign in to see your feed and your portfolio.</p>' +
+      '<form class="form" data-form="login" novalidate>' +
+      field("li-user", "Username or email", "text", "username", "") + field("li-pass", "Password", "password", "current-password", "") +
+      '<p class="form-error" id="li-error" role="alert" hidden></p>' +
+      '<div class="panel"><p class="eyebrow">Demo account</p><p class="body-text">Username <b>Warren</b>, password <b>admin</b>. Warren already owns 10 companies.</p></div>' +
+      '<div class="spacer"></div><button class="btn primary" type="submit">Sign in</button>' +
+      '<button class="btn ghost" type="button" data-action="start">Create an account instead</button></form></section>';
+  }
+  function signInDemo() {
+    demoAccount(DEMO_LOGIN.name); S.user.id = DEMO_LOGIN.user; S.user.email = DEMO_LOGIN.user + "@example.com";
+    S.introSeen = true; S.prefs.sectors = ["Tech", "Chips", "Health"];
+    S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
+    S.portfolio = null;
+    resetFeed(); S.current = pickNext();
+    go("wishlist");
+    toast("Signed in as Warren (demo account).", false);
   }
   function verify() {
     return '<section class="screen"><button class="back-link" type="button" data-action="goto" data-screen="signup">' + ICON.back + "Back</button>" +
@@ -943,7 +965,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   // Network map: you in the middle, one node per sector (size = number of companies you own in it),
   // each company linked to its sector (size = amount). Positions are computed, no layout library.
   function portfolioGraph(p) {
-    var W = 380, H = 380, cx = W / 2, cy = H / 2, n = p.sectors.length, ring = n === 1 ? 0 : 104;
+    var W = 420, H = 420, cx = W / 2, cy = H / 2, n = p.sectors.length, ring = n === 1 ? 0 : 112;
     var links = "", nodes = "";
     function f(v) { return v.toFixed(1); }
     p.sectors.forEach(function (s, i) {
@@ -983,7 +1005,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   function wishlist() {
     var fromApi = LIVE && S.portfolio, p = fromApi ? S.portfolio : computePortfolio();
     var count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0);
-    var origin = fromApi ? "Computed by the API from your orders in DuckDB." : S.user.id === "camille" ? "Sample portfolio of the demo account." : "";
+    var origin = fromApi ? "Computed by the API from your orders in DuckDB." : S.user.id === DEMO_LOGIN.user ? "Sample portfolio of the demo account." : "";
     var map = p.sectors.length
       ? '<div class="panel map"><div class="title-row"><p class="eyebrow">Where your money is</p><span class="fine">' + money(p.total) + " · " + count +
         (count > 1 ? " companies" : " company") + "</span></div>" + portfolioGraph(p) +
@@ -1168,7 +1190,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   function hideToast() { toastEl.hidden = true; clearTimeout(toastTimer); }
 
   /* ---------------------------------------------------------------- render */
-  var SCREENS = { welcome: welcome, signup: signup, verify: verify, setup: setup, quiz: quiz, ready: ready, intro: intro,
+  var SCREENS = { welcome: welcome, login: login, signup: signup, verify: verify, setup: setup, quiz: quiz, ready: ready, intro: intro,
     discover: discover, reveal: reveal, buy: buy, kyc: kyc, review: review, shared: shared, wishlist: wishlist,
     learn: learn, lesson: lessonScreen, social: social, friend: friendScreen, profile: profile };
   var TAB_OF = { discover: "discover", reveal: "discover", buy: "discover", kyc: "discover", review: "discover", shared: "discover",
@@ -1308,13 +1330,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   var ACTIONS = {
     goto: function (d) { go(d.screen); },
     start: function () { go("signup"); },
-    haveAccount: function () {
-      demoAccount("Camille"); S.user.id = "camille"; S.user.email = "camille@example.com"; S.introSeen = true;
-      S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
-      S.portfolio = null; loadPortfolio();
-      resetFeed(); advance();
-      toast("Signed in as Camille (demo account with a sample portfolio).", false);
-    },
+    haveAccount: function () { go("login"); },
     socialSignup: function (d) { demoAccount(""); toast("Signed up with " + d.provider + " (demo).", false); go("setup"); },
     terms: function (d, el) { S.user.terms = el.checked; var b = document.getElementById("su-submit"); if (b) b.disabled = !el.checked; },
     resend: function () { var el = document.getElementById("resend"); if (el) el.textContent = "Resend in 0:30"; startResend(); toast("New code sent (demo).", false); },
@@ -1455,6 +1471,11 @@ h2.display { font-size: 26px; line-height: 1.15; }
       if (pass.length < 8) return showError("su-error", "Use at least 8 characters for your password.");
       S.user.name = name; S.user.email = email;
       go("verify");
+    }
+    if (form === "login") {
+      var u = document.getElementById("li-user").value.trim().toLowerCase(), pw = document.getElementById("li-pass").value;
+      if (u === DEMO_LOGIN.user && pw === DEMO_LOGIN.password) return signInDemo();
+      return showError("li-error", "Wrong username or password. Try the demo account: Warren / admin.");
     }
     if (form === "verify") {
       if (!/^\d{6}$/.test(document.getElementById("code").value)) return showError("code-error", "Enter the 6 digits from the email.");
