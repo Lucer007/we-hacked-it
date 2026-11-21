@@ -25,6 +25,3 @@ data_pipeline/raw/
 
 # SEC downloads (about 50 MB, rebuilt by the scripts)
 data_pipeline/sp500/cache/
-
-# Rebuilt by data_pipeline/sp500/build_db.py
-data_pipeline/sp500/dealdeck.duckdb

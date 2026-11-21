@@ -82,7 +82,9 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
 - Théo's terminal is Windows PowerShell; Claude's Bash tool is Git Bash. The `!` prefix only
   works in the Claude Code input box.
 - Python packages installed: anthropic 2.12, duckdb 2.0.1, beautifulsoup4, lxml, requests.
-- `.gitignore` excludes SEC caches, `dealdeck.duckdb` and raw register data (personal data).
+- `.gitignore` excludes SEC caches and raw register data (personal data).
+- `dealdeck.duckdb` (5 MB) is committed so both developers use the same data. Only one
+  person runs `build_db.py`, then commits and pushes the new file (Git can't merge it).
 - The reports contradict outdated knowledge: Apple's CEO is John Ternus, Coca-Cola's is
   Henrique Braun (from 31 March 2026), Walmart's is John Furner. Always take facts from the
   reports, never from memory.
