@@ -34,7 +34,6 @@
   --verified: #76D8AF;
   --verified-soft: #12291F;
   --pass: #FF8A7A;
-  --warn: #F2C46D;
   --overlay: rgba(2, 8, 5, 0.7);
   --shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.9);
   --tile-1: #1D3B30; --tile-2: #3A3320; --tile-3: #183A3A; --tile-4: #2E2F45; --tile-5: #2F3A1E; --tile-6: #1F2F3F;
@@ -578,7 +577,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 .sg-count { font-size: 12px; color: var(--accent); white-space: nowrap; }
 .sg-chev { color: var(--muted); font-size: 20px; line-height: 1; transition: transform 0.2s ease; }
 .sg.open .sg-chev { transform: rotate(90deg); }
-.sg-subs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 14px 14px; animation: rise 0.3s ease both; }
+.sg-subs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 14px 14px; }
+.sg-subs.in { animation: rise 0.3s ease both; }  /* only the sector just opened */
 .sg-subs .chip.select { min-height: 38px; font-size: 13.5px; }
 .chart { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line-strong); border-radius: 16px; padding: 14px; background: var(--surface); }
 .chart.up { --chart-color: var(--accent); }
@@ -734,7 +734,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       { friend: "ines", what: "finished a lesson", lesson: "Why prices go up and down", when: "5 h ago", likes: 2, comments: 0 },
       { friend: "hugo", what: "invested in", item: "KO", note: "", when: "Yesterday", likes: 6, comments: 3 }
     ],
-    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 460, 460], sheet: null, justDragged: false
+    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 460, 460], sheet: null, justDragged: false,
+    bot: null, reportShown: false, reportFresh: false
   };
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
@@ -979,7 +980,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       return '<div class="sg' + (open ? " open" : "") + (n ? " has" : "") + '" style="--i:' + (Math.min(gi, 8) + 2) + '">' +
         '<button type="button" class="sg-head" data-action="toggleGroup" data-group="' + esc(name) + '" aria-expanded="' + open + '">' +
         '<span class="sg-name">' + esc(name) + '</span><span class="sg-count">' + (n ? n + "/" + subs.length + " picked" : "") + '</span><span class="sg-chev" aria-hidden="true">›</span></button>' +
-        (open ? '<div class="sg-subs">' + subs.map(function (s) {
+        (open ? '<div class="sg-subs' + (JUST.group === name ? " in" : "") + '">' + subs.map(function (s) {
           var on = S.prefs.sectors.indexOf(s) >= 0, just = JUST.pick === "sectors|" + s ? " just" : "";
           return '<button type="button" class="chip select' + (on ? " on" : "") + just + '" aria-pressed="' + on + '" data-action="toggleList" data-key="sectors" data-value="' + esc(s) + '">' + (on ? "✓ " : "") + esc(s) + "</button>";
         }).join("") + '<button type="button" class="link-btn" data-action="pickGroup" data-group="' + esc(name) + '">' + (n === subs.length ? "Clear" : "Pick all " + subs.length) + "</button></div>" : "") +
@@ -1440,11 +1441,12 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     AMZN: ["query_financials", "5-year revenue"], WMT: ["search_filing", "risk factors"], KO: ["search_filing", "risk factors"],
     LLY: ["query_financials", "5-year revenue"], JPM: ["search_filing", "risk factors"], TSLA: ["query_financials", "5-year revenue"]
   };
-  var TECH_SECTORS = ["Chips", "Tech", "Internet"];
+  var TECH_SECTORS = ["Information Technology", "Communication Services", "Chips", "Tech", "Internet"];
   var NVDA_TSMC = { quote: "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers.",
                     source: "Nvidia annual report (10-K), 2026" };
   var botRun = 0, botFrame = null, botTimer = null;
 
+  function secName(s) { return SHORT_SECTOR[s] || s; }
   function andList(a) { return a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1]; }
   function botAnalysis(p) {
     function pct(v) { return p.total ? Math.round(v / p.total * 100) : 0; }
@@ -1456,7 +1458,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       levels[s.sector] = "high"; used[s.sector] = true;
       var has = {};
       s.holdings.forEach(function (h) { has[h.ticker] = true; });
-      var f = { level: "high", title: share + "% of your money is in " + s.sector,
+      var f = { level: "high", title: share + "% of your money is in " + secName(s.sector),
                 text: names(s) + ". When this sector has a bad year, " + share + "% of your money moves with it." };
       if (has.TSM && (has.NVDA || has.AMD)) {
         var both = has.NVDA && has.AMD;
@@ -1471,19 +1473,24 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     if (tech.length > 1 && techShare >= 40) {
       tech.forEach(function (s) { used[s.sector] = true; if (!levels[s.sector]) levels[s.sector] = "watch"; });
       findings.push({ level: "watch", title: techShare + "% of your money follows technology",
-        text: andList(tech.map(function (s) { return s.sector; })) + " are separate circles on the map, but one theme: a tech slowdown would hit " +
+        text: andList(tech.map(function (s) { return secName(s.sector); })) + " are separate circles on the map, but one theme: a tech slowdown would hit " +
           (techShare >= 50 ? "more than half your money" : "a big part of your money") + " at once." });
     }
     p.sectors.forEach(function (s) {
       var share = pct(s.amount);
       if (used[s.sector] || share < 20) return;
       used[s.sector] = true; levels[s.sector] = "watch";
-      findings.push({ level: "watch", title: share + "% of your money is in " + s.sector, text: names(s) + ". Worth watching as you add companies." });
+      findings.push({ level: "watch", title: share + "% of your money is in " + secName(s.sector), text: names(s) + ". Worth watching as you add companies." });
     });
+    var top = null;
+    p.sectors.forEach(function (s) { s.holdings.forEach(function (h) { if (!top || h.amount > top.amount) top = h; }); });
+    if (top && pct(top.amount) >= 15 && p.sectors.reduce(function (n, s) { return n + s.companies; }, 0) > 1)
+      findings.push({ level: "watch", title: top.name + " alone is " + pct(top.amount) + "% of your money",
+        text: "Your biggest holding: news about this one company moves " + pct(top.amount) + "% of your portfolio." });
     var rest = p.sectors.filter(function (s) { return !used[s.sector]; });
     if (rest.length) {
       var max = Math.max.apply(null, rest.map(function (s) { return pct(s.amount); }));
-      var restNames = andList(rest.map(function (s) { return s.sector; }));
+      var restNames = andList(rest.map(function (s) { return secName(s.sector); }));
       findings.push(findings.length
         ? { level: "ok", title: (rest.length > 1 ? "Your other " + rest.length + " sectors hold " : "Your other sector holds ") + pct(rest.reduce(function (n, s) { return n + s.amount; }, 0)) + "%",
             text: restNames + (rest.length > 1 ? " each hold " + max + "% or less." : " holds " + max + "%.") + " They balance the rest." }
@@ -1511,7 +1518,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     var count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0);
     var stops = [{ kind: "you", key: "", tool: "show_companies", text: "Your " + count + (count > 1 ? " companies" : " company") + " in " + p.sectors.length + (p.sectors.length > 1 ? " sectors" : " sector") }];
     p.sectors.forEach(function (s) {
-      stops.push({ kind: "sector", key: s.sector, tool: "query_financials", text: s.sector + " · " + money(s.amount) + " · " + Math.round(s.amount / p.total * 100) + "% of your money" });
+      stops.push({ kind: "sector", key: s.sector, tool: "query_financials", text: secName(s.sector) + " · " + money(s.amount) + " · " + Math.round(s.amount / p.total * 100) + "% of your money" });
       s.holdings.forEach(function (h, j) {
         var st = BOT_STEPS[h.ticker] || (j % 2 ? ["query_financials", "5-year revenue"] : ["search_filing", "risk factors"]);
         stops.push({ kind: "co", key: h.ticker, tool: st[0], text: h.name + " · " + st[1] });
@@ -2163,7 +2170,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       }
       redrawGraph(); S.opening = [];
     },
-    toggleGroup: function (d) { S.openGroups[d.group] = !S.openGroups[d.group]; render(); },
+    toggleGroup: function (d) { S.openGroups[d.group] = !S.openGroups[d.group]; if (S.openGroups[d.group]) JUST.group = d.group; render(); },
     pickGroup: function (d) {
       var subs = groupSubs(d.group), all = subs.every(function (s) { return S.prefs.sectors.indexOf(s) >= 0; });
       S.prefs.sectors = S.prefs.sectors.filter(function (s) { return subs.indexOf(s) < 0; });
