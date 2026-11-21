@@ -414,6 +414,24 @@ h2.display { font-size: 26px; line-height: 1.15; }
 .hb-bar { width: 70%; background: var(--accent); border-radius: 4px 4px 0 0; min-height: 4px; }
 .hb-year { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
+/* Foldable portfolio map: sectors unfold their companies. */
+.pgraph .pg-sector { cursor: pointer; }
+.pgraph .pg-sector:focus { outline: none; }
+.pgraph .pg-sector:hover > circle:first-of-type, .pgraph .pg-sector:focus-visible > circle:first-of-type { stroke-width: 3; filter: drop-shadow(0 0 8px var(--accent-glow)); }
+.pgraph .pg-sector.open > circle:first-of-type { fill: var(--accent-soft); }
+.pgraph .pg-toggle { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.pgraph .pg-toggle-sign { fill: var(--accent-ink); font: 700 13px var(--font-display); text-anchor: middle; pointer-events: none; }
+.pgraph .pg-co { transform-box: fill-box; transform-origin: center; }
+.pgraph .pg-co.unfold { animation: pg-unfold 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.15) both; animation-delay: var(--delay, 0s); }
+.pgraph .pg-co.fold { animation: pg-unfold 0.26s ease-in both reverse; }
+.pgraph line.pg-leaf.unfold, .pgraph line.pg-leaf.fold { stroke-dasharray: var(--len); }
+.pgraph line.pg-leaf.unfold { stroke-dashoffset: var(--len); animation: pg-draw 0.45s ease-out forwards; animation-delay: var(--delay, 0s); }
+.pgraph line.pg-leaf.fold { animation: pg-draw 0.26s ease-in both reverse; }
+@keyframes pg-unfold { from { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; } to { transform: translate(0, 0) scale(1); opacity: 1; } }
+@keyframes pg-draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.nowrap { white-space: nowrap; flex: none; }
+@media (prefers-reduced-motion: reduce) { .pgraph .pg-co, .pgraph line.pg-leaf { animation: none !important; stroke-dashoffset: 0 !important; } }
+
 @media (prefers-reduced-motion: reduce) { .card, .progress-fill { transition: none !important; } }
 </style>
 
@@ -522,7 +540,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
       { friend: "ines", what: "finished a lesson", lesson: "Why prices go up and down", when: "5 h ago", likes: 2, comments: 0 },
       { friend: "hugo", what: "invested in", item: "KO", note: "", when: "Yesterday", likes: 6, comments: 3 }
     ],
-    portfolio: null, fin: {}, sheet: null, justDragged: false
+    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, sheet: null, justDragged: false
   };
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
@@ -674,7 +692,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     demoAccount(DEMO_LOGIN.name); S.user.id = DEMO_LOGIN.user; S.user.email = DEMO_LOGIN.user + "@example.com";
     S.introSeen = true; S.prefs.sectors = ["Tech", "Chips", "Health"];
     S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
-    S.portfolio = null;
+    S.portfolio = null; S.expanded = {};
     resetFeed(); S.current = pickNext();
     go("wishlist");
     toast("Signed in as Warren (demo account).", false);
@@ -962,8 +980,8 @@ h2.display { font-size: 26px; line-height: 1.15; }
     i = name.lastIndexOf(" ");
     return i > 0 ? [name.slice(0, i), name.slice(i + 1)] : [name];
   }
-  // Network map: you in the middle, one node per sector (size = number of companies you own in it),
-  // each company linked to its sector (size = amount). Positions are computed, no layout library.
+  // Network map: you in the middle, one node per sector (size = number of companies you own in it).
+  // Sectors start folded; a click unfolds its companies (size = amount), which slide out of the sector.
   function portfolioGraph(p) {
     var W = 420, H = 420, cx = W / 2, cy = H / 2, n = p.sectors.length, ring = n === 1 ? 0 : 112;
     var links = "", nodes = "";
@@ -971,28 +989,36 @@ h2.display { font-size: 26px; line-height: 1.15; }
     p.sectors.forEach(function (s, i) {
       var a = -Math.PI / 2 + i * 2 * Math.PI / n;
       var sx = cx + ring * Math.cos(a), sy = cy + ring * Math.sin(a);
-      var r = 22 + 8 * s.companies;
+      var r = 22 + 8 * s.companies, open = !!S.expanded[s.sector];
+      var anim = S.opening.indexOf(s.sector) >= 0 ? " unfold" : S.closing === s.sector ? " fold" : "";
       if (n > 1) links += '<line class="pg-hub" x1="' + cx + '" y1="' + cy + '" x2="' + f(sx) + '" y2="' + f(sy) + '"></line>';
-      var k = s.holdings.length, spread = Math.min(1.7, 0.62 * (k - 1));
-      s.holdings.forEach(function (h, j) {
-        var b = n === 1 ? -Math.PI / 2 + j * 2 * Math.PI / k : a + (k === 1 ? 0 : -spread / 2 + spread * j / (k - 1));
-        var hr = 14 + Math.min(6, Math.sqrt(h.amount) * 0.8), d = r + hr + 14;
-        var hx = Math.max(hr + 2, Math.min(W - hr - 2, sx + d * Math.cos(b)));
-        var hy = Math.max(hr + 2, Math.min(H - hr - 2, sy + d * Math.sin(b)));
-        links += '<line class="pg-leaf" x1="' + f(sx) + '" y1="' + f(sy) + '" x2="' + f(hx) + '" y2="' + f(hy) + '"></line>';
-        nodes += '<g class="pg-co" data-action="open" data-id="' + esc(h.ticker) + '" tabindex="0" role="button" aria-label="' + esc(h.name + ", " + money(h.amount)) + '">' +
-          "<title>" + esc(h.name + " · " + money(h.amount)) + '</title><circle cx="' + f(hx) + '" cy="' + f(hy) + '" r="' + f(hr) + '"></circle>' +
-          '<text x="' + f(hx) + '" y="' + f(hy) + '" dy="0.35em">' + esc(h.ticker) + "</text></g>";
-      });
+      if (open) {
+        var k = s.holdings.length, spread = Math.min(1.7, 0.62 * (k - 1));
+        s.holdings.forEach(function (h, j) {
+          var b = n === 1 ? -Math.PI / 2 + j * 2 * Math.PI / k : a + (k === 1 ? 0 : -spread / 2 + spread * j / (k - 1));
+          var hr = 14 + Math.min(6, Math.sqrt(h.amount) * 0.8), d = r + hr + 14;
+          var hx = Math.max(hr + 2, Math.min(W - hr - 2, sx + d * Math.cos(b)));
+          var hy = Math.max(hr + 2, Math.min(H - hr - 2, sy + d * Math.sin(b)));
+          var len = Math.hypot(hx - sx, hy - sy), delay = (j * 0.07).toFixed(2) + "s";
+          links += '<line class="pg-leaf' + anim + '" style="--len:' + f(len) + ";--delay:" + delay + '" x1="' + f(sx) + '" y1="' + f(sy) + '" x2="' + f(hx) + '" y2="' + f(hy) + '"></line>';
+          nodes += '<g class="pg-co' + anim + '" style="--dx:' + f(sx - hx) + "px;--dy:" + f(sy - hy) + "px;--delay:" + delay + '" data-action="open" data-id="' + esc(h.ticker) +
+            '" tabindex="0" role="button" aria-label="' + esc(h.name + ", " + money(h.amount)) + '"><title>' + esc(h.name + " · " + money(h.amount)) + "</title>" +
+            '<circle cx="' + f(hx) + '" cy="' + f(hy) + '" r="' + f(hr) + '"></circle><text x="' + f(hx) + '" y="' + f(hy) + '" dy="0.35em">' + esc(h.ticker) + "</text></g>";
+        });
+      }
       var lines = splitLabel(s.sector), top = sy - 4 - (lines.length - 1) * 6;
-      nodes += '<g class="pg-sector"><title>' + esc(s.sector + ": " + s.companies + (s.companies > 1 ? " companies, " : " company, ") + money(s.amount)) + "</title>" +
+      var bx = sx + r * 0.72, by = sy - r * 0.72;
+      nodes += '<g class="pg-sector' + (open ? " open" : "") + '" data-action="toggleSector" data-sector="' + esc(s.sector) + '" tabindex="0" role="button" aria-expanded="' + open +
+        '" aria-label="' + esc(s.sector + ", " + s.companies + (s.companies > 1 ? " companies" : " company") + (open ? ", tap to fold" : ", tap to unfold")) + '">' +
+        "<title>" + esc(s.sector + ": " + s.companies + (s.companies > 1 ? " companies, " : " company, ") + money(s.amount)) + "</title>" +
         '<circle cx="' + f(sx) + '" cy="' + f(sy) + '" r="' + r + '"></circle><text x="' + f(sx) + '" y="' + f(top) + '">' +
         lines.map(function (l, li) { return '<tspan x="' + f(sx) + '" dy="' + (li ? "1.15em" : "0") + '">' + esc(l) + "</tspan>"; }).join("") + "</text>" +
-        '<text class="pg-count" x="' + f(sx) + '" y="' + f(sy + 14 + (lines.length - 1) * 6) + '">' + s.companies + "</text></g>";
+        '<text class="pg-count" x="' + f(sx) + '" y="' + f(sy + 14 + (lines.length - 1) * 6) + '">' + s.companies + "</text>" +
+        '<circle class="pg-toggle" cx="' + f(bx) + '" cy="' + f(by) + '" r="9"></circle><text class="pg-toggle-sign" x="' + f(bx) + '" y="' + f(by) + '" dy="0.35em">' + (open ? "−" : "+") + "</text></g>";
     });
     if (n > 1) nodes += '<g class="pg-you"><circle cx="' + cx + '" cy="' + cy + '" r="20"></circle><text x="' + cx + '" y="' + cy + '" dy="0.35em">You</text></g>';
     var label = "Your investments by sector: " + p.sectors.map(function (s) { return s.sector + " " + s.companies; }).join(", ");
-    return '<svg class="pgraph" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(label) + '">' + links + nodes + "</svg>";
+    return '<svg class="pgraph" viewBox="0 0 ' + W + " " + H + '" role="group" aria-label="' + esc(label) + '">' + links + nodes + "</svg>";
   }
   function sectorRows(p) {
     return '<ul class="sector-rows">' + p.sectors.map(function (s) {
@@ -1002,14 +1028,24 @@ h2.display { font-size: 26px; line-height: 1.15; }
         "<small>" + s.holdings.map(function (h) { return esc(h.name); }).join(", ") + "</small></li>";
     }).join("") + "</ul>";
   }
-  function wishlist() {
-    var fromApi = LIVE && S.portfolio, p = fromApi ? S.portfolio : computePortfolio();
+  function currentPortfolio() { return LIVE && S.portfolio ? S.portfolio : computePortfolio(); }
+  function mapInner(p) {
     var count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0);
-    var origin = fromApi ? "Computed by the API from your orders in DuckDB." : S.user.id === DEMO_LOGIN.user ? "Sample portfolio of the demo account." : "";
+    var allOpen = p.sectors.every(function (s) { return S.expanded[s.sector]; });
+    var origin = LIVE && S.portfolio ? "Computed by the API from your orders in DuckDB." : S.user.id === DEMO_LOGIN.user ? "Sample portfolio of the demo account." : "";
+    return '<div class="title-row"><p class="eyebrow">Where your money is</p><span class="fine">' + money(p.total) + " · " + count + (count > 1 ? " companies" : " company") + "</span></div>" +
+      portfolioGraph(p) +
+      '<div class="title-row"><p class="fine">Tap a sector to unfold its companies. Bigger circle = more companies. ' + origin + "</p>" +
+      '<button class="link-btn nowrap" type="button" data-action="toggleAllSectors">' + (allOpen ? "Fold all" : "Unfold all") + "</button></div>";
+  }
+  function redrawGraph() {
+    var wrap = document.getElementById("pgraph-wrap");
+    if (wrap) wrap.innerHTML = mapInner(currentPortfolio());
+  }
+  function wishlist() {
+    var p = currentPortfolio();
     var map = p.sectors.length
-      ? '<div class="panel map"><div class="title-row"><p class="eyebrow">Where your money is</p><span class="fine">' + money(p.total) + " · " + count +
-        (count > 1 ? " companies" : " company") + "</span></div>" + portfolioGraph(p) +
-        '<p class="fine">Bigger circle = more companies you own in that sector. Tap a company to see it again. ' + origin + "</p></div>" + sectorRows(p)
+      ? '<div class="panel map" id="pgraph-wrap">' + mapInner(p) + "</div>" + sectorRows(p)
       : '<div class="panel"><p class="eyebrow">Your portfolio map</p><p class="body-text">Buy your first company and it shows up here, linked to its sector.</p></div>';
     var tabsHtml = '<div class="filters" role="group" aria-label="Filter">' + ["All", "Companies", "ETFs"].map(function (f) {
       var on = S.wishFilter === f;
@@ -1414,6 +1450,22 @@ h2.display { font-size: 26px; line-height: 1.15; }
     react: function (d) { var p = S.posts[Number(d.i)]; p.liked = !p.liked; p.likes += p.liked ? 1 : -1; render(); },
     friend: function (d) { S.friend = d.id; go("friend"); },
     follow: function () { S.following[S.friend] = !S.following[S.friend]; render(); },
+    toggleSector: function (d) {
+      var s = d.sector;
+      if (S.expanded[s]) {
+        S.closing = s; redrawGraph();
+        setTimeout(function () { delete S.expanded[s]; S.closing = null; redrawGraph(); focusSector(s); }, 280);
+      } else { S.expanded[s] = true; S.opening = [s]; redrawGraph(); S.opening = []; focusSector(s); }
+    },
+    toggleAllSectors: function () {
+      var p = currentPortfolio(), allOpen = p.sectors.every(function (s) { return S.expanded[s.sector]; });
+      if (allOpen) S.expanded = {};
+      else {
+        S.opening = p.sectors.filter(function (s) { return !S.expanded[s.sector]; }).map(function (s) { return s.sector; });
+        p.sectors.forEach(function (s) { S.expanded[s.sector] = true; });
+      }
+      redrawGraph(); S.opening = [];
+    },
     togglePopups: function () { S.prefs.popups = !S.prefs.popups; render(); },
     toggleShareAmounts: function () { S.prefs.shareAmounts = !S.prefs.shareAmounts; render(); },
     signOut: function () {
@@ -1483,8 +1535,15 @@ h2.display { font-size: 26px; line-height: 1.15; }
     }
   });
   overlay.addEventListener("click", function (e) { if (e.target === overlay) closeSheet(); });
+  function focusSector(name) {
+    var el = Array.prototype.filter.call(document.querySelectorAll(".pg-sector"), function (g) { return g.dataset.sector === name; })[0];
+    if (el && document.activeElement && document.activeElement.closest && document.activeElement.closest(".pgraph")) el.focus();
+  }
   document.addEventListener("keydown", function (e) {
     if (S.sheet) { if (e.key === "Escape") closeSheet(); return; }
+    if ((e.key === "Enter" || e.key === " ") && e.target.closest && e.target.closest("g[data-action]")) {
+      e.preventDefault(); e.target.closest("g[data-action]").dispatchEvent(new MouseEvent("click", { bubbles: true })); return;
+    }
     if (S.screen !== "discover" || !S.current || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
     if (e.key === "ArrowLeft") { e.preventDefault(); ACTIONS.pass(); }
     else if (e.key === "ArrowRight") { e.preventDefault(); ACTIONS.like(); }
