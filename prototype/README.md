@@ -9,13 +9,13 @@ Screens follow the wireframe v2 (https://claude.ai/artifact/24yQRUjVSvunEx8p1i6B
    "I already have an account" signs in a demo user (Camille) and goes straight to the feed: handy for the video.
 2. Quick (6) or Full (8) setup: how new, what to swipe, sectors, ESG, risk (€100 → €80), hidden sectors
    (+ controversies and founder-led in Full) → Feed ready → How it works (brand-new users).
-3. Discover: filter chips, one card you scroll down (no flip), pass/undo, Tune your feed, Ask with cited answers.
+3. Discover: filter chips, one card you scroll down (no flip), pass/undo, Tune your feed.
 4. Reveal + "New word" pop-up → amount → ID check (first buy, demo) → review with the risk checkbox →
    share with friends → Social.
 5. Learn (4 lessons with a quiz, words met while swiping, glossary search), Social (sample friends,
    friend profile), Wishlist, Profile and settings.
 
-Real data: the 12 company cards, their sources and the Ask answers. Showcase only (no backend):
+Real data: the 12 company cards and their sources. Showcase only (no backend):
 account, ID check, order, ESG rating, friends and lessons progress; everything lives in the page's memory.
 
 ## Rebuild after the data changes
@@ -33,8 +33,6 @@ Edit the page in `app.template.html`, never in `index.html` (it is overwritten).
 
 - **Share price:** no free price feed allows automated use, so the reveal says the price comes
   from the broker partner in the live app.
-- **Free questions:** the text box explains that the analyst agent answers them in the live app.
-  The listed questions are real: built from quotes checked against the reports.
 - **Buy:** no order is placed.
 - **Analyse my portfolio (Portfolio tab):** a scripted replay of the analyst agent, with no API
   call. A robot hops you → sector → company on the map (about 8 s, "Skip" to jump), and each step

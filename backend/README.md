@@ -25,7 +25,8 @@ python -m uvicorn backend.app:app --reload --port 8000
 Open http://127.0.0.1:8000. The header shows **Live API** when the page talks to the backend.
 The same page published on claude.ai has no backend and runs on its embedded data.
 
-Optional: `$env:ANTHROPIC_API_KEY = "..."` before starting turns on free questions in "Ask".
+Optional: `$env:ANTHROPIC_API_KEY = "..."` before starting turns on `POST /api/ask`. The page no
+longer calls it: the "Ask" chatbot was removed from the app on 21 Nov.
 
 ## Data and collaboration
 

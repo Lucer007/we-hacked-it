@@ -75,6 +75,11 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   `dealdeck.duckdb` is now in git for the co-developer; app state stays local. See `backend/README.md`.
 - **Portfolio tab** (was Wishlist): network map, you → sectors (size = number of companies) →
   companies; sector table; wishlist below. Demo login: Warren / admin (10 companies in 6 sectors; TSLA and GOOGL left to buy live).
+- **Afternoon (14:30), Théo:** the "Ask" chatbot is removed from the app (never requested): no chat
+  button on the card, no "Ask about" on the match screen. `/api/ask` and `analyst.py` stay in the repo,
+  unused by the page. Final logo (sprout in a circle) in the header and as favicon. The
+  "Not investment advice" note is fine print under the main button, not an amber box.
+  The API now rebuilds the page when the template or an asset changes (no restart needed).
 
 ## Constraints and gotchas
 
