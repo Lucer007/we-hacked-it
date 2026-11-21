@@ -22,11 +22,20 @@ import duckdb  # noqa: E402
 
 from build_profile_cards import DB_PATH, locate, report  # noqa: E402
 
-# Friendly sector names for the preference question.
-FRIENDLY_SECTORS = {
-    "NVDA": "Chips", "AMD": "Chips", "TSM": "Chips", "AAPL": "Tech", "MSFT": "Tech", "GOOGL": "Internet",
-    "AMZN": "Retail", "WMT": "Retail", "TSLA": "Cars & energy", "KO": "Food & drinks", "JPM": "Finance",
-    "LLY": "Health",
+# Sector and sub-sector (GICS sectors, plain-English sub-sectors), as in the sector question.
+SECTORS = {
+    "NVDA": ("Information Technology", "Semiconductors and chip equipment"),
+    "AMD": ("Information Technology", "Semiconductors and chip equipment"),
+    "TSM": ("Information Technology", "Semiconductors and chip equipment"),
+    "MSFT": ("Information Technology", "Software"),
+    "AAPL": ("Information Technology", "Hardware and devices"),
+    "GOOGL": ("Communication Services", "Search and social media"),
+    "AMZN": ("Consumer Discretionary", "Online and big-box retail"),
+    "TSLA": ("Consumer Discretionary", "Cars"),
+    "WMT": ("Consumer Staples", "Supermarkets and everyday retail"),
+    "KO": ("Consumer Staples", "Food and drinks"),
+    "JPM": ("Financials", "Banks"),
+    "LLY": ("Health Care", "Pharmaceuticals"),
 }
 
 # Names as people say them (the S&P list has "Alphabet Inc. (Class A)", "Lilly (Eli)"...).
@@ -103,6 +112,10 @@ def comparison_question(db) -> dict:
 def build_data() -> dict:
     """Cards for the app: verified profile cards + ready-made questions. Also used by the backend."""
     cards = json.loads((PIPELINE / "profile_cards.json").read_text(encoding="utf-8"))["cards"]
+    # Share-price snapshot for the match-screen chart (data_pipeline/sp500/fetch_prices.py).
+    prices_file = PIPELINE / "prices.json"
+    price_data = json.loads(prices_file.read_text(encoding="utf-8")) if prices_file.exists() else {"prices": {}}
+    prices = price_data["prices"]
     db = duckdb.connect(str(DB_PATH), read_only=True)
     comparison = comparison_question(db)
 
@@ -117,7 +130,9 @@ def build_data() -> dict:
             "id": card["ticker"],
             "ticker": card["ticker"],
             "name": card["name"],
-            "sector": FRIENDLY_SECTORS.get(card["ticker"], card["front"]["sector"] or "Other"),
+            "sector": SECTORS.get(card["ticker"], ("Other", "Other"))[0],
+            "subsector": SECTORS.get(card["ticker"], ("Other", "Other"))[1],
+            "prices": prices.get(card["ticker"]),
             "industry": card["front"]["sector"],
             "front": card["front"],
             "back": card["back"],
@@ -129,7 +144,8 @@ def build_data() -> dict:
         })
 
     db.close()
-    return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "cards": out}
+    return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "cards": out,
+            "prices_source": price_data.get("source"), "prices_as_of": (price_data.get("fetched_at") or "")[:10]}
 
 
 def render_page(data: dict) -> str:

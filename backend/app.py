@@ -135,6 +135,16 @@ def financials(ticker: str):
         for y, end, rev, ni, div, url in reversed(rows)]}
 
 
+@app.get("/api/companies/{ticker}/prices")
+def prices(ticker: str):
+    """Share-price history (1 year daily, 5 years weekly), snapshot from data_pipeline/sp500/fetch_prices.py."""
+    ticker = check_ticker(ticker)
+    series = CARDS[ticker].get("prices")
+    if not series:
+        raise HTTPException(404, f"No price data for {ticker}. Run data_pipeline/sp500/fetch_prices.py.")
+    return {"ticker": ticker, "source": DATA.get("prices_source"), "as_of": DATA.get("prices_as_of"), **series}
+
+
 @app.get("/api/portfolio")
 def get_portfolio(user: str = DEMO_USER):
     return portfolio(user.lower())

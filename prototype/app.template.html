@@ -29,9 +29,12 @@
   --accent-ink: #04110B;
   --accent-soft: #163A2C;
   --accent-glow: rgba(94, 229, 168, 0.45);
+  --warn: #F2C14E;
+  --warn-soft: rgba(242, 193, 78, 0.1);
   --verified: #76D8AF;
   --verified-soft: #12291F;
   --pass: #FF8A7A;
+  --warn: #F2C46D;
   --overlay: rgba(2, 8, 5, 0.7);
   --shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.9);
   --tile-1: #1D3B30; --tile-2: #3A3320; --tile-3: #183A3A; --tile-4: #2E2F45; --tile-5: #2F3A1E; --tile-6: #1F2F3F;
@@ -438,6 +441,62 @@ h2.display { font-size: 26px; line-height: 1.15; }
 .pgraph .pg-you[data-action] { cursor: zoom-out; }
 .pgraph .pg-amt { fill: var(--accent); font: 600 8.5px var(--font-display); text-anchor: middle; pointer-events: none; }
 
+/* Analyst robot: hops from node to node on the map, then a short concentration report. */
+.pgraph.busy .pg-sector, .pgraph.busy .pg-co, .pgraph.busy .pg-you { pointer-events: none; }
+.pg-bot { pointer-events: none; filter: drop-shadow(0 0 7px var(--accent-glow)); }
+.pg-bot .bot-body { transform-box: fill-box; transform-origin: center bottom; animation: bot-in 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) backwards; }
+.bot-art .bot-head { fill: var(--accent); }
+.bot-art .bot-ear { fill: var(--verified); }
+.bot-art .bot-face { fill: var(--accent-ink); }
+.bot-art .bot-eyes rect { fill: var(--accent); transition: fill 0.15s ease; }
+.bot-art .bot-antenna { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
+.bot-art .bot-bulb { fill: var(--accent); animation: bot-bulb 0.8s ease-in-out infinite alternate; }
+.bot-art .bot-eyes { transform-box: fill-box; transform-origin: center; animation: bot-blink 3.4s infinite; }
+.pg-bot.scan .bot-eyes rect { fill: #FFFFFF; }
+.pgraph .scanned > circle:first-of-type { stroke: var(--accent); }
+.pgraph .scanning > circle:first-of-type { stroke: var(--accent); stroke-width: 3; animation: pg-scan 0.45s ease-out; }
+.pgraph .pg-sector.risk-high > circle:first-of-type { stroke: var(--pass); stroke-width: 3; filter: drop-shadow(0 0 8px rgba(255, 138, 122, 0.55)); }
+.pgraph .pg-sector.risk-watch > circle:first-of-type { stroke: var(--warn); stroke-width: 3; }
+.pgraph .risk-high .pg-count { fill: var(--pass); }
+.pgraph .risk-watch .pg-count { fill: var(--warn); }
+.bot-btn { width: 100%; margin-top: 6px; }
+.bot-status { display: flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 6px; padding: 0 4px 0 12px; border-radius: var(--r-ctl);
+              background: var(--accent-soft); border: 1px solid var(--line-strong); }
+.bot-status p { flex: 1; min-width: 0; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bot-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; animation: bot-bulb 0.6s ease-in-out infinite alternate; }
+.bot-tool { font: 600 11px var(--font-mono); color: var(--accent); margin-right: 4px; }
+#bot-report-wrap:empty { display: none; }
+.bot-report { display: flex; flex-direction: column; gap: 14px; }
+.bot-report:focus { outline: none; }
+.bot-report.fresh { animation: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.bot-report-head { display: flex; align-items: center; gap: 12px; }
+.bot-report-head > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.bot-report-head strong { font-size: 17px; }
+.bot-report-head small { color: var(--muted); font-size: 12px; }
+.bot-avatar { width: 44px; height: 44px; flex: none; border-radius: 14px; background: var(--accent-soft); display: grid; place-items: center; }
+.level { margin-left: auto; font: 600 11.5px var(--font-display); border-radius: 999px; padding: 4px 10px; border: 1px solid; white-space: nowrap; flex: none; }
+.level.high { color: var(--pass); }
+.level.watch { color: var(--warn); }
+.level.ok { color: var(--accent); }
+.findings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.findings li { display: flex; gap: 10px; }
+.fresh .findings li { animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 140ms + 200ms); }
+.findings .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; flex: none; }
+.findings .high .dot { background: var(--pass); }
+.findings .watch .dot { background: var(--warn); }
+.findings .ok .dot { background: var(--accent); }
+.findings strong { display: block; font-size: 15px; }
+.findings p { font-size: 13.5px; color: var(--muted); margin: 3px 0 0; }
+.findings blockquote { margin: 8px 0 0; padding: 8px 12px; border-left: 2px solid var(--accent); border-radius: 0 10px 10px 0; background: var(--accent-soft); font-size: 12.5px; }
+.findings cite { display: block; margin-top: 4px; font: normal 600 11px var(--font-display); color: var(--accent); }
+@keyframes bot-in { from { transform: scale(0.2) translateY(10px); opacity: 0; } }
+@keyframes bot-bulb { from { opacity: 0.35; } to { opacity: 1; } }
+@keyframes bot-blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(0.12); } }
+@keyframes pg-scan { 50% { filter: drop-shadow(0 0 12px var(--accent-glow)); } }
+@media (prefers-reduced-motion: reduce) {
+  .pg-bot .bot-body, .bot-art .bot-bulb, .bot-art .bot-eyes, .bot-dot, .bot-report.fresh, .fresh .findings li, .pgraph .scanning > circle:first-of-type { animation: none !important; }
+}
+
 /* Quiz life: questions slide in, picks pop, a right answer throws confetti, a wrong one shakes. */
 .btn, .option, .chip, .q-btn, .round, .react { transition: transform 0.14s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease; }
 .btn:not([disabled]):active, .option:not([disabled]):active, button.chip:active, .q-btn:active, .round:not([disabled]):active, .react:active { transform: scale(0.96); }
@@ -503,6 +562,46 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 @keyframes ring { from { box-shadow: 0 0 0 0 var(--accent-glow); } to { box-shadow: 0 0 0 14px rgba(94, 229, 168, 0); } }
 @keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-7px); } 40%, 60% { transform: translateX(7px); } }
 
+/* Disclaimer, sector tree, price chart. */
+.disclaimer { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--warn); background: var(--warn-soft); border-radius: 14px; padding: 12px 14px; }
+.disclaimer strong { display: block; font-family: var(--font-display); font-size: 15px; color: var(--warn); }
+.disclaimer p { margin: 2px 0 0; font-size: 13.5px; color: var(--ink); }
+.disc-icon { width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--warn); color: var(--accent-ink);
+             font: 700 16px var(--font-display); }
+.welcome .hero-art { height: clamp(120px, 24vh, 230px); }
+.sector-tree { display: flex; flex-direction: column; gap: 8px; }
+.sg { border: 1px solid var(--line-strong); border-radius: 14px; background: var(--surface); }
+.sg.has { border-color: var(--accent); }
+.sg-head { width: 100%; display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 12px 14px; text-align: left; color: var(--ink);
+           font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+.sg-name { flex: 1; min-width: 0; }
+.sg-count { font-size: 12px; color: var(--accent); white-space: nowrap; }
+.sg-chev { color: var(--muted); font-size: 20px; line-height: 1; transition: transform 0.2s ease; }
+.sg.open .sg-chev { transform: rotate(90deg); }
+.sg-subs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0 14px 14px; animation: rise 0.3s ease both; }
+.sg-subs .chip.select { min-height: 38px; font-size: 13.5px; }
+.chart { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line-strong); border-radius: 16px; padding: 14px; background: var(--surface); }
+.chart.up { --chart-color: var(--accent); }
+.chart.down { --chart-color: var(--pass); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+.chart-price { margin: 2px 0 0; font-family: var(--font-display); font-weight: 600; font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.chart-change { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--chart-color); font-variant-numeric: tabular-nums; }
+.chart-change span { color: var(--muted); font-weight: 500; font-size: 12.5px; margin-left: 6px; }
+.chart-plot { position: relative; }
+.chart-svg { width: 100%; height: auto; display: block; touch-action: pan-y; cursor: crosshair; }
+.chart-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; }
+.chart-line { fill: none; stroke: var(--chart-color); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart-cross { stroke: var(--muted); stroke-width: 1; }
+.chart-dot { fill: var(--chart-color); stroke: var(--surface); stroke-width: 2; }
+.chart-max, .chart-min { position: absolute; left: 0; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; pointer-events: none; }
+.chart-max { top: -2px; }
+.chart-min { bottom: -2px; }
+.chart-tip { position: absolute; transform: translate(-50%, calc(-100% - 10px)); background: var(--ink); color: var(--bg); border-radius: 8px; padding: 4px 8px;
+             font: 600 12px var(--font-display); white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums; }
+.chart-axis { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+.ranges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.ranges .chip { justify-content: center; }
+
 @media (prefers-reduced-motion: reduce) {
   .card, .progress-fill, .mini-track i { transition: none !important; }
   .step-in *, .ready-in *, .just, .just *, .just::after, .nudge, .bump, .hint { animation: none !important; }
@@ -522,8 +621,6 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"></rect></svg>Discover</button>
     <button class="tab" type="button" data-action="tab" data-tab="learn">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"></path><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"></path></svg>Learn</button>
-    <button class="tab" type="button" data-action="tab" data-tab="social">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.5.8 2.5 2.6 3 5.2"></path></svg>Social</button>
     <button class="tab" type="button" data-action="tab" data-tab="wishlist">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="5" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="18" cy="19" r="2"></circle><path d="m6.5 6.5 3.4 3.4M17.4 7.3l-3.2 3M16.5 17.5l-2.4-3.4"></path></svg>Portfolio</button>
     <button class="tab" type="button" data-action="tab" data-tab="profile">
@@ -550,10 +647,23 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   var HIDEABLE = ["Fossil fuels", "Weapons", "Tobacco", "Gambling"];
   var LEVEL = { "new": "Brand new", basics: "Knows the basics", pro: "Experienced" };
   var ESG = { lot: "A lot", bit: "A little", no: "Not really" };
-  // The questionnaire's sectors, mapped onto the sectors of the demo companies (the full app has them all).
-  var SECTOR_MAP = { Tech: ["Tech", "Chips", "Internet"], Health: ["Health"], Energy: ["Cars & energy"], Food: ["Food & drinks"], Fashion: [],
-    Travel: [], Entertainment: ["Internet"], Finance: ["Finance"], Industry: ["Cars & energy"], "Real estate": [] };
-  var PREF_SECTORS = Object.keys(SECTOR_MAP);
+  // The sector question: 11 big sectors (GICS), each with plain-English sub-sectors to pick from.
+  var SECTOR_TREE = [
+    ["Information Technology", ["Semiconductors and chip equipment", "Software", "Hardware and devices"]],
+    ["Financials", ["Banks", "Payments and financial services", "Investment firms and insurance"]],
+    ["Communication Services", ["Search and social media", "Entertainment and streaming", "Telecom"]],
+    ["Consumer Discretionary", ["Online and big-box retail", "Cars", "Luxury, clothing and restaurants"]],
+    ["Health Care", ["Pharmaceuticals", "Biotech", "Medical devices and health services"]],
+    ["Industrials", ["Aerospace and defense", "Machinery and electrical equipment", "Transport"]],
+    ["Consumer Staples", ["Food and drinks", "Household and personal care", "Supermarkets and everyday retail"]],
+    ["Energy", ["Integrated oil and gas", "Oil and gas production", "Oilfield services and pipelines"]],
+    ["Utilities", ["Electricity", "Power producers, including renewables", "Gas, water and multi-utilities"]],
+    ["Materials", ["Chemicals and industrial gases", "Metals and mining", "Construction materials and packaging"]],
+    ["Real Estate", ["Warehouses, data centers and cell towers", "Homes, shops and offices", "Real estate services"]]
+  ];
+  var SHORT_SECTOR = { "Information Technology": "Tech", "Communication Services": "Communication", "Consumer Discretionary": "Consumer",
+    "Consumer Staples": "Everyday goods", "Health Care": "Health care", "Real Estate": "Real estate" };
+  function groupSubs(name) { return (SECTOR_TREE.filter(function (g) { return g[0] === name; })[0] || [name, []])[1]; }
   var INNOVATION = ["NVDA", "AMD", "TSM", "MSFT", "GOOGL", "LLY", "TSLA"];   // AI, chips, biotech, clean energy
   var EMERGING = ["TSM"];                                                    // Taiwan counts as an emerging market (MSCI)
   var CONSUMER = ["AAPL", "AMZN", "WMT", "KO", "GOOGL", "MSFT", "TSLA"];     // products people use every day
@@ -611,20 +721,20 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   var S = {
     screen: "welcome", step: 0,
     user: { name: "", email: "", terms: false, verified: false, kyc: false },
-    prefs: { setup: "quick", level: "new", assets: ["Companies"], sectors: ["Tech", "Health", "Food"], esg: "lot", risk: null,
+    prefs: { setup: "quick", level: "new", assets: ["Companies"], sectors: ["Software", "Semiconductors and chip equipment", "Pharmaceuticals", "Food and drinks"], esg: "lot", risk: null,
              terms: true, monthly: null, size: ["Large", "Mid-size", "Small"], emerging: null, rival: false, country: null, newtech: null,
              age: null, products: null, productsText: "", carbon: false, women: false,
              hide: HIDEABLE.slice(), legal: true, founder: null, popups: true, shareAmounts: false },
     weights: {}, seen: [], current: null, history: [], swipes: 0, filter: "All", introSeen: false,
     tuneShown: false, showTune: false, wishlist: [], owned: {}, revealId: null, amount: 10, agreed: false,
-    shareMode: "pick", words: [], popupsShown: [], lessonsDone: [], lesson: null, lessonAnswer: null, lessonCheer: "",
+    shareMode: "pick", openGroups: { "Information Technology": true }, range: "1Y", words: [], popupsShown: [], lessonsDone: [], lesson: null, lessonAnswer: null, lessonCheer: "",
     friend: null, following: { sami: true, ines: true, hugo: true }, wishFilter: "All",
     posts: [
       { friend: "sami", what: "added to their wishlist", item: "NVDA", note: "Didn’t know one customer made up 22% of its sales.", when: "2 h ago", likes: 4, comments: 1 },
       { friend: "ines", what: "finished a lesson", lesson: "Why prices go up and down", when: "5 h ago", likes: 2, comments: 0 },
       { friend: "hugo", what: "invested in", item: "KO", note: "", when: "Yesterday", likes: 6, comments: 3 }
     ],
-    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 420, 420], sheet: null, justDragged: false
+    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 460, 460], sheet: null, justDragged: false
   };
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
@@ -708,12 +818,11 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   };
 
   /* ---------------------------------------------------------------- recommender */
-  function initWeights() {
-    S.weights = {};
-    SECTORS.forEach(function (s) { S.weights[s] = pickedFor(s) ? 1 : 0.3; });
-  }
-  function pickedFor(dataSector) {
-    return S.prefs.sectors.filter(function (p) { return (SECTOR_MAP[p] || [p]).indexOf(dataSector) >= 0; })[0] || null;
+  function initWeights() { S.weights = {}; }  // per sub-sector, 1 unless swipes changed it
+  // What the user picked that covers this company: its sub-sector, else its big sector (another sub-sector of it).
+  function pickedFor(c) {
+    if (S.prefs.sectors.indexOf(c.subsector) >= 0) return c.subsector;
+    return groupSubs(c.sector).some(function (s) { return S.prefs.sectors.indexOf(s) >= 0; }) ? c.sector : null;
   }
   function productHit(id) {
     if (S.prefs.products !== "which" || !S.prefs.productsText.trim()) return false;
@@ -721,7 +830,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     return S.prefs.productsText.toLowerCase().split(/[,;\n]+| and /).some(function (w) { w = w.trim(); return w.length >= 3 && hay.indexOf(w) >= 0; });
   }
   function score(c) {
-    var w = S.weights[c.sector] || 0.3;
+    var picked = pickedFor(c), w = (S.weights[c.subsector] == null ? 1 : S.weights[c.subsector]) * (picked === c.subsector ? 1 : picked ? 0.65 : 0.3);
     if (S.prefs.founder === true && c.back.profile.founder_led === "Yes") w *= 1.6;
     if (S.prefs.founder === false && c.back.profile.founder_led === "Yes") w *= 0.6;
     if (S.prefs.newtech === true && INNOVATION.indexOf(c.id) >= 0) w *= 1.3;
@@ -752,15 +861,19 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   function resetFeed() { initWeights(); S.seen = []; S.history = []; S.swipes = 0; S.tuneShown = false; S.showTune = false; S.current = null; }
 
   /* ---------------------------------------------------------------- 1 · welcome and account */
+  function disclaimer() {
+    return '<div class="disclaimer" role="note"><span class="disc-icon" aria-hidden="true">!</span><div><strong>Not investment advice</strong>' +
+      "<p>Equiteas shows companies based on your own answers. We never tell you what to buy, and nothing here is a recommendation. Investing carries a risk of loss.</p></div></div>";
+  }
   function welcome() {
     return '<section class="screen welcome">' +
       '<div class="hero-art" aria-hidden="true"></div>' +
       '<h1 class="display">Get to know a company before you see its <span class="hl">stock price.</span></h1>' +
-      '<p class="lead">Invest in companies you know and believe in. <b>Values first.</b></p>' +
+      '<p class="lead">Invest in companies you know and believe in. <b>Values first.</b></p>' + disclaimer() +
       '<p class="fine">' + CARDS.length + " real companies · every fact checked against its latest annual report</p>" +
       '<div class="btn-col"><button class="btn primary" type="button" data-action="start">Get started</button>' +
       '<button class="btn ghost" type="button" data-action="haveAccount">I already have an account</button></div>' +
-      '<p class="fine">Not financial advice. Investing carries risk.</p></section>';
+      "</section>";
   }
   function field(id, label, type, auto, value) {
     return '<div class="field"><label for="' + id + '">' + label + '</label><input id="' + id + '" type="' + type + '" autocomplete="' + auto + '" value="' + esc(value || "") + '"></div>';
@@ -791,7 +904,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   }
   function signInDemo() {
     demoAccount(DEMO_LOGIN.name); S.user.id = DEMO_LOGIN.user; S.user.email = DEMO_LOGIN.user + "@example.com";
-    S.introSeen = true; S.prefs.sectors = ["Tech", "Health"];
+    S.introSeen = true; S.prefs.sectors = ["Software", "Semiconductors and chip equipment", "Pharmaceuticals"];
     S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
     S.portfolio = null; S.expanded = {};
     resetFeed(); S.current = pickNext();
@@ -816,7 +929,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       options: [["new", "No, never", "Beginner mode"], ["basics", "Yes, a little", "Only explain the tricky stuff"], ["pro", "Yes, I’m experienced", "No pop-ups, more data"]] },
     assets: { title: "What do you want to swipe?", help: "Pick one or more.", multi: true,
       options: [["Companies", "Companies", "One business, one share"], ["ETFs", "ETFs", "A basket of companies in one share"], ["Funds", "Mutual funds", "A basket picked by a fund manager"]] },
-    sectors: { title: "Which sectors do you want to see?", help: "Choose as many as you like. You’ll still see a few others now and then." },
+    sectors: { title: "Which sectors do you want to see?", help: "Tap a sector to see its sub-sectors, then pick as many as you like. You’ll still see a few others now and then." },
     esg: { title: "Are you interested in ESG investing?", help: "ESG rates how a company treats the environment, people and its own rules (governance).",
       options: [["lot", "Yes, a lot", "ESG near the top of every card"], ["bit", "A little", "Show it, lower down"], ["no", "Not really", "Keep cards shorter"]] },
     hide: { title: "Hide these sectors?", help: "Tap to switch. Hidden = these companies never appear in your feed." },
@@ -856,13 +969,34 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
           '<strong>' + o[1] + ' <em class="time">' + o[3] + "</em></strong><span>" + o[2] + "</span></button>";
       }).join("") + "</div>" +
       '<p class="fine">Skipped questions show up later as optional cards. Change anything anytime in Profile.</p>' +
-      '<div class="spacer"></div><p class="fine">Your answers decide what you see, not what you should buy.</p>' +
+      '<div class="spacer"></div>' + disclaimer() +
       '<button class="btn primary" type="button" data-action="beginQuiz">Start</button></section>';
+  }
+  function sectorTree() {
+    return '<div class="sector-tree">' + SECTOR_TREE.map(function (g, gi) {
+      var name = g[0], subs = g[1], open = !!S.openGroups[name];
+      var n = subs.filter(function (s) { return S.prefs.sectors.indexOf(s) >= 0; }).length;
+      return '<div class="sg' + (open ? " open" : "") + (n ? " has" : "") + '" style="--i:' + (Math.min(gi, 8) + 2) + '">' +
+        '<button type="button" class="sg-head" data-action="toggleGroup" data-group="' + esc(name) + '" aria-expanded="' + open + '">' +
+        '<span class="sg-name">' + esc(name) + '</span><span class="sg-count">' + (n ? n + "/" + subs.length + " picked" : "") + '</span><span class="sg-chev" aria-hidden="true">›</span></button>' +
+        (open ? '<div class="sg-subs">' + subs.map(function (s) {
+          var on = S.prefs.sectors.indexOf(s) >= 0, just = JUST.pick === "sectors|" + s ? " just" : "";
+          return '<button type="button" class="chip select' + (on ? " on" : "") + just + '" aria-pressed="' + on + '" data-action="toggleList" data-key="sectors" data-value="' + esc(s) + '">' + (on ? "✓ " : "") + esc(s) + "</button>";
+        }).join("") + '<button type="button" class="link-btn" data-action="pickGroup" data-group="' + esc(name) + '">' + (n === subs.length ? "Clear" : "Pick all " + subs.length) + "</button></div>" : "") +
+        "</div>";
+    }).join("") + "</div>";
+  }
+  function sectorSummary() {
+    return SECTOR_TREE.map(function (g) {
+      var n = g[1].filter(function (s) { return S.prefs.sectors.indexOf(s) >= 0; }).length;
+      return n ? (SHORT_SECTOR[g[0]] || g[0]) + (n < g[1].length ? " (" + n + ")" : "") : null;
+    }).filter(Boolean).join(", ");
   }
   function quiz() {
     var list = steps(), key = list[S.step], q = Q[key], body = "", note = q.note || "";
-    if (key === "sectors" || key === "hide") {
-      var items = key === "sectors" ? PREF_SECTORS : HIDEABLE, chosen = S.prefs[key];
+    if (key === "sectors") body = sectorTree();
+    else if (key === "hide") {
+      var items = HIDEABLE, chosen = S.prefs[key];
       body = '<div class="chips" role="group" aria-label="' + esc(q.title) + '">' + items.map(function (s, i) {
         var on = chosen.indexOf(s) >= 0, just = JUST.pick === key + "|" + s ? " just" : "";
         return '<button type="button" class="chip select' + (on ? " on" : "") + just + '" style="--i:' + (Math.min(i, 8) + 2) + '" aria-pressed="' + on + '" data-action="toggleList" data-key="' + key + '" data-value="' + esc(s) + '">' +
@@ -902,7 +1036,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       '<p class="lead">Here’s what shapes it. Your swipes keep adjusting it.</p><dl class="rows">' +
       row("Level", esc(LEVEL[S.prefs.level]) + (S.prefs.popups ? " · pop-ups on" : "")) +
       row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
-      row("Sectors", esc(S.prefs.sectors.join(", ") || "None")) + row("ESG", esc(ESG[S.prefs.esg])) + row("Hidden", esc(hidden)) +
+      row("Sectors", esc(sectorSummary() || "None")) + row("ESG", esc(ESG[S.prefs.esg])) + row("Hidden", esc(hidden)) +
       (S.prefs.setup === "full" ? row("Monthly budget", S.prefs.monthly ? esc(MONTHLY[S.prefs.monthly]) : "Skipped") +
         row("Rivals back to back", S.prefs.rival ? "On" : "Off") + row("On cards", esc(cardExtras().join(", ") || "Essentials only")) : "") +
       row("Ticker and price", "Hidden until you swipe right") + "</dl>" +
@@ -954,7 +1088,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     }
     html += '<div class="card-head">' + logo(c) + '<div><h2 class="cname">' + esc(c.name) + "</h2>" +
       (f.tagline ? '<p class="tagline">' + esc(f.tagline) + "</p>" : "") + "</div></div>" +
-      '<div class="chips"><span class="chip">Company · ' + esc(c.sector) + "</span>" +
+      '<div class="chips"><span class="chip">' + esc(c.sector) + '</span><span class="chip soft">' + esc(c.subsector) + "</span>" +
       (p.founder_led === "Yes" ? '<span class="chip soft">Founder-led</span>' : "") + "</div>" +
       '<dl class="facts">' + fact("CEO", f.ceo) + fact("Staff", f.employees) + fact("HQ", f.headquarters) + fact("Founded", p.founded) + "</dl>";
     if (f.mission) html += '<figure class="quote-block"><p class="eyebrow">Mission</p><p>“' + esc(f.mission) + "”</p>" + source(c, "mission") + "</figure>";
@@ -1017,7 +1151,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     var c = S.current ? BY_ID[S.current] : null;
     var why = "";
     if (c) {
-      var picked = pickedFor(c.sector);
+      var picked = pickedFor(c);
       why = S.rivalOf ? "Team " + BY_ID[S.rivalOf].name + " or Team " + c.name + "? Its biggest rival, right after."
         : productHit(c.id) ? "Shown because you said you use its products. Never a recommendation."
         : picked ? "Shown because you picked " + picked + ". Ranked by your answers and swipes, never a recommendation."
@@ -1042,7 +1176,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     addWords(["Ticker"]);
     return '<section class="screen reveal"><div class="reveal-head"><p class="eyebrow match">♥ It’s a match</p>' + logo(c, true) +
       '<h2 class="display">' + esc(c.name) + '</h2><div class="ticker-line"><span class="ticker">' + esc(c.ticker) + "</span><span>" + esc(c.reveal.exchange || "") + "</span></div></div>" +
-      '<div class="price-box"><strong>Share price</strong><span>Live from our broker partner’s market data in the app</span></div>' +
+      priceChart(c) +
       keyNumbers(c) + (LIVE ? '<div id="history"><p class="fine">Loading 5 years from the API…</p></div>' : "") +
       '<dl class="rows">' + row("Size", esc(c.back.profile.size)) + row("Dividend", div ? esc(div) : "Not in our data") + "</dl>" +
       '<p class="notice">Shown because of your answers, not a recommendation. Not financial advice. You can lose money.</p>' +
@@ -1050,6 +1184,62 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       '<button class="btn primary" type="button" data-action="buy">Buy</button></div>' +
       '<div class="btn-col"><button class="btn ghost" type="button" data-action="ask" data-id="' + esc(c.id) + '">Ask about ' + esc(c.name) + "</button>" +
       '<button class="btn ghost" type="button" data-action="keepSwiping">Keep swiping</button></div></section>';
+  }
+  var CHART = null;
+  function fmtPrice(v, cur) {
+    return (cur === "USD" ? "$" : "") + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (cur && cur !== "USD" ? " " + cur : "");
+  }
+  function fmtDay(ts) { return new Date(ts * 1000).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); }
+  function priceChart(c) {
+    var pr = c.prices;
+    if (!pr || !pr.daily || pr.daily.length < 2) {
+      CHART = null;
+      return '<div class="price-box"><strong>Share price</strong><span>Live from our broker partner’s market data in the app</span></div>';
+    }
+    var pts = S.range === "5Y" ? pr.weekly : pr.daily.slice(-({ "1M": 22, "6M": 126, "1Y": 260 }[S.range] || 260));
+    var cur = pr.currency, first = pts[0][1], last = pts[pts.length - 1][1], change = (last / first - 1) * 100, up = change >= 0;
+    var vals = pts.map(function (q) { return q[1]; }), min = Math.min.apply(null, vals), max = Math.max.apply(null, vals), span = max - min || 1;
+    var W = 340, H = 150, top = 14, bottom = H - 14;
+    function x(i) { return i / (pts.length - 1) * W; }
+    function y(v) { return top + (max - v) / span * (bottom - top); }
+    CHART = { id: c.id, pts: pts, W: W, H: H, x: x, y: y, cur: cur };
+    var line = pts.map(function (q, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(q[1]).toFixed(1); }).join("");
+    var area = line + "L" + W + " " + H + "L0 " + H + "Z";
+    var label = c.name + " share price over " + S.range + ": from " + fmtPrice(first, cur) + " to " + fmtPrice(last, cur) + " (" + (up ? "+" : "") + change.toFixed(1) + "%).";
+    return '<div class="chart ' + (up ? "up" : "down") + '" id="chart-wrap" data-id="' + esc(c.id) + '">' +
+      '<div class="chart-head"><div><p class="eyebrow">Share price</p><p class="chart-price">' + fmtPrice(last, cur) + "</p></div>" +
+      '<p class="chart-change">' + (up ? "▲ +" : "▼ ") + change.toFixed(1) + "%<span>" + S.range + "</span></p></div>" +
+      '<div class="chart-plot"><svg class="chart-svg" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(label) + '">' +
+      '<defs><linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--chart-color); stop-opacity: 0.32"></stop>' +
+      '<stop offset="1" style="stop-color: var(--chart-color); stop-opacity: 0"></stop></linearGradient></defs>' +
+      [top, (top + bottom) / 2, bottom].map(function (gy) { return '<line class="chart-grid" x1="0" x2="' + W + '" y1="' + gy + '" y2="' + gy + '"></line>'; }).join("") +
+      '<path d="' + area + '" fill="url(#chart-fill)"></path><path class="chart-line" d="' + line + '"></path>' +
+      '<line class="chart-cross" y1="0" y2="' + H + '" hidden></line><circle class="chart-dot" r="4.5" hidden></circle></svg>' +
+      '<span class="chart-max">' + fmtPrice(max, cur) + '</span><span class="chart-min">' + fmtPrice(min, cur) + '</span><div class="chart-tip" hidden></div></div>' +
+      '<div class="chart-axis"><span>' + fmtDay(pts[0][0]) + "</span><span>" + fmtDay(pts[pts.length - 1][0]) + "</span></div>" +
+      '<div class="ranges" role="group" aria-label="Time range">' + ["1M", "6M", "1Y", "5Y"].map(function (r) {
+        var on = S.range === r;
+        return '<button type="button" class="chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-action="range" data-value="' + r + '">' + r + "</button>";
+      }).join("") + "</div>" +
+      '<p class="fine">' + (S.range === "5Y" ? "Weekly" : "Daily") + " closing prices in " + esc(cur) + ". Source: " + esc(DATA.prices_source || "market data") +
+      (DATA.prices_as_of ? ", as of " + esc(DATA.prices_as_of) : "") + ". Past performance doesn’t predict future results. In the app, live prices come from our broker partner.</p></div>";
+  }
+  function bindChart() {
+    var wrap = document.getElementById("chart-wrap");
+    if (!wrap || !CHART || CHART.id !== wrap.dataset.id) return;
+    var st = CHART, svg = wrap.querySelector(".chart-svg"), cross = wrap.querySelector(".chart-cross"), dot = wrap.querySelector(".chart-dot"), tip = wrap.querySelector(".chart-tip");
+    function show(e) {
+      var r = svg.getBoundingClientRect(), k = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+      var i = Math.round(k * (st.pts.length - 1)), px = st.x(i), py = st.y(st.pts[i][1]);
+      cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.removeAttribute("hidden");
+      dot.setAttribute("cx", px); dot.setAttribute("cy", py); dot.removeAttribute("hidden");
+      tip.textContent = fmtDay(st.pts[i][0]) + " · " + fmtPrice(st.pts[i][1], st.cur);
+      tip.style.left = Math.max(12, Math.min(88, px / st.W * 100)) + "%"; tip.style.top = (py / st.H * 100) + "%"; tip.hidden = false;
+    }
+    function hide() { cross.setAttribute("hidden", ""); dot.setAttribute("hidden", ""); tip.hidden = true; }
+    svg.addEventListener("pointermove", show);
+    svg.addEventListener("pointerdown", show);
+    svg.addEventListener("pointerleave", hide);
   }
   function buy() {
     var c = BY_ID[S.revealId];
@@ -1087,18 +1277,11 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   }
   function shared() {
     var c = BY_ID[S.revealId];
-    var opts = [["pick", "Just the company", "Friends see what you picked, not how much"], ["amount", "Company and amount", "Friends also see " + money(S.amount)], ["none", "Keep it private", "Nobody sees this purchase"]];
-    var preview = S.shareMode === "none" ? "" :
-      '<div class="panel"><p class="eyebrow">Friends will see</p><div class="post-head"><span class="avatar">' + esc(initials(userName())) + "</span><p><b>" + esc(userName()) + "</b> invested in <b>" + esc(c.name) + "</b>" +
-      (S.shareMode === "amount" ? " · " + money(S.amount) : "") + "</p></div></div>";
     return '<section class="screen"><div class="done-head"><span class="done-icon">' + ICON.check + "</span>" +
-      '<h2 class="display">You own a piece of ' + esc(c.name) + "</h2><p class=\"lead\">" + money(S.amount) + " · order placed (demo: no money moved)</p></div>" +
-      '<h3 class="section-title">Share with friends?</h3><div class="options" role="radiogroup" aria-label="Share with friends">' + opts.map(function (o) {
-        var on = S.shareMode === o[0];
-        return '<button type="button" role="radio" aria-checked="' + on + '" class="option' + (on ? " on" : "") + '" data-action="shareMode" data-value="' + o[0] + '"><strong>' + o[1] + "</strong><span>" + esc(o[2]) + "</span></button>";
-      }).join("") + "</div>" + preview +
-      '<div class="spacer"></div><div class="btn-col"><button class="btn primary" type="button" data-action="share">' + (S.shareMode === "none" ? "Done" : "Share") + "</button>" +
-      '<button class="btn ghost" type="button" data-action="keepSwiping">Not now</button></div></section>';
+      '<h2 class="display">You own a piece of ' + esc(c.name) + '</h2><p class="lead">' + money(S.amount) + " · order placed (demo: no money moved)</p></div>" +
+      '<p class="notice">It now appears in your portfolio map, under ' + esc(c.sector) + ".</p>" +
+      '<div class="spacer"></div><div class="btn-col"><button class="btn primary" type="button" data-action="tab" data-tab="wishlist">See my portfolio</button>' +
+      '<button class="btn ghost" type="button" data-action="keepSwiping">Keep swiping</button></div></section>';
   }
   function computePortfolio() {
     var sectors = {};
@@ -1123,12 +1306,12 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   }
   // Network map: you in the middle, one node per sector (size = number of companies you own in it).
   // Tapping a sector zooms the view onto it (animated viewBox) and unfolds its companies (size = amount).
-  var GRAPH = 420, FULL_VIEW = [0, 0, GRAPH, GRAPH];
+  var GRAPH = 460, FULL_VIEW = [0, 0, GRAPH, GRAPH];
   function graphLayout(p) {
-    var cx = GRAPH / 2, cy = GRAPH / 2, n = p.sectors.length, ring = n === 1 ? 0 : 112, out = {};
+    var cx = GRAPH / 2, cy = GRAPH / 2, n = p.sectors.length, ring = n === 1 ? 0 : 124, out = {};
     p.sectors.forEach(function (s, i) {
       var a = -Math.PI / 2 + i * 2 * Math.PI / n;
-      out[s.sector] = { a: a, x: cx + ring * Math.cos(a), y: cy + ring * Math.sin(a), r: 22 + 8 * s.companies };
+      out[s.sector] = { a: a, x: cx + ring * Math.cos(a), y: cy + ring * Math.sin(a), r: 22 + 8 * Math.min(s.companies, 4) };
     });
     return out;
   }
@@ -1140,7 +1323,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   }
   function portfolioGraph(p) {
     var W = GRAPH, H = GRAPH, cx = W / 2, cy = H / 2, n = p.sectors.length, lay = graphLayout(p);
-    var links = "", nodes = "";
+    var links = "", nodes = "", risk = S.reportShown && !S.bot ? botAnalysis(p).levels : {};
+    function seen(kind, key) { return S.bot && S.bot.visited[kind + ":" + key] ? " scanned" : ""; }
     function f(v) { return v.toFixed(1); }
     p.sectors.forEach(function (s) {
       var L = lay[s.sector], a = L.a, sx = L.x, sy = L.y, r = L.r, open = !!S.expanded[s.sector], focused = S.focus === s.sector;
@@ -1148,34 +1332,37 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       var dim = S.focus && !focused ? " dim" : "";
       if (n > 1) links += '<line class="pg-hub' + dim + '" x1="' + cx + '" y1="' + cy + '" x2="' + f(sx) + '" y2="' + f(sy) + '"></line>';
       if (open) {
-        var k = s.holdings.length, spread = Math.min(1.7, 0.62 * (k - 1));
+        var k = s.holdings.length, spread = Math.min(2.5, 0.62 * (k - 1));
         s.holdings.forEach(function (h, j) {
           var b = n === 1 ? -Math.PI / 2 + j * 2 * Math.PI / k : a + (k === 1 ? 0 : -spread / 2 + spread * j / (k - 1));
           var hr = 14 + Math.min(6, Math.sqrt(h.amount) * 0.8), d = r + hr + 14;
           var hx = sx + d * Math.cos(b), hy = sy + d * Math.sin(b);
           var len = Math.hypot(hx - sx, hy - sy), delay = (0.12 + j * 0.07).toFixed(2) + "s";
           links += '<line class="pg-leaf' + anim + '" style="--len:' + f(len) + ";--delay:" + delay + '" x1="' + f(sx) + '" y1="' + f(sy) + '" x2="' + f(hx) + '" y2="' + f(hy) + '"></line>';
-          nodes += '<g class="pg-co' + anim + '" style="--dx:' + f(sx - hx) + "px;--dy:" + f(sy - hy) + "px;--delay:" + delay + '" data-action="open" data-id="' + esc(h.ticker) +
+          nodes += '<g class="pg-co' + anim + seen("co", h.ticker) + '" style="--dx:' + f(sx - hx) + "px;--dy:" + f(sy - hy) + "px;--delay:" + delay + '" data-action="open" data-id="' + esc(h.ticker) +
             '" tabindex="0" role="button" aria-label="' + esc(h.name + ", " + money(h.amount)) + '"><title>' + esc(h.name + " · " + money(h.amount)) + "</title>" +
             '<circle cx="' + f(hx) + '" cy="' + f(hy) + '" r="' + f(hr) + '"></circle><text x="' + f(hx) + '" y="' + f(hy) + '" dy="0.35em">' + esc(h.ticker) + "</text>" +
             (focused ? '<text class="pg-amt" x="' + f(hx + (hr + 11) * Math.cos(b)) + '" y="' + f(hy + (hr + 11) * Math.sin(b)) + '" dy="0.35em">€' + Math.round(h.amount) + "</text>" : "") + "</g>";
         });
       }
-      var lines = splitLabel(s.sector), top = sy - 4 - (lines.length - 1) * 6;
+      var lines = splitLabel(SHORT_SECTOR[s.sector] || s.sector), top = sy - 4 - (lines.length - 1) * 6;
       var bx = sx + r * 0.72, by = sy - r * 0.72;
-      nodes += '<g class="pg-sector' + (open ? " open" : "") + dim + '" data-action="toggleSector" data-sector="' + esc(s.sector) + '" tabindex="0" role="button" aria-expanded="' + open +
-        '" aria-label="' + esc(s.sector + ", " + s.companies + (s.companies > 1 ? " companies" : " company") + (focused ? ", tap to zoom out" : ", tap to zoom in")) + '">' +
+      var rk = risk[s.sector] || "";
+      nodes += '<g class="pg-sector' + (open ? " open" : "") + dim + seen("sector", s.sector) + (rk ? " risk-" + rk : "") + '" data-action="toggleSector" data-sector="' + esc(s.sector) + '" tabindex="0" role="button" aria-expanded="' + open +
+        '" aria-label="' + esc(s.sector + ", " + s.companies + (s.companies > 1 ? " companies" : " company") + (rk === "high" ? ", high concentration" : rk === "watch" ? ", worth watching" : "") +
+        (focused ? ", tap to zoom out" : ", tap to zoom in")) + '">' +
         "<title>" + esc(s.sector + ": " + s.companies + (s.companies > 1 ? " companies, " : " company, ") + money(s.amount)) + "</title>" +
         '<circle cx="' + f(sx) + '" cy="' + f(sy) + '" r="' + r + '"></circle><text x="' + f(sx) + '" y="' + f(top) + '">' +
         lines.map(function (l, li) { return '<tspan x="' + f(sx) + '" dy="' + (li ? "1.15em" : "0") + '">' + esc(l) + "</tspan>"; }).join("") + "</text>" +
         '<text class="pg-count" x="' + f(sx) + '" y="' + f(sy + 14 + (lines.length - 1) * 6) + '">' + s.companies + "</text>" +
         '<circle class="pg-toggle" cx="' + f(bx) + '" cy="' + f(by) + '" r="9"></circle><text class="pg-toggle-sign" x="' + f(bx) + '" y="' + f(by) + '" dy="0.35em">' + (open ? "−" : "+") + "</text></g>";
     });
-    if (n > 1) nodes += '<g class="pg-you' + (S.focus ? " dim" : "") + '"' + (S.focus ? ' data-action="zoomOut" role="button" tabindex="0" aria-label="Zoom out"' : "") +
+    if (n > 1) nodes += '<g class="pg-you' + (S.focus ? " dim" : "") + seen("you", "") + '"' + (S.focus ? ' data-action="zoomOut" role="button" tabindex="0" aria-label="Zoom out"' : "") +
       '><circle cx="' + cx + '" cy="' + cy + '" r="20"></circle><text x="' + cx + '" y="' + cy + '" dy="0.35em">You</text></g>';
     var backdrop = S.focus ? '<rect class="pg-backdrop" data-action="zoomOut" x="-420" y="-420" width="1260" height="1260"></rect>' : "";
     var label = "Your investments by sector: " + p.sectors.map(function (s) { return s.sector + " " + s.companies; }).join(", ");
-    return '<svg class="pgraph" viewBox="' + S.viewBox.map(function (v) { return v.toFixed(1); }).join(" ") + '" role="group" aria-label="' + esc(label) + '">' + backdrop + links + nodes + "</svg>";
+    var bot = S.bot ? '<g class="pg-bot bot-art" aria-hidden="true" transform="translate(' + S.bot.x.toFixed(1) + " " + (S.bot.y - 4).toFixed(1) + ')"><g class="bot-body">' + BOT_HEAD + "</g></g>" : "";
+    return '<svg class="pgraph' + (S.bot ? " busy" : "") + '" viewBox="' + S.viewBox.map(function (v) { return v.toFixed(1); }).join(" ") + '" role="group" aria-label="' + esc(label) + '">' + backdrop + links + nodes + bot + "</svg>";
   }
   var zoomFrame = null;
   function zoomTo(target) {
@@ -1219,20 +1406,212 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     var caption = focused
       ? "<b>" + esc(focused.sector) + "</b> · " + focused.companies + (focused.companies > 1 ? " companies · " : " company · ") + money(focused.amount) +
         " · " + Math.round(focused.amount / p.total * 100) + "% of your money. Tap a company to see it again."
+      : S.reportShown ? "Coral ring: a lot of your money in one sector. Amber: worth watching. Tap a sector to zoom in."
       : "Tap a sector to zoom in on its companies. Bigger circle = more companies. " + origin;
     return '<div class="title-row"><p class="eyebrow">Where your money is</p><span class="fine">' + money(p.total) + " · " + count + (count > 1 ? " companies" : " company") + "</span></div>" +
       portfolioGraph(p) +
-      '<div class="title-row"><p class="fine">' + caption + "</p>" +
-      '<button class="link-btn nowrap" type="button" data-action="toggleAllSectors">' + (S.focus ? "Zoom out" : allOpen ? "Fold all" : "Unfold all") + "</button></div>";
+      (S.bot
+        ? '<div class="bot-status"><span class="bot-dot" aria-hidden="true"></span><p id="bot-status-text">' + botStatusHtml() + "</p>" +
+          '<button class="link-btn nowrap" type="button" data-action="skipBot">Skip</button></div>'
+        : '<div class="title-row"><p class="fine">' + caption + "</p>" +
+          '<button class="link-btn nowrap" type="button" data-action="toggleAllSectors">' + (S.focus ? "Zoom out" : allOpen ? "Fold all" : "Unfold all") + "</button></div>" +
+          '<button class="btn primary bot-btn" type="button" data-action="analyse">' + BOT_ICON + (S.reportShown ? "Run the analysis again" : "Analyse my portfolio") + "</button>");
   }
   function redrawGraph() {
     var wrap = document.getElementById("pgraph-wrap");
     if (wrap) wrap.innerHTML = mapInner(currentPortfolio());
   }
+
+  /* ---------------------------------------------------------------- analyst robot (demo run) */
+  // "Analyse my portfolio" replays the analyst agent's tool loop on the map: a robot hops
+  // you → sector → company, then a short concentration report. No API call in the demo: the step
+  // labels and the wording are prepared; the percentages come from the holdings and the quote is
+  // Nvidia's 10-K, word for word (it is in profile_extractions.json, checked against the filing).
+  var BOT_HEAD = '<line class="bot-antenna" x1="0" y1="-12" x2="0" y2="-18"></line><circle class="bot-bulb" cx="0" cy="-19.5" r="2.8"></circle>' +
+    '<rect class="bot-ear" x="-16.5" y="-5" width="4.5" height="9" rx="2.2"></rect><rect class="bot-ear" x="12" y="-5" width="4.5" height="9" rx="2.2"></rect>' +
+    '<rect class="bot-head" x="-13" y="-12.5" width="26" height="22" rx="8"></rect><rect class="bot-face" x="-9.5" y="-8.5" width="19" height="13.5" rx="5"></rect>' +
+    '<g class="bot-look"><g class="bot-eyes"><rect x="-6" y="-5.2" width="3.8" height="6.5" rx="1.9"></rect><rect x="2.2" y="-5.2" width="3.8" height="6.5" rx="1.9"></rect></g></g>';
+  var BOT_ICON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<rect x="4" y="8" width="16" height="12" rx="4"></rect><path d="M12 8V5"></path><circle cx="12" cy="3.5" r="1.2"></circle><path d="M9.5 13v2M14.5 13v2M2 13v2M22 13v2"></path></svg>';
+  // What the agent "does" at each company (prepared for the demo; other tickers get a default step).
+  var BOT_STEPS = {
+    NVDA: ["search_filing", "who makes its chips?"], AMD: ["search_filing", "who makes its chips?"], TSM: ["search_filing", "who are its customers?"],
+    AAPL: ["query_financials", "5-year revenue"], MSFT: ["search_filing", "risk factors"], GOOGL: ["query_financials", "5-year revenue"],
+    AMZN: ["query_financials", "5-year revenue"], WMT: ["search_filing", "risk factors"], KO: ["search_filing", "risk factors"],
+    LLY: ["query_financials", "5-year revenue"], JPM: ["search_filing", "risk factors"], TSLA: ["query_financials", "5-year revenue"]
+  };
+  var TECH_SECTORS = ["Chips", "Tech", "Internet"];
+  var NVDA_TSMC = { quote: "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers.",
+                    source: "Nvidia annual report (10-K), 2026" };
+  var botRun = 0, botFrame = null, botTimer = null;
+
+  function andList(a) { return a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1]; }
+  function botAnalysis(p) {
+    function pct(v) { return p.total ? Math.round(v / p.total * 100) : 0; }
+    function names(s) { return andList(s.holdings.map(function (h) { return h.name; })); }
+    var levels = {}, used = {}, findings = [];
+    p.sectors.slice().sort(function (a, b) { return b.amount - a.amount; }).forEach(function (s) {
+      var share = pct(s.amount);
+      if (share < 30) return;
+      levels[s.sector] = "high"; used[s.sector] = true;
+      var has = {};
+      s.holdings.forEach(function (h) { has[h.ticker] = true; });
+      var f = { level: "high", title: share + "% of your money is in " + s.sector,
+                text: names(s) + ". When this sector has a bad year, " + share + "% of your money moves with it." };
+      if (has.TSM && (has.NVDA || has.AMD)) {
+        var both = has.NVDA && has.AMD;
+        f.text += " They are linked too: " + (both ? "Nvidia and AMD have their" : (has.NVDA ? "Nvidia" : "AMD") + " has its") +
+          " chips made by TSMC, so one problem at TSMC hits " + (both ? "all three." : "both.");
+        if (has.NVDA) f.quote = NVDA_TSMC;
+      }
+      findings.push(f);
+    });
+    var tech = p.sectors.filter(function (s) { return TECH_SECTORS.indexOf(s.sector) >= 0; });
+    var techShare = pct(tech.reduce(function (n, s) { return n + s.amount; }, 0));
+    if (tech.length > 1 && techShare >= 40) {
+      tech.forEach(function (s) { used[s.sector] = true; if (!levels[s.sector]) levels[s.sector] = "watch"; });
+      findings.push({ level: "watch", title: techShare + "% of your money follows technology",
+        text: andList(tech.map(function (s) { return s.sector; })) + " are separate circles on the map, but one theme: a tech slowdown would hit " +
+          (techShare >= 50 ? "more than half your money" : "a big part of your money") + " at once." });
+    }
+    p.sectors.forEach(function (s) {
+      var share = pct(s.amount);
+      if (used[s.sector] || share < 20) return;
+      used[s.sector] = true; levels[s.sector] = "watch";
+      findings.push({ level: "watch", title: share + "% of your money is in " + s.sector, text: names(s) + ". Worth watching as you add companies." });
+    });
+    var rest = p.sectors.filter(function (s) { return !used[s.sector]; });
+    if (rest.length) {
+      var max = Math.max.apply(null, rest.map(function (s) { return pct(s.amount); }));
+      var restNames = andList(rest.map(function (s) { return s.sector; }));
+      findings.push(findings.length
+        ? { level: "ok", title: (rest.length > 1 ? "Your other " + rest.length + " sectors hold " : "Your other sector holds ") + pct(rest.reduce(function (n, s) { return n + s.amount; }, 0)) + "%",
+            text: restNames + (rest.length > 1 ? " each hold " + max + "% or less." : " holds " + max + "%.") + " They balance the rest." }
+        : { level: "ok", title: "Your money is spread out", text: "No sector holds more than " + max + "% of your money: " + restNames + "." });
+    }
+    var overall = findings.some(function (f) { return f.level === "high"; }) ? ["high", "High concentration"]
+      : findings.some(function (f) { return f.level === "watch"; }) ? ["watch", "Some concentration"] : ["ok", "Well spread"];
+    return { levels: levels, findings: findings, overall: overall };
+  }
+  function botReport(p) {
+    var a = botAnalysis(p), count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0), fresh = S.reportFresh;
+    S.reportFresh = false;
+    return '<section class="panel bot-report' + (fresh ? " fresh" : "") + '" id="bot-report" tabindex="-1" aria-labelledby="bot-report-title">' +
+      '<div class="bot-report-head"><span class="bot-avatar" aria-hidden="true"><svg class="bot-art" viewBox="-19 -24 38 38" width="34" height="34">' + BOT_HEAD + "</svg></span>" +
+      '<div><p class="eyebrow">Analyst report</p><strong id="bot-report-title">Concentration check</strong><small>' + count + (count > 1 ? " companies · " : " company · ") +
+      p.sectors.length + (p.sectors.length > 1 ? " sectors · " : " sector · ") + money(p.total) + "</small></div>" +
+      '<span class="level ' + a.overall[0] + '">' + a.overall[1] + "</span></div>" +
+      '<ul class="findings">' + a.findings.map(function (f, i) {
+        return '<li class="' + f.level + '" style="--i:' + i + '"><span class="dot" aria-hidden="true"></span><div><strong>' + esc(f.title) + "</strong><p>" + esc(f.text) + "</p>" +
+          (f.quote ? "<blockquote>“" + esc(f.quote.quote) + "”<cite>" + esc(f.quote.source) + "</cite></blockquote>" : "") + "</div></li>";
+      }).join("") + "</ul>" +
+      '<p class="fine">Sources: your holdings and the companies’ annual reports filed with the SEC. This describes your portfolio. It is not investment advice.</p></section>';
+  }
+  function botStops(p) {
+    var count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0);
+    var stops = [{ kind: "you", key: "", tool: "show_companies", text: "Your " + count + (count > 1 ? " companies" : " company") + " in " + p.sectors.length + (p.sectors.length > 1 ? " sectors" : " sector") }];
+    p.sectors.forEach(function (s) {
+      stops.push({ kind: "sector", key: s.sector, tool: "query_financials", text: s.sector + " · " + money(s.amount) + " · " + Math.round(s.amount / p.total * 100) + "% of your money" });
+      s.holdings.forEach(function (h, j) {
+        var st = BOT_STEPS[h.ticker] || (j % 2 ? ["query_financials", "5-year revenue"] : ["search_filing", "risk factors"]);
+        stops.push({ kind: "co", key: h.ticker, tool: st[0], text: h.name + " · " + st[1] });
+      });
+    });
+    stops.push({ kind: "you", key: "", tool: "grounding_check", text: "Every claim matched to its source" });
+    return stops;
+  }
+  function botStatusHtml() { return S.bot ? '<span class="bot-tool">' + esc(S.bot.tool) + "</span>" + esc(S.bot.text) : ""; }
+  function botNode(st) {
+    var list = document.querySelectorAll("#pgraph-wrap .pg-" + st.kind);
+    for (var i = 0; i < list.length; i++) {
+      var g = list[i];
+      if (st.kind === "you" || (st.kind === "co" ? g.getAttribute("data-id") : g.getAttribute("data-sector")) === st.key) {
+        var c = g.querySelector("circle");
+        return { g: g, x: Number(c.getAttribute("cx")), y: Number(c.getAttribute("cy")) };
+      }
+    }
+    return null;
+  }
+  function placeBot(x, y, tilt) {
+    var g = document.querySelector("#pgraph-wrap .pg-bot");
+    if (!g || !S.bot) return false;
+    S.bot.x = x; S.bot.y = y;
+    g.setAttribute("transform", "translate(" + x.toFixed(1) + " " + (y - 4).toFixed(1) + ")" + (tilt ? " rotate(" + tilt.toFixed(1) + ")" : ""));
+    return true;
+  }
+  function botLook(dir) {
+    var l = document.querySelector("#pgraph-wrap .pg-bot .bot-look");
+    if (l) l.setAttribute("transform", "translate(" + dir * 2 + " 0)");
+  }
+  function botMark(st, on) {
+    var bot = document.querySelector("#pgraph-wrap .pg-bot"), n = botNode(st);
+    if (bot) bot.classList.toggle("scan", on);
+    if (!n) return;
+    n.g.classList.toggle("scanning", on);
+    if (!on) { n.g.classList.add("scanned"); S.bot.visited[st.kind + ":" + st.key] = true; }
+  }
+  function botFly(a, b, run, done) {
+    var dx = b.x - a.x, dy = b.y - a.y, dist = Math.sqrt(dx * dx + dy * dy), t0 = null;
+    var dur = 140 + Math.min(220, dist * 1.2), lift = Math.min(18, 4 + dist * 0.14), side = dx >= 0 ? 1 : -1;
+    botLook(dx > 2 ? 1 : dx < -2 ? -1 : 0);
+    botFrame = requestAnimationFrame(function step(now) {
+      if (run !== botRun) return;
+      if (t0 === null) t0 = now;
+      var k = Math.min(1, (now - t0) / dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, arc = Math.sin(Math.PI * k);
+      if (!placeBot(a.x + dx * e, a.y + dy * e - arc * lift, arc * 9 * side)) { stopBot(); return; }
+      if (k < 1) botFrame = requestAnimationFrame(step);
+      else { botLook(0); done(); }
+    });
+  }
+  function stopBot() { botRun++; cancelAnimationFrame(botFrame); clearTimeout(botTimer); S.bot = null; }
+  function finishBot() {
+    stopBot();
+    S.reportShown = true; S.reportFresh = true;
+    redrawGraph();
+    var box = document.getElementById("bot-report-wrap");
+    if (!box) return;
+    box.innerHTML = botReport(currentPortfolio());
+    var r = document.getElementById("bot-report"), reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (r) { r.focus({ preventScroll: true }); r.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+  }
+  function startBot() {
+    var p = currentPortfolio();
+    if (!p.sectors.length) return;
+    stopBot();
+    var run = botRun, stops = botStops(p), reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    S.reportShown = false;
+    if (S.focus) { S.focus = null; zoomTo(FULL_VIEW.slice()); }
+    S.opening = p.sectors.filter(function (s) { return !S.expanded[s.sector]; }).map(function (s) { return s.sector; });
+    p.sectors.forEach(function (s) { S.expanded[s.sector] = true; });
+    S.bot = { x: GRAPH / 2, y: GRAPH / 2, visited: {}, tool: stops[0].tool, text: stops[0].text };
+    redrawGraph(); S.opening = [];
+    var box = document.getElementById("bot-report-wrap");
+    if (box) box.innerHTML = "";
+    if (reduce) { botTimer = setTimeout(function () { if (run === botRun) finishBot(); }, 900); return; }
+    function visit(k) {
+      if (run !== botRun) return;
+      if (!document.querySelector("#pgraph-wrap .pg-bot")) { stopBot(); return; }  // left the Portfolio tab
+      if (k >= stops.length) { botTimer = setTimeout(function () { if (run === botRun) finishBot(); }, 250); return; }
+      var to = botNode(stops[k]);
+      if (!to) { visit(k + 1); return; }
+      botFly({ x: S.bot.x, y: S.bot.y }, to, run, function () {
+        S.bot.tool = stops[k].tool; S.bot.text = stops[k].text;
+        var el = document.getElementById("bot-status-text");
+        if (el) el.innerHTML = botStatusHtml();
+        botMark(stops[k], true);
+        botTimer = setTimeout(function () {
+          if (run !== botRun) return;
+          botMark(stops[k], false);
+          visit(k + 1);
+        }, k === 0 ? 750 : stops[k].kind === "co" ? 140 : 230);
+      });
+    }
+    visit(0);
+  }
   function wishlist() {
     var p = currentPortfolio();
     var map = p.sectors.length
-      ? '<div class="panel map" id="pgraph-wrap">' + mapInner(p) + "</div>" + sectorRows(p)
+      ? '<div class="panel map" id="pgraph-wrap">' + mapInner(p) + "</div>" + '<div id="bot-report-wrap">' + (S.reportShown && !S.bot ? botReport(p) : "") + "</div>" + sectorRows(p)
       : '<div class="panel"><p class="eyebrow">Your portfolio map</p><p class="body-text">Buy your first company and it shows up here, linked to its sector.</p></div>';
     var tabsHtml = '<div class="filters" role="group" aria-label="Filter">' + ["All", "Companies", "ETFs"].map(function (f) {
       var on = S.wishFilter === f;
@@ -1331,8 +1710,6 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       row("How new am I", esc(LEVEL[S.prefs.level])) + row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
       row("Sectors, ESG, risk…", '<button class="link-btn" type="button" data-action="editAnswers">Edit ›</button>') + "</dl>" +
       '<h3 class="section-title">App</h3><dl class="rows">' + row("Theme", "Dark") + row("Concept pop-ups", switchBtn("togglePopups", S.prefs.popups, "Concept pop-ups")) + "</dl>" +
-      '<h3 class="section-title">Social privacy</h3><dl class="rows">' + row("Who sees my profile", "Friends only") +
-      row("Share amounts by default", switchBtn("toggleShareAmounts", S.prefs.shareAmounts, "Share amounts by default")) + "</dl>" +
       '<h3 class="section-title">Identity check</h3><dl class="rows">' + row("Status", S.user.kyc ? "Done (demo)" : "Not done yet") + "</dl>" +
       '<div class="btn-col"><button class="btn ghost" type="button" data-action="about">How the cards are made</button>' +
       '<button class="btn ghost" type="button" data-action="signOut">Sign out</button></div></section>';
@@ -1541,6 +1918,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     afterRender = [];
     queue.forEach(function (fn) { fn(); });
     if (entering && S.screen === "verify") startResend();
+    if (S.screen === "reveal") bindChart();
     if (S.screen === "reveal" && LIVE) loadHistory(S.revealId);
     if (entering && S.screen === "wishlist") loadPortfolio();
     bindDrag();
@@ -1575,18 +1953,18 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   }
   function doPass() {
     var c = BY_ID[S.current];
-    S.history.push({ id: c.id, sector: c.sector, weight: S.weights[c.sector] });
-    S.weights[c.sector] = (S.weights[c.sector] || 0.3) * 0.6;
+    S.history.push({ id: c.id, sector: c.subsector, weight: S.weights[c.subsector] });
+    S.weights[c.subsector] = (S.weights[c.subsector] == null ? 1 : S.weights[c.subsector]) * 0.6;
     S.seen.push(c.id);
     S.swipes++;
     send("/api/swipes", { user: userId(), ticker: c.id, direction: "pass" });
     S.lastSwiped = c.id;
     advance();
-    toast("Fewer " + c.sector.toLowerCase() + " companies from now on.", true);
+    toast("Fewer companies in " + c.subsector.toLowerCase() + " from now on.", true);
   }
   function doLike() {
     var c = BY_ID[S.current];
-    S.weights[c.sector] = (S.weights[c.sector] || 0.3) * 1.3;
+    S.weights[c.subsector] = (S.weights[c.subsector] == null ? 1 : S.weights[c.subsector]) * 1.3;
     S.seen.push(c.id);
     S.swipes++;
     S.history = [];
@@ -1763,15 +2141,19 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     react: function (d) { var p = S.posts[Number(d.i)]; p.liked = !p.liked; p.likes += p.liked ? 1 : -1; render(); },
     friend: function (d) { S.friend = d.id; go("friend"); },
     follow: function () { S.following[S.friend] = !S.following[S.friend]; render(); },
+    analyse: function () { startBot(); },
+    skipBot: function () { if (S.bot) finishBot(); },
     toggleSector: function (d) {
+      if (S.bot) return;
       var s = d.sector;
       if (S.focus === s) { zoomOut(); focusSector(s); return; }
       S.focus = s; S.expanded = {}; S.expanded[s] = true; S.opening = [s];
       redrawGraph(); S.opening = [];
       zoomTo(sectorBox(s)); focusSector(s);
     },
-    zoomOut: function () { zoomOut(); },
+    zoomOut: function () { if (!S.bot) zoomOut(); },
     toggleAllSectors: function () {
+      if (S.bot) return;
       if (S.focus) { zoomOut(); return; }
       var p = currentPortfolio(), allOpen = p.sectors.every(function (s) { return S.expanded[s.sector]; });
       if (allOpen) S.expanded = {};
@@ -1781,10 +2163,23 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       }
       redrawGraph(); S.opening = [];
     },
+    toggleGroup: function (d) { S.openGroups[d.group] = !S.openGroups[d.group]; render(); },
+    pickGroup: function (d) {
+      var subs = groupSubs(d.group), all = subs.every(function (s) { return S.prefs.sectors.indexOf(s) >= 0; });
+      S.prefs.sectors = S.prefs.sectors.filter(function (s) { return subs.indexOf(s) < 0; });
+      if (!all) S.prefs.sectors = S.prefs.sectors.concat(subs);
+      render();
+    },
+    range: function (d) {
+      S.range = d.value;
+      var w = document.getElementById("chart-wrap");
+      if (w) { w.outerHTML = priceChart(BY_ID[w.dataset.id]); bindChart(); }
+    },
     togglePopups: function () { S.prefs.popups = !S.prefs.popups; render(); },
     toggleShareAmounts: function () { S.prefs.shareAmounts = !S.prefs.shareAmounts; render(); },
     signOut: function () {
       S.user = { name: "", email: "", terms: false, verified: false, kyc: false };
+      stopBot(); S.reportShown = false;
       S.owned = {}; S.portfolio = null; S.wishlist = []; S.introSeen = false; go("welcome");
     },
     tab: function (d) {
