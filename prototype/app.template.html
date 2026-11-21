@@ -432,6 +432,12 @@ h2.display { font-size: 26px; line-height: 1.15; }
 .nowrap { white-space: nowrap; flex: none; }
 @media (prefers-reduced-motion: reduce) { .pgraph .pg-co, .pgraph line.pg-leaf { animation: none !important; stroke-dashoffset: 0 !important; } }
 
+/* Zoom on a sector. */
+.pgraph .dim { opacity: 0.28; transition: opacity 0.4s ease; }
+.pgraph .pg-backdrop { fill: transparent; cursor: zoom-out; }
+.pgraph .pg-you[data-action] { cursor: zoom-out; }
+.pgraph .pg-amt { fill: var(--accent); font: 600 8.5px var(--font-display); text-anchor: middle; pointer-events: none; }
+
 @media (prefers-reduced-motion: reduce) { .card, .progress-fill { transition: none !important; } }
 </style>
 
@@ -441,11 +447,6 @@ h2.display { font-size: 26px; line-height: 1.15; }
       <img src="__LOGO__" alt="" width="30" height="30">
       equiteas
     </div>
-    <span class="live-badge" id="live-badge" hidden title="Served by the Equiteas API (FastAPI + DuckDB)">● Live API</span>
-    <button class="pill-btn" type="button" data-action="about" aria-haspopup="dialog">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-      Facts checked
-    </button>
   </header>
   <main id="view" aria-live="polite"></main>
   <nav class="tabs" id="tabs" aria-label="Sections" hidden>
@@ -540,7 +541,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
       { friend: "ines", what: "finished a lesson", lesson: "Why prices go up and down", when: "5 h ago", likes: 2, comments: 0 },
       { friend: "hugo", what: "invested in", item: "KO", note: "", when: "Yesterday", likes: 6, comments: 3 }
     ],
-    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, sheet: null, justDragged: false
+    portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 420, 420], sheet: null, justDragged: false
   };
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
@@ -981,44 +982,85 @@ h2.display { font-size: 26px; line-height: 1.15; }
     return i > 0 ? [name.slice(0, i), name.slice(i + 1)] : [name];
   }
   // Network map: you in the middle, one node per sector (size = number of companies you own in it).
-  // Sectors start folded; a click unfolds its companies (size = amount), which slide out of the sector.
-  function portfolioGraph(p) {
-    var W = 420, H = 420, cx = W / 2, cy = H / 2, n = p.sectors.length, ring = n === 1 ? 0 : 112;
-    var links = "", nodes = "";
-    function f(v) { return v.toFixed(1); }
+  // Tapping a sector zooms the view onto it (animated viewBox) and unfolds its companies (size = amount).
+  var GRAPH = 420, FULL_VIEW = [0, 0, GRAPH, GRAPH];
+  function graphLayout(p) {
+    var cx = GRAPH / 2, cy = GRAPH / 2, n = p.sectors.length, ring = n === 1 ? 0 : 112, out = {};
     p.sectors.forEach(function (s, i) {
       var a = -Math.PI / 2 + i * 2 * Math.PI / n;
-      var sx = cx + ring * Math.cos(a), sy = cy + ring * Math.sin(a);
-      var r = 22 + 8 * s.companies, open = !!S.expanded[s.sector];
+      out[s.sector] = { a: a, x: cx + ring * Math.cos(a), y: cy + ring * Math.sin(a), r: 22 + 8 * s.companies };
+    });
+    return out;
+  }
+  function sectorBox(name) {
+    var s = graphLayout(currentPortfolio())[name];
+    if (!s) return FULL_VIEW.slice();
+    var half = Math.max(104, s.r + 84);
+    return [s.x - half, s.y - half, 2 * half, 2 * half];
+  }
+  function portfolioGraph(p) {
+    var W = GRAPH, H = GRAPH, cx = W / 2, cy = H / 2, n = p.sectors.length, lay = graphLayout(p);
+    var links = "", nodes = "";
+    function f(v) { return v.toFixed(1); }
+    p.sectors.forEach(function (s) {
+      var L = lay[s.sector], a = L.a, sx = L.x, sy = L.y, r = L.r, open = !!S.expanded[s.sector], focused = S.focus === s.sector;
       var anim = S.opening.indexOf(s.sector) >= 0 ? " unfold" : S.closing === s.sector ? " fold" : "";
-      if (n > 1) links += '<line class="pg-hub" x1="' + cx + '" y1="' + cy + '" x2="' + f(sx) + '" y2="' + f(sy) + '"></line>';
+      var dim = S.focus && !focused ? " dim" : "";
+      if (n > 1) links += '<line class="pg-hub' + dim + '" x1="' + cx + '" y1="' + cy + '" x2="' + f(sx) + '" y2="' + f(sy) + '"></line>';
       if (open) {
         var k = s.holdings.length, spread = Math.min(1.7, 0.62 * (k - 1));
         s.holdings.forEach(function (h, j) {
           var b = n === 1 ? -Math.PI / 2 + j * 2 * Math.PI / k : a + (k === 1 ? 0 : -spread / 2 + spread * j / (k - 1));
           var hr = 14 + Math.min(6, Math.sqrt(h.amount) * 0.8), d = r + hr + 14;
-          var hx = Math.max(hr + 2, Math.min(W - hr - 2, sx + d * Math.cos(b)));
-          var hy = Math.max(hr + 2, Math.min(H - hr - 2, sy + d * Math.sin(b)));
-          var len = Math.hypot(hx - sx, hy - sy), delay = (j * 0.07).toFixed(2) + "s";
+          var hx = sx + d * Math.cos(b), hy = sy + d * Math.sin(b);
+          var len = Math.hypot(hx - sx, hy - sy), delay = (0.12 + j * 0.07).toFixed(2) + "s";
           links += '<line class="pg-leaf' + anim + '" style="--len:' + f(len) + ";--delay:" + delay + '" x1="' + f(sx) + '" y1="' + f(sy) + '" x2="' + f(hx) + '" y2="' + f(hy) + '"></line>';
           nodes += '<g class="pg-co' + anim + '" style="--dx:' + f(sx - hx) + "px;--dy:" + f(sy - hy) + "px;--delay:" + delay + '" data-action="open" data-id="' + esc(h.ticker) +
             '" tabindex="0" role="button" aria-label="' + esc(h.name + ", " + money(h.amount)) + '"><title>' + esc(h.name + " · " + money(h.amount)) + "</title>" +
-            '<circle cx="' + f(hx) + '" cy="' + f(hy) + '" r="' + f(hr) + '"></circle><text x="' + f(hx) + '" y="' + f(hy) + '" dy="0.35em">' + esc(h.ticker) + "</text></g>";
+            '<circle cx="' + f(hx) + '" cy="' + f(hy) + '" r="' + f(hr) + '"></circle><text x="' + f(hx) + '" y="' + f(hy) + '" dy="0.35em">' + esc(h.ticker) + "</text>" +
+            (focused ? '<text class="pg-amt" x="' + f(hx + (hr + 11) * Math.cos(b)) + '" y="' + f(hy + (hr + 11) * Math.sin(b)) + '" dy="0.35em">€' + Math.round(h.amount) + "</text>" : "") + "</g>";
         });
       }
       var lines = splitLabel(s.sector), top = sy - 4 - (lines.length - 1) * 6;
       var bx = sx + r * 0.72, by = sy - r * 0.72;
-      nodes += '<g class="pg-sector' + (open ? " open" : "") + '" data-action="toggleSector" data-sector="' + esc(s.sector) + '" tabindex="0" role="button" aria-expanded="' + open +
-        '" aria-label="' + esc(s.sector + ", " + s.companies + (s.companies > 1 ? " companies" : " company") + (open ? ", tap to fold" : ", tap to unfold")) + '">' +
+      nodes += '<g class="pg-sector' + (open ? " open" : "") + dim + '" data-action="toggleSector" data-sector="' + esc(s.sector) + '" tabindex="0" role="button" aria-expanded="' + open +
+        '" aria-label="' + esc(s.sector + ", " + s.companies + (s.companies > 1 ? " companies" : " company") + (focused ? ", tap to zoom out" : ", tap to zoom in")) + '">' +
         "<title>" + esc(s.sector + ": " + s.companies + (s.companies > 1 ? " companies, " : " company, ") + money(s.amount)) + "</title>" +
         '<circle cx="' + f(sx) + '" cy="' + f(sy) + '" r="' + r + '"></circle><text x="' + f(sx) + '" y="' + f(top) + '">' +
         lines.map(function (l, li) { return '<tspan x="' + f(sx) + '" dy="' + (li ? "1.15em" : "0") + '">' + esc(l) + "</tspan>"; }).join("") + "</text>" +
         '<text class="pg-count" x="' + f(sx) + '" y="' + f(sy + 14 + (lines.length - 1) * 6) + '">' + s.companies + "</text>" +
         '<circle class="pg-toggle" cx="' + f(bx) + '" cy="' + f(by) + '" r="9"></circle><text class="pg-toggle-sign" x="' + f(bx) + '" y="' + f(by) + '" dy="0.35em">' + (open ? "−" : "+") + "</text></g>";
     });
-    if (n > 1) nodes += '<g class="pg-you"><circle cx="' + cx + '" cy="' + cy + '" r="20"></circle><text x="' + cx + '" y="' + cy + '" dy="0.35em">You</text></g>';
+    if (n > 1) nodes += '<g class="pg-you' + (S.focus ? " dim" : "") + '"' + (S.focus ? ' data-action="zoomOut" role="button" tabindex="0" aria-label="Zoom out"' : "") +
+      '><circle cx="' + cx + '" cy="' + cy + '" r="20"></circle><text x="' + cx + '" y="' + cy + '" dy="0.35em">You</text></g>';
+    var backdrop = S.focus ? '<rect class="pg-backdrop" data-action="zoomOut" x="-420" y="-420" width="1260" height="1260"></rect>' : "";
     var label = "Your investments by sector: " + p.sectors.map(function (s) { return s.sector + " " + s.companies; }).join(", ");
-    return '<svg class="pgraph" viewBox="0 0 ' + W + " " + H + '" role="group" aria-label="' + esc(label) + '">' + links + nodes + "</svg>";
+    return '<svg class="pgraph" viewBox="' + S.viewBox.map(function (v) { return v.toFixed(1); }).join(" ") + '" role="group" aria-label="' + esc(label) + '">' + backdrop + links + nodes + "</svg>";
+  }
+  var zoomFrame = null;
+  function zoomTo(target) {
+    cancelAnimationFrame(zoomFrame);
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var from = S.viewBox.slice(), t0 = null, dur = reduce ? 0 : 650;
+    function step(now) {
+      if (t0 === null) t0 = now;
+      var k = dur ? Math.min(1, (now - t0) / dur) : 1;
+      var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;  // ease in-out
+      S.viewBox = from.map(function (v, i) { return v + (target[i] - v) * e; });
+      var svg = document.querySelector("#pgraph-wrap svg");
+      if (svg) svg.setAttribute("viewBox", S.viewBox.map(function (v) { return v.toFixed(1); }).join(" "));
+      if (k < 1) zoomFrame = requestAnimationFrame(step);
+    }
+    zoomFrame = requestAnimationFrame(step);
+  }
+  function zoomOut() {
+    var s = S.focus;
+    S.focus = null;
+    if (s) {
+      S.closing = s; redrawGraph();
+      setTimeout(function () { delete S.expanded[s]; S.closing = null; redrawGraph(); }, 280);
+    } else redrawGraph();
+    zoomTo(FULL_VIEW.slice());
   }
   function sectorRows(p) {
     return '<ul class="sector-rows">' + p.sectors.map(function (s) {
@@ -1033,10 +1075,15 @@ h2.display { font-size: 26px; line-height: 1.15; }
     var count = p.sectors.reduce(function (n, s) { return n + s.companies; }, 0);
     var allOpen = p.sectors.every(function (s) { return S.expanded[s.sector]; });
     var origin = LIVE && S.portfolio ? "Computed by the API from your orders in DuckDB." : S.user.id === DEMO_LOGIN.user ? "Sample portfolio of the demo account." : "";
+    var focused = S.focus ? p.sectors.filter(function (s) { return s.sector === S.focus; })[0] : null;
+    var caption = focused
+      ? "<b>" + esc(focused.sector) + "</b> · " + focused.companies + (focused.companies > 1 ? " companies · " : " company · ") + money(focused.amount) +
+        " · " + Math.round(focused.amount / p.total * 100) + "% of your money. Tap a company to see it again."
+      : "Tap a sector to zoom in on its companies. Bigger circle = more companies. " + origin;
     return '<div class="title-row"><p class="eyebrow">Where your money is</p><span class="fine">' + money(p.total) + " · " + count + (count > 1 ? " companies" : " company") + "</span></div>" +
       portfolioGraph(p) +
-      '<div class="title-row"><p class="fine">Tap a sector to unfold its companies. Bigger circle = more companies. ' + origin + "</p>" +
-      '<button class="link-btn nowrap" type="button" data-action="toggleAllSectors">' + (allOpen ? "Fold all" : "Unfold all") + "</button></div>";
+      '<div class="title-row"><p class="fine">' + caption + "</p>" +
+      '<button class="link-btn nowrap" type="button" data-action="toggleAllSectors">' + (S.focus ? "Zoom out" : allOpen ? "Fold all" : "Unfold all") + "</button></div>";
   }
   function redrawGraph() {
     var wrap = document.getElementById("pgraph-wrap");
@@ -1247,6 +1294,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     // Re-rendering the same screen (wishlist button, amount, checkbox) keeps the scroll position.
     var entering = S.screen !== lastScreen;
     var scrollTo = entering ? 0 : view.scrollTop;
+    if (entering && S.screen === "wishlist") { cancelAnimationFrame(zoomFrame); S.focus = null; S.expanded = {}; S.viewBox = FULL_VIEW.slice(); }
     lastScreen = S.screen;
     view.innerHTML = SCREENS[S.screen]();
     var tabScreen = TAB_OF[S.screen];
@@ -1452,12 +1500,14 @@ h2.display { font-size: 26px; line-height: 1.15; }
     follow: function () { S.following[S.friend] = !S.following[S.friend]; render(); },
     toggleSector: function (d) {
       var s = d.sector;
-      if (S.expanded[s]) {
-        S.closing = s; redrawGraph();
-        setTimeout(function () { delete S.expanded[s]; S.closing = null; redrawGraph(); focusSector(s); }, 280);
-      } else { S.expanded[s] = true; S.opening = [s]; redrawGraph(); S.opening = []; focusSector(s); }
+      if (S.focus === s) { zoomOut(); focusSector(s); return; }
+      S.focus = s; S.expanded = {}; S.expanded[s] = true; S.opening = [s];
+      redrawGraph(); S.opening = [];
+      zoomTo(sectorBox(s)); focusSector(s);
     },
+    zoomOut: function () { zoomOut(); },
     toggleAllSectors: function () {
+      if (S.focus) { zoomOut(); return; }
       var p = currentPortfolio(), allOpen = p.sectors.every(function (s) { return S.expanded[s.sector]; });
       if (allOpen) S.expanded = {};
       else {
@@ -1553,7 +1603,6 @@ h2.display { font-size: 26px; line-height: 1.15; }
   if (/^https?:$/.test(location.protocol) && !/claude|anthropic/.test(location.hostname)) {
     api("/api/health").then(function (h) {
       LIVE = true; HEALTH = h;
-      document.getElementById("live-badge").hidden = false;
       return api("/api/cards");
     }).then(function (d) {
       CARDS.length = 0; BY_ID = {};
