@@ -1,0 +1,95 @@
+{
+  "_comment": "Curated list for the demo. 'siren' identifies the company in the official registers. 'pitch' is what the startup says it does (shown as Self-reported). 'sectors' is Dealdeck's own classification, used for the thesis fit. stage / raising / already_raised are self-reported by the startup: leave null until a startup gives them.",
+  "startups": [
+    {
+      "siren": "852153428", "display_name": "Sun'Agri", "sectors": ["energy", "agriculture"],
+      "pitch": "Dynamic agrivoltaics: solar panels above crops that tilt to shade or expose the plants depending on the weather.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "834275570", "display_name": "Hysetco", "sectors": ["mobility", "energy"],
+      "pitch": "Runs hydrogen-powered taxi fleets and hydrogen refuelling stations in the Paris region.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "847631207", "display_name": "Néolithe", "sectors": ["circular economy", "construction"],
+      "pitch": "Turns non-recyclable waste into aggregates for the construction industry instead of landfill or incineration.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "820924801", "display_name": "Carbiolice", "sectors": ["materials"],
+      "pitch": "Develops an enzyme additive that makes PLA bioplastics compostable at home.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "832233571", "display_name": "Murfy", "sectors": ["circular economy"],
+      "pitch": "Repairs household appliances and sells refurbished ones.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "848016093", "display_name": "Toopi Organics", "sectors": ["agriculture"],
+      "pitch": "Turns collected human urine into bio-based fertilisers and biostimulants for farmers.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "538758236", "display_name": "Dracula Technologies", "sectors": ["energy"],
+      "pitch": "Prints organic solar cells that power small electronic devices from indoor light.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "808203467", "display_name": "Ecov", "sectors": ["mobility"],
+      "pitch": "Runs carpooling lines for daily commutes, in partnership with local authorities.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "851682807", "display_name": "Beev", "sectors": ["mobility", "energy"],
+      "pitch": "Installs electric-vehicle charging stations for companies and residential buildings.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "824683155", "display_name": "Ecojoko", "sectors": ["energy"],
+      "pitch": "A smart home device and app that track electricity use and suggest ways to save energy.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "820585123", "display_name": "Hello Watt", "sectors": ["energy"],
+      "pitch": "Helps households cut their energy bills: energy offer comparison and home renovation support.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "801500018", "display_name": "Lactips", "sectors": ["materials"],
+      "pitch": "Makes a water-soluble, biodegradable plastic from milk protein.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "890762867", "display_name": "Fairmat", "sectors": ["materials", "circular economy"],
+      "pitch": "Recycles carbon-fibre composite waste into new materials.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "813144797", "display_name": "Cocolis", "sectors": ["mobility"],
+      "pitch": "Peer-to-peer delivery: people who are already travelling carry parcels and furniture for others.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    },
+    {
+      "siren": "883967879", "display_name": "Sweep", "sectors": ["software"],
+      "pitch": "Software that helps companies measure and manage their carbon emissions and ESG data.",
+      "pitch_source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+      "stage": null, "raising": null, "already_raised": null
+    }
+  ]
+}

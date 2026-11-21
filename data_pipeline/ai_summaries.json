@@ -1,0 +1,117 @@
+{
+  "852153428": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Sun'Agri builds solar panels over crops that tilt to shade or expose the plants depending on the weather.", "refs": [1]},
+      {"text": "Its filed 2024 accounts show €4.5M in revenue and a net loss of €6.1M.", "refs": [4, 5]},
+      {"text": "It has 20 to 49 employees, is classed by INSEE as a large company at group level, and has received ADEME support.", "refs": [6, 7, 9]}
+    ]
+  },
+  "834275570": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Hysetco runs hydrogen-powered taxi fleets and hydrogen stations in the Paris region.", "refs": [1]},
+      {"text": "Its latest public accounts, for 2022, show €3.9M in revenue and a net loss of €20.7M.", "refs": [4, 5]},
+      {"text": "Founded in 2017 in Saint-Denis, it has 20 to 49 employees and has received ADEME support.", "refs": [3, 6, 9]}
+    ]
+  },
+  "847631207": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Néolithe turns non-recyclable waste into aggregates for the construction industry.", "refs": [1]},
+      {"text": "In 2024 it reported €249k in revenue and a net loss of €23.8M.", "refs": [4, 5]},
+      {"text": "Founded in 2019, it employs 100 to 199 people and has received ADEME support.", "refs": [3, 6, 9]}
+    ]
+  },
+  "820924801": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Carbiolice develops an enzyme additive that makes PLA bioplastics compostable at home.", "refs": [1]},
+      {"text": "Its 2025 accounts show €98k in revenue and a net loss of €3.8M.", "refs": [4, 5]},
+      {"text": "Founded in 2016 in Clermont-Ferrand, it has 10 to 19 employees.", "refs": [3, 6]}
+    ]
+  },
+  "832233571": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Murfy repairs household appliances and sells refurbished ones.", "refs": [1]},
+      {"text": "Its latest public accounts, for 2022, show €7.5M in revenue and a net loss of €11.4M.", "refs": [4, 5]},
+      {"text": "With 250 to 499 employees, it is classed as a mid-sized company and belongs to the social and solidarity economy.", "refs": [6, 7, 9]}
+    ]
+  },
+  "848016093": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Toopi Organics turns collected human urine into bio-based fertilisers and biostimulants.", "refs": [1]},
+      {"text": "Its revenue is not public.", "refs": [4]},
+      {"text": "Founded in 2019, it has 20 to 49 employees, has received ADEME support and has published a greenhouse gas emissions report.", "refs": [3, 5, 8, 9]}
+    ]
+  },
+  "538758236": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Dracula Technologies prints organic solar cells that power small devices from indoor light.", "refs": [1]},
+      {"text": "Founded in 2011 in Valence, it has 20 to 49 employees and its revenue is not public.", "refs": [3, 4, 5]},
+      {"text": "It is registered as a mission-driven company and has published a greenhouse gas emissions report.", "refs": [8, 9]}
+    ]
+  },
+  "808203467": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Ecov runs carpooling lines for daily commutes with local authorities.", "refs": [1]},
+      {"text": "Founded in 2014 in Nantes, it has 50 to 99 employees and has received ADEME support.", "refs": [3, 5, 8]},
+      {"text": "Its revenue is not public.", "refs": [4]}
+    ]
+  },
+  "851682807": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Beev installs electric-vehicle charging stations for companies and residential buildings.", "refs": [1]},
+      {"text": "Founded in 2019 in Saint-Denis, it has 20 to 49 employees.", "refs": [3, 5]},
+      {"text": "Its revenue is not public.", "refs": [4]}
+    ]
+  },
+  "824683155": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Ecojoko makes a home device and app that track electricity use and suggest ways to save.", "refs": [1]},
+      {"text": "Founded in 2016 in Montreuil, it has 20 to 49 employees; its revenue is not public.", "refs": [3, 4, 5]}
+    ]
+  },
+  "820585123": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Hello Watt helps households cut their energy bills through offer comparison and renovation support.", "refs": [1]},
+      {"text": "Founded in 2016 in Paris, it has 100 to 199 employees; its revenue is not public.", "refs": [3, 4, 5]}
+    ]
+  },
+  "801500018": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Lactips makes a water-soluble, biodegradable plastic from milk protein.", "refs": [1]},
+      {"text": "Founded in 2014, it has 20 to 49 employees and has received ADEME support.", "refs": [3, 5, 8]},
+      {"text": "Its revenue is not public.", "refs": [4]}
+    ]
+  },
+  "890762867": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Fairmat recycles carbon-fibre composite waste into new materials.", "refs": [1]},
+      {"text": "Founded in 2020 in Paris, it has 100 to 199 employees; its revenue is not public.", "refs": [3, 4, 5]}
+    ]
+  },
+  "813144797": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Cocolis lets people who are already travelling carry parcels and furniture for others.", "refs": [1]},
+      {"text": "Founded in 2015 in Dijon, it has 10 to 19 employees; its revenue is not public.", "refs": [3, 4, 5]}
+    ]
+  },
+  "883967879": {
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {"text": "According to the startup, Sweep makes software that helps companies measure and manage their carbon emissions and ESG data.", "refs": [1]},
+      {"text": "Founded in 2020 in Montpellier, it has 100 to 199 employees; its revenue is not public.", "refs": [3, 4, 5]}
+    ]
+  }
+}

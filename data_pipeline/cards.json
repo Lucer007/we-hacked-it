@@ -1,0 +1,2125 @@
+{
+  "generated_at": "2026-11-20T23:19:31+00:00",
+  "source": "recherche-entreprises.api.gouv.fr (INSEE Sirene, INPI, annual accounts, ADEME)",
+  "thesis": {
+    "label": "Energy & mobility · ≤ 8 yrs · ≤ 49 staff · SME",
+    "sectors": [
+      "energy",
+      "mobility"
+    ],
+    "max_age_years": 8,
+    "max_headcount_code": "12"
+  },
+  "cards": [
+    {
+      "siren": "852153428",
+      "name": "Sun'Agri",
+      "legal_name": "SUN'AGRI",
+      "sector": "Production of electricity",
+      "naf_code": "35.11Z",
+      "sectors": [
+        "energy",
+        "agriculture"
+      ],
+      "city": "Paris",
+      "founded": "2019-06-21",
+      "founded_year": 2019,
+      "stage": null,
+      "raising": null,
+      "pitch": "Dynamic agrivoltaics: solar panels above crops that tilt to shade or expose the plants depending on the weather.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+      "stats": [
+        {
+          "label": "Revenue 2024",
+          "value": "€4.5M",
+          "official": true
+        },
+        {
+          "label": "Net income 2024",
+          "value": "−€6.1M",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2019",
+          "official": true
+        }
+      ],
+      "fit": [
+        {
+          "label": "Energy",
+          "ok": true
+        },
+        {
+          "label": "Founded 2019",
+          "ok": true
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "Large company (not an SME)",
+          "ok": false
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Dynamic agrivoltaics: solar panels above crops that tilt to shade or expose the plants depending on the weather.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Production of electricity (NAF 35.11Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2019-06-21 in Paris",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue 2024: €4.5M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Net income 2024: −€6.1M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Company category: Large company (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Registered officers: 1 (President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/852153428",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Sun'Agri builds solar panels over crops that tilt to shade or expose the plants depending on the weather.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Its filed 2024 accounts show €4.5M in revenue and a net loss of €6.1M.",
+          "refs": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "It has 20 to 49 employees, is classed by INSEE as a large company at group level, and has received ADEME support.",
+          "refs": [
+            6,
+            7,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "834275570",
+      "name": "Hysetco",
+      "legal_name": "HYSETCO",
+      "sector": "Renting and leasing of cars",
+      "naf_code": "77.11A",
+      "sectors": [
+        "mobility",
+        "energy"
+      ],
+      "city": "Saint-Denis",
+      "founded": "2017-12-19",
+      "founded_year": 2017,
+      "stage": null,
+      "raising": null,
+      "pitch": "Runs hydrogen-powered taxi fleets and hydrogen refuelling stations in the Paris region.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+      "stats": [
+        {
+          "label": "Revenue 2022",
+          "value": "€3.9M",
+          "official": true
+        },
+        {
+          "label": "Net income 2022",
+          "value": "−€20.7M",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2017",
+          "official": true
+        }
+      ],
+      "fit": [
+        {
+          "label": "Mobility",
+          "ok": true
+        },
+        {
+          "label": "Founded 2017 (too old)",
+          "ok": false
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Runs hydrogen-powered taxi fleets and hydrogen refuelling stations in the Paris region.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Renting and leasing of cars (NAF 77.11A)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2017-12-19 in Saint-Denis",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue 2022: €3.9M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Net income 2022: −€20.7M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Registered officers: 1 (President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/834275570",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Hysetco runs hydrogen-powered taxi fleets and hydrogen stations in the Paris region.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Its latest public accounts, for 2022, show €3.9M in revenue and a net loss of €20.7M.",
+          "refs": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "Founded in 2017 in Saint-Denis, it has 20 to 49 employees and has received ADEME support.",
+          "refs": [
+            3,
+            6,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "847631207",
+      "name": "Néolithe",
+      "legal_name": "NEOLITHE",
+      "sector": "Research and development in natural sciences and engineering",
+      "naf_code": "72.19Z",
+      "sectors": [
+        "circular economy",
+        "construction"
+      ],
+      "city": "Beaulieu-sur-Layon",
+      "founded": "2019-01-21",
+      "founded_year": 2019,
+      "stage": null,
+      "raising": null,
+      "pitch": "Turns non-recyclable waste into aggregates for the construction industry instead of landfill or incineration.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+      "stats": [
+        {
+          "label": "Revenue 2024",
+          "value": "€249k",
+          "official": true
+        },
+        {
+          "label": "Net income 2024",
+          "value": "−€23.8M",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "100–199",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2019",
+          "official": true
+        }
+      ],
+      "fit": [
+        {
+          "label": "Circular economy (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2019",
+          "ok": true
+        },
+        {
+          "label": "100–199 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Turns non-recyclable waste into aggregates for the construction industry instead of landfill or incineration.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Research and development in natural sciences and engineering (NAF 72.19Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2019-01-21 in Beaulieu-sur-Layon",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue 2024: €249k",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Net income 2024: −€23.8M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Employees: 100–199 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/847631207",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Néolithe turns non-recyclable waste into aggregates for the construction industry.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "In 2024 it reported €249k in revenue and a net loss of €23.8M.",
+          "refs": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "Founded in 2019, it employs 100 to 199 people and has received ADEME support.",
+          "refs": [
+            3,
+            6,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "820924801",
+      "name": "Carbiolice",
+      "legal_name": "CARBIOLICE",
+      "sector": "Manufacture of plastics in primary forms",
+      "naf_code": "20.16Z",
+      "sectors": [
+        "materials"
+      ],
+      "city": "Clermont-Ferrand",
+      "founded": "2016-06-14",
+      "founded_year": 2016,
+      "stage": null,
+      "raising": null,
+      "pitch": "Develops an enzyme additive that makes PLA bioplastics compostable at home.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+      "stats": [
+        {
+          "label": "Revenue 2025",
+          "value": "€98k",
+          "official": true
+        },
+        {
+          "label": "Net income 2025",
+          "value": "−€3.8M",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "10–19",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2016",
+          "official": true
+        }
+      ],
+      "fit": [
+        {
+          "label": "Materials (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2016 (too old)",
+          "ok": false
+        },
+        {
+          "label": "10–19 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Develops an enzyme additive that makes PLA bioplastics compostable at home.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Manufacture of plastics in primary forms (NAF 20.16Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2016-06-14 in Clermont-Ferrand",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue 2025: €98k",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Net income 2025: −€3.8M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Employees: 10–19 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Registered officers: 1 (President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820924801",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Carbiolice develops an enzyme additive that makes PLA bioplastics compostable at home.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Its 2025 accounts show €98k in revenue and a net loss of €3.8M.",
+          "refs": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "Founded in 2016 in Clermont-Ferrand, it has 10 to 19 employees.",
+          "refs": [
+            3,
+            6
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "832233571",
+      "name": "Murfy",
+      "legal_name": "MURFY",
+      "sector": "Repair of household appliances",
+      "naf_code": "95.22Z",
+      "sectors": [
+        "circular economy"
+      ],
+      "city": "Nieppe",
+      "founded": "2017-09-28",
+      "founded_year": 2017,
+      "stage": null,
+      "raising": null,
+      "pitch": "Repairs household appliances and sells refurbished ones.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+      "stats": [
+        {
+          "label": "Revenue 2022",
+          "value": "€7.5M",
+          "official": true
+        },
+        {
+          "label": "Net income 2022",
+          "value": "−€11.4M",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "250–499",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2017",
+          "official": true
+        }
+      ],
+      "fit": [
+        {
+          "label": "Circular economy (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2017 (too old)",
+          "ok": false
+        },
+        {
+          "label": "250–499 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "Mid-sized company (not an SME)",
+          "ok": false
+        }
+      ],
+      "fit_score": "0/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Repairs household appliances and sells refurbished ones.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Repair of household appliances (NAF 95.22Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2017-09-28 in Nieppe",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue 2022: €7.5M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Net income 2022: −€11.4M",
+          "source": "Annual accounts filed with the commercial court registry",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Employees: 250–499 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Company category: Mid-sized company (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Registered officers: 1 (President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Part of the social and solidarity economy (ESS)",
+          "source": "Social and solidarity economy register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/832233571",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Murfy repairs household appliances and sells refurbished ones.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Its latest public accounts, for 2022, show €7.5M in revenue and a net loss of €11.4M.",
+          "refs": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "With 250 to 499 employees, it is classed as a mid-sized company and belongs to the social and solidarity economy.",
+          "refs": [
+            6,
+            7,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "848016093",
+      "name": "Toopi Organics",
+      "legal_name": "TOOPI ORGANICS",
+      "sector": "Research and development in biotechnology",
+      "naf_code": "72.11Z",
+      "sectors": [
+        "agriculture"
+      ],
+      "city": "Loupiac-de-la-Reole",
+      "founded": "2019-02-01",
+      "founded_year": 2019,
+      "stage": null,
+      "raising": null,
+      "pitch": "Turns collected human urine into bio-based fertilisers and biostimulants for farmers.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2019",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Agriculture (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2019",
+          "ok": true
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Turns collected human urine into bio-based fertilisers and biostimulants for farmers.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Research and development in biotechnology (NAF 72.11Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2019-02-01 in Loupiac-de-la-Reole",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Other officer, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Has published a greenhouse gas emissions report",
+          "source": "ADEME greenhouse gas report register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/848016093",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Toopi Organics turns collected human urine into bio-based fertilisers and biostimulants.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Its revenue is not public.",
+          "refs": [
+            4
+          ]
+        },
+        {
+          "text": "Founded in 2019, it has 20 to 49 employees, has received ADEME support and has published a greenhouse gas emissions report.",
+          "refs": [
+            3,
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "538758236",
+      "name": "Dracula Technologies",
+      "legal_name": "DRACULA TECHNOLOGIES",
+      "sector": "Manufacture of electronic components",
+      "naf_code": "26.11Z",
+      "sectors": [
+        "energy"
+      ],
+      "city": "Valence",
+      "founded": "2011-12-12",
+      "founded_year": 2011,
+      "stage": null,
+      "raising": null,
+      "pitch": "Prints organic solar cells that power small electronic devices from indoor light.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2011",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Energy",
+          "ok": true
+        },
+        {
+          "label": "Founded 2011 (too old)",
+          "ok": false
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Prints organic solar cells that power small electronic devices from indoor light.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Manufacture of electronic components (NAF 26.11Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2011-12-12 in Valence",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Has published a greenhouse gas emissions report",
+          "source": "ADEME greenhouse gas report register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        },
+        {
+          "n": 9,
+          "fact": "Registered as a mission-driven company (société à mission)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/538758236",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Dracula Technologies prints organic solar cells that power small devices from indoor light.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2011 in Valence, it has 20 to 49 employees and its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "text": "It is registered as a mission-driven company and has published a greenhouse gas emissions report.",
+          "refs": [
+            8,
+            9
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "808203467",
+      "name": "Ecov",
+      "legal_name": "ECOV",
+      "sector": "Business and management consultancy",
+      "naf_code": "70.22Z",
+      "sectors": [
+        "mobility"
+      ],
+      "city": "Nantes",
+      "founded": "2014-12-02",
+      "founded_year": 2014,
+      "stage": null,
+      "raising": null,
+      "pitch": "Runs carpooling lines for daily commutes, in partnership with local authorities.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "50–99",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2014",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Mobility",
+          "ok": true
+        },
+        {
+          "label": "Founded 2014 (too old)",
+          "ok": false
+        },
+        {
+          "label": "50–99 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Runs carpooling lines for daily commutes, in partnership with local authorities.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Business and management consultancy (NAF 70.22Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2014-12-02 in Nantes",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 50–99 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 7 (Other officer, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/808203467",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Ecov runs carpooling lines for daily commutes with local authorities.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2014 in Nantes, it has 50 to 99 employees and has received ADEME support.",
+          "refs": [
+            3,
+            5,
+            8
+          ]
+        },
+        {
+          "text": "Its revenue is not public.",
+          "refs": [
+            4
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "851682807",
+      "name": "Beev",
+      "legal_name": "BEEV",
+      "sector": "Other professional, scientific and technical activities",
+      "naf_code": "74.90B",
+      "sectors": [
+        "mobility",
+        "energy"
+      ],
+      "city": "Saint-Denis",
+      "founded": "2019-06-03",
+      "founded_year": 2019,
+      "stage": null,
+      "raising": null,
+      "pitch": "Installs electric-vehicle charging stations for companies and residential buildings.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2019",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Mobility",
+          "ok": true
+        },
+        {
+          "label": "Founded 2019",
+          "ok": true
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "4/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Installs electric-vehicle charging stations for companies and residential buildings.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Other professional, scientific and technical activities (NAF 74.90B)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2019-06-03 in Saint-Denis",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/851682807",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Beev installs electric-vehicle charging stations for companies and residential buildings.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2019 in Saint-Denis, it has 20 to 49 employees.",
+          "refs": [
+            3,
+            5
+          ]
+        },
+        {
+          "text": "Its revenue is not public.",
+          "refs": [
+            4
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "824683155",
+      "name": "Ecojoko",
+      "legal_name": "JOKO LABS",
+      "sector": "Computer programming",
+      "naf_code": "62.01Z",
+      "sectors": [
+        "energy"
+      ],
+      "city": "Montreuil",
+      "founded": "2016-12-26",
+      "founded_year": 2016,
+      "stage": null,
+      "raising": null,
+      "pitch": "A smart home device and app that track electricity use and suggest ways to save energy.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2016",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Energy",
+          "ok": true
+        },
+        {
+          "label": "Founded 2016 (too old)",
+          "ok": false
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: A smart home device and app that track electricity use and suggest ways to save energy.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Computer programming (NAF 62.01Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2016-12-26 in Montreuil",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/824683155",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Ecojoko makes a home device and app that track electricity use and suggest ways to save.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2016 in Montreuil, it has 20 to 49 employees; its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "820585123",
+      "name": "Hello Watt",
+      "legal_name": "HELLO WATT",
+      "sector": "Other professional, scientific and technical activities",
+      "naf_code": "74.90B",
+      "sectors": [
+        "energy"
+      ],
+      "city": "Paris",
+      "founded": "2016-05-26",
+      "founded_year": 2016,
+      "stage": null,
+      "raising": null,
+      "pitch": "Helps households cut their energy bills: energy offer comparison and home renovation support.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "100–199",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2016",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Energy",
+          "ok": true
+        },
+        {
+          "label": "Founded 2016 (too old)",
+          "ok": false
+        },
+        {
+          "label": "100–199 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Helps households cut their energy bills: energy offer comparison and home renovation support.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Other professional, scientific and technical activities (NAF 74.90B)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2016-05-26 in Paris",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 100–199 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/820585123",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Hello Watt helps households cut their energy bills through offer comparison and renovation support.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2016 in Paris, it has 100 to 199 employees; its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "801500018",
+      "name": "Lactips",
+      "legal_name": "LACTIPS",
+      "sector": "Manufacture of plastics in primary forms",
+      "naf_code": "20.16Z",
+      "sectors": [
+        "materials"
+      ],
+      "city": "Saint-Paul-en-Jarez",
+      "founded": "2014-03-27",
+      "founded_year": 2014,
+      "stage": null,
+      "raising": null,
+      "pitch": "Makes a water-soluble, biodegradable plastic from milk protein.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "20–49",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2014",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Materials (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2014 (too old)",
+          "ok": false
+        },
+        {
+          "label": "20–49 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Makes a water-soluble, biodegradable plastic from milk protein.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Manufacture of plastics in primary forms (NAF 20.16Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2014-03-27 in Saint-Paul-en-Jarez",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 20–49 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 5 (Board member, Chair of the board, Chief executive)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        },
+        {
+          "n": 8,
+          "fact": "Has received support from ADEME, the French ecological transition agency",
+          "source": "ADEME funding records",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/801500018",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Lactips makes a water-soluble, biodegradable plastic from milk protein.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2014, it has 20 to 49 employees and has received ADEME support.",
+          "refs": [
+            3,
+            5,
+            8
+          ]
+        },
+        {
+          "text": "Its revenue is not public.",
+          "refs": [
+            4
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "890762867",
+      "name": "Fairmat",
+      "legal_name": "FAIRMAT",
+      "sector": "Manufacture of other plastic products",
+      "naf_code": "22.29A",
+      "sectors": [
+        "materials",
+        "circular economy"
+      ],
+      "city": "Paris",
+      "founded": "2020-10-21",
+      "founded_year": 2020,
+      "stage": null,
+      "raising": null,
+      "pitch": "Recycles carbon-fibre composite waste into new materials.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "100–199",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2020",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Materials (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2020",
+          "ok": true
+        },
+        {
+          "label": "100–199 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Recycles carbon-fibre composite waste into new materials.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Manufacture of other plastic products (NAF 22.29A)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2020-10-21 in Paris",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 100–199 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 1 (President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/890762867",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Fairmat recycles carbon-fibre composite waste into new materials.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2020 in Paris, it has 100 to 199 employees; its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "813144797",
+      "name": "Cocolis",
+      "legal_name": "COCOLIS",
+      "sector": "Data processing and hosting",
+      "naf_code": "63.11Z",
+      "sectors": [
+        "mobility"
+      ],
+      "city": "Dijon",
+      "founded": "2015-08-16",
+      "founded_year": 2015,
+      "stage": null,
+      "raising": null,
+      "pitch": "Peer-to-peer delivery: people who are already travelling carry parcels and furniture for others.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "10–19",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2015",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Mobility",
+          "ok": true
+        },
+        {
+          "label": "Founded 2015 (too old)",
+          "ok": false
+        },
+        {
+          "label": "10–19 staff",
+          "ok": true
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "3/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Peer-to-peer delivery: people who are already travelling carry parcels and furniture for others.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Data processing and hosting (NAF 63.11Z)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2015-08-16 in Dijon",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 10–19 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 2 (Chief executive, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/813144797",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Cocolis lets people who are already travelling carry parcels and furniture for others.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2015 in Dijon, it has 10 to 19 employees; its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    },
+    {
+      "siren": "883967879",
+      "name": "Sweep",
+      "legal_name": "SWEEP",
+      "sector": "Software publishing",
+      "naf_code": "58.29C",
+      "sectors": [
+        "software"
+      ],
+      "city": "Montpellier",
+      "founded": "2020-06-01",
+      "founded_year": 2020,
+      "stage": null,
+      "raising": null,
+      "pitch": "Software that helps companies measure and manage their carbon emissions and ESG data.",
+      "register_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+      "stats": [
+        {
+          "label": "Revenue",
+          "value": "Not public",
+          "official": true
+        },
+        {
+          "label": "Employees",
+          "value": "100–199",
+          "official": true
+        },
+        {
+          "label": "Founded",
+          "value": "2020",
+          "official": true
+        },
+        {
+          "label": "Already raised",
+          "value": "Not provided",
+          "official": false
+        }
+      ],
+      "fit": [
+        {
+          "label": "Software (off-thesis)",
+          "ok": false
+        },
+        {
+          "label": "Founded 2020",
+          "ok": true
+        },
+        {
+          "label": "100–199 staff (too big)",
+          "ok": false
+        },
+        {
+          "label": "SME",
+          "ok": true
+        }
+      ],
+      "fit_score": "2/4",
+      "facts": [
+        {
+          "n": 1,
+          "fact": "Activity: Software that helps companies measure and manage their carbon emissions and ESG data.",
+          "source": "Company website, summarised by the Dealdeck team (verify before the demo)",
+          "source_url": null,
+          "official": false
+        },
+        {
+          "n": 2,
+          "fact": "Registered activity: Software publishing (NAF 58.29C)",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        },
+        {
+          "n": 3,
+          "fact": "Founded on 2020-06-01 in Montpellier",
+          "source": "INSEE Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        },
+        {
+          "n": 4,
+          "fact": "Revenue: not public (accounts kept confidential or no sales reported)",
+          "source": "Annual accounts register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        },
+        {
+          "n": 5,
+          "fact": "Employees: 100–199 (2024)",
+          "source": "INSEE headcount band, Sirene register",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        },
+        {
+          "n": 6,
+          "fact": "Company category: SME (2024)",
+          "source": "INSEE, assessed at group level",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        },
+        {
+          "n": 7,
+          "fact": "Registered officers: 6 (Board member, Deputy chief executive, Other officer, President)",
+          "source": "National Business Register (INPI)",
+          "source_url": "https://annuaire-entreprises.data.gouv.fr/entreprise/883967879",
+          "official": true
+        }
+      ],
+      "summary": [
+        {
+          "text": "According to the startup, Sweep makes software that helps companies measure and manage their carbon emissions and ESG data.",
+          "refs": [
+            1
+          ]
+        },
+        {
+          "text": "Founded in 2020 in Montpellier, it has 100 to 199 employees; its revenue is not public.",
+          "refs": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "flags": {
+        "commercial_use_opposition": true
+      },
+      "summary_generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)"
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "NVDA": {
+    "accession": "0001045810-26-000021",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "AI computing infrastructure for data centers", "quote": "NVIDIA is now a data center scale AI infrastructure company reshaping all industries."},
+      "what_they_do": {"value": "Sells AI computing and networking platforms and software for data centers.", "quote": "The Compute & Networking segment includes our Data Center accelerated computing and networking platforms and AI solutions and software"},
+      "mission": {"value": "", "quote": ""},
+      "ceo": {"value": "Jen-Hsun Huang", "quote": "Jen-Hsun Huang 63 President and Chief Executive Officer"},
+      "employees": {"value": "42,000", "quote": "we had approximately 42,000 employees in 38 countries"},
+      "founded_year": {"value": "1993", "quote": "NVIDIA was incorporated in California in April 1993"},
+      "founder_led": {"value": "yes", "quote": "Jen-Hsun Huang co-founded NVIDIA in 1993 and has served as our President, Chief Executive Officer"},
+      "segments": [
+        {"value": "Compute & Networking", "quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\""},
+        {"value": "Graphics", "quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\""}
+      ],
+      "risks": [
+        {"value": "One customer made up 22% of revenue and another 14%.", "quote": "sales to one direct customer represented 22% of total revenue and sales to another direct customer represented 14% of total revenue"},
+        {"value": "Export controls and tariffs can limit sales.", "quote": "government actions or changes in governmental policies, such as export controls, increased restrictions on gaming usage, or tariffs"},
+        {"value": "Relies on outside foundries such as TSMC to make its chips.", "quote": "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers."}
+      ],
+      "legal_matters": []
+    }
+  },
+  "AMD": {
+    "accession": "0000002488-26-000018",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Global semiconductor company", "quote": "Advanced Micro Devices, Inc. is a global semiconductor company."},
+      "what_they_do": {"value": "Designs AI accelerators and processors (CPUs) for data centers, PCs and gaming.", "quote": "AMD's products include Artificial Intelligence (AI) Accelerators, microprocessors (CPUs)"},
+      "mission": {"value": "Build great products that accelerate next-generation computing experiences.", "quote": "Our Mission - Build great products that accelerate next-generation computing experiences."},
+      "ceo": {"value": "Lisa T. Su", "quote": "/s/Lisa T. Su President and Chief Executive Officer (Principal Executive Officer)"},
+      "employees": {"value": "31,000", "quote": "we had approximately 31,000 employees in our global workforce"},
+      "founded_year": {"value": "1969", "quote": "Founded in 1969 as a Silicon Valley start-up"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Data Center", "quote": "Our three reportable segments are: • the Data Center segment"},
+        {"value": "Client and Gaming", "quote": "• the Client and Gaming segment, which"},
+        {"value": "Embedded", "quote": "Total Client and Gaming 14,550 9,649 Embedded 3,454 3,557"}
+      ],
+      "risks": [
+        {"value": "Its markets are highly competitive and change fast.", "quote": "in which our products are sold are highly competitive and rapidly evolving"},
+        {"value": "Depends on outside manufacturers to make its chips.", "quote": "It is important to have reliable relationships with all of these third-party manufacturing suppliers to ensure adequate product supply"},
+        {"value": "The chip industry goes through severe downturns.", "quote": "The semiconductor industry is highly cyclical and has experienced severe downturns."}
+      ],
+      "legal_matters": []
+    }
+  },
+  "AAPL": {
+    "accession": "0000320193-26-000026",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "iPhone, Mac, iPad, wearables and services", "quote": "The Company designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services."},
+      "what_they_do": {"value": "Designs and sells smartphones, computers, tablets and wearables, plus related services.", "quote": "The Company designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services."},
+      "mission": {"value": "", "quote": ""},
+      "ceo": {"value": "John Ternus", "quote": "/s/ John Ternus Chief Executive Officer and Director (Principal Executive Officer)"},
+      "employees": {"value": "167,000", "quote": "the Company had approximately 167,000 full-time equivalent employees"},
+      "founded_year": {"value": "", "quote": ""},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Americas", "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific."},
+        {"value": "Europe", "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific."},
+        {"value": "Greater China", "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific."},
+        {"value": "Japan", "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific."},
+        {"value": "Rest of Asia Pacific", "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific."}
+      ],
+      "risks": [
+        {"value": "Most manufacturing is done by partners in Asia, mainly China.", "quote": "manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam"},
+        {"value": "EU rules (Digital Markets Act) force changes to the App Store.", "quote": "as it seeks to comply with the Digital Markets Act (\"DMA\"), including new business terms and alternative fee structures for iOS and iPadOS apps"},
+        {"value": "Depends on keeping its CEO and key people.", "quote": "key personnel, including its Chief Executive Officer, executive team and other highly skilled employees"}
+      ],
+      "legal_matters": [
+        {"value": "EU investigation into whether Apple complies with the Digital Markets Act.", "quote": "the Commission announced that it had opened a formal noncompliance investigation against the Company under Article 5(4) of the EU DMA"}
+      ]
+    }
+  },
+  "MSFT": {
+    "accession": "0001193125-26-323660",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Software, cloud and AI for people and businesses", "quote": "We develop and support a broad portfolio of technology solutions for individuals and businesses"},
+      "what_they_do": {"value": "Makes money from software, cloud services and devices.", "quote": "Founded in 1975, we develop and support software, services, devices, and solutions"},
+      "mission": {"value": "Empower every person and every organization on the planet to achieve more.", "quote": "Our mission is to empower every person and every organization on the planet to achieve more."},
+      "ceo": {"value": "Satya Nadella", "quote": "Satya Nadella 58 Chairman and Chief Executive Officer"},
+      "employees": {"value": "223,000", "quote": "we employed approximately 223,000 people on a full-time basis"},
+      "founded_year": {"value": "1975", "quote": "Founded in 1975, we develop and support software"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Productivity and Business Processes", "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing"},
+        {"value": "Intelligent Cloud", "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing"},
+        {"value": "More Personal Computing", "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing"}
+      ],
+      "risks": [
+        {"value": "Heavy spending on AI infrastructure could reduce margins.", "quote": "developing proprietary hardware, infrastructure, and artificial intelligence (\"AI\") models, could increase our cost structure, reduce margins"},
+        {"value": "Cyberattacks could hurt revenue and reputation.", "quote": "Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation or competitive position."},
+        {"value": "Intense competition in every market.", "quote": "We face intense competition across all markets for our products and services"}
+      ],
+      "legal_matters": [
+        {"value": "Irish privacy regulator investigated LinkedIn's targeted advertising under GDPR.", "quote": "the Irish Data Protection Commission (\"IDPC\") began investigating a complaint against LinkedIn as to whether LinkedIn's targeted advertising practices violated"}
+      ]
+    }
+  },
+  "AMZN": {
+    "accession": "0001018724-26-000004",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Online and physical stores, plus AWS cloud", "quote": "We serve consumers through our online and physical stores"},
+      "what_they_do": {"value": "Sells products online and in stores, and rents computing power through Amazon Web Services.", "quote": "We have organized our operations into three segments: North America, International, and Amazon Web Services (\"AWS\")."},
+      "mission": {"value": "Be Earth's most customer-centric company.", "quote": "We seek to be Earth's most customer-centric company."},
+      "ceo": {"value": "Andrew R. Jassy", "quote": "Mr. Jassy has served as President and Chief Executive Officer since July 2021"},
+      "employees": {"value": "1,576,000 (full- and part-time)", "quote": "we employed approximately 1,576,000 full-time and part-time employees"},
+      "founded_year": {"value": "", "quote": ""},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "North America", "quote": "three segments: North America, International, and AWS"},
+        {"value": "International", "quote": "three segments: North America, International, and AWS"},
+        {"value": "AWS", "quote": "three segments: North America, International, and AWS"}
+      ],
+      "risks": [
+        {"value": "Intense competition in retail and cloud.", "quote": "Our businesses are rapidly evolving and intensely competitive"},
+        {"value": "International operations bring extra risks.", "quote": "Our International Operations Expose Us to a Number of Risks"},
+        {"value": "Some countries restrict foreign-owned data centers and retail.", "quote": "foreign investment in and operation of the internet, IT infrastructure, data centers, retail, delivery"}
+      ],
+      "legal_matters": [
+        {"value": "Recorded $2.5B in 2025 to settle a lawsuit with the FTC.", "quote": "we recorded $ 2.5 billion of expense related to the settlement of a lawsuit with the FTC"}
+      ]
+    }
+  },
+  "GOOGL": {
+    "accession": "0001652044-26-000018",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Google services and Google Cloud", "quote": "Google comprises two segments: Google Services and Google Cloud"},
+      "what_they_do": {"value": "Makes most of its money from advertising on Google's services.", "quote": "We generate a significant portion of our revenues from advertising."},
+      "mission": {"value": "Organize the world's information and make it universally accessible and useful.", "quote": "Our mission to organize the world's information and make it universally accessible and useful"},
+      "ceo": {"value": "Sundar Pichai", "quote": "Our Chief Operating Decision Maker (CODM) is our Chief Executive Officer, Sundar Pichai."},
+      "employees": {"value": "190,820", "quote": "Alphabet had 190,820 employees"},
+      "founded_year": {"value": "1998", "quote": "Google was incorporated in California in September 1998"},
+      "founder_led": {"value": "no", "quote": "As our founders Larry and Sergey wrote in the original founders' letter"},
+      "segments": [
+        {"value": "Google Services", "quote": "Google comprises two segments: Google Services and Google Cloud"},
+        {"value": "Google Cloud", "quote": "Google comprises two segments: Google Services and Google Cloud"}
+      ],
+      "risks": [
+        {"value": "Depends heavily on advertising revenue.", "quote": "We generate a significant portion of our revenues from advertising."},
+        {"value": "Several antitrust lawsuits, including from the US government.", "quote": "The US Department of Justice (DOJ), various states, and other plaintiffs have filed, and may continue to file in the future, several antitrust lawsuits"},
+        {"value": "New AI laws add safety duties for frontier models.", "quote": "each of which imposes safety and reporting obligations on developers of frontier models"}
+      ],
+      "legal_matters": [
+        {"value": "US antitrust lawsuits over its ad technology, Search and Android.", "quote": "several antitrust lawsuits about aspects of our business, including our advertising technologies and practices, the operation and distribution of Google Search"}
+      ]
+    }
+  },
+  "TSLA": {
+    "accession": "0001628280-26-003952",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Electric cars and energy storage", "quote": "We operate as two reportable segments: (i) automotive and (ii) energy generation and storage."},
+      "what_they_do": {"value": "Makes electric cars and batteries, and is working on self-driving and robots.", "quote": "We are focused on bringing artificial intelligence (\"AI\") into the real world, through products and services like Full Self-Driving"},
+      "mission": {"value": "Building a world of amazing abundance.", "quote": "Our mission is building a world of amazing abundance."},
+      "ceo": {"value": "Elon Musk", "quote": "Elon Musk, Technoking of Tesla and our Chief Executive Officer"},
+      "employees": {"value": "", "quote": ""},
+      "founded_year": {"value": "2003", "quote": "was incorporated in the State of Delaware on July 1, 2003"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Automotive", "quote": "two reportable segments: (i) automotive and (ii) energy generation and storage"},
+        {"value": "Energy generation and storage", "quote": "two reportable segments: (i) automotive and (ii) energy generation and storage"}
+      ],
+      "risks": [
+        {"value": "Highly dependent on Elon Musk, who does not work full time at Tesla.", "quote": "he does not devote his full time and attention to Tesla"},
+        {"value": "Competition from other electric, hybrid and fuel-efficient cars.", "quote": "competition, including from other types of alternative fuel vehicles, plug-in hybrid electric vehicles and high fuel-economy internal combustion engine vehicles"},
+        {"value": "Must scale factories and supply chains efficiently.", "quote": "ramp efficient and cost-effective manufacturing capabilities, processes and supply chains"}
+      ],
+      "legal_matters": [
+        {"value": "Shareholder lawsuits over Musk's 2018 statements about taking Tesla private.", "quote": "seven derivative lawsuits were filed in the Delaware Court of Chancery, purportedly on behalf of Tesla, against Mr. Musk"}
+      ]
+    }
+  },
+  "KO": {
+    "accession": "0001628280-26-010047",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Beverages sold in more than 200 countries", "quote": "are now sold in more than 200 countries"},
+      "what_they_do": {"value": "A total beverage company selling drinks under its brands worldwide.", "quote": "The Coca-Cola Company is a total beverage company"},
+      "mission": {"value": "Refresh the world and make a difference.", "quote": "We are guided by our purpose, which is to refresh the world and make a difference."},
+      "ceo": {"value": "Henrique Braun (CEO from March 31, 2026)", "quote": "the Board of Directors elected Mr. Braun to serve as Chief Executive Officer of the Company, effective March 31, 2026"},
+      "employees": {"value": "65,900", "quote": "our Company had approximately 65,900 and 69,700 employees, respectively"},
+      "founded_year": {"value": "1892", "quote": "a Georgia corporation with the same name that had been organized in 1892"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "EMEA", "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments"},
+        {"value": "Latin America", "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments"},
+        {"value": "North America", "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments"},
+        {"value": "Asia Pacific", "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments"},
+        {"value": "Bottling Investments", "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments"}
+      ],
+      "risks": [
+        {"value": "Health concerns such as obesity may reduce demand.", "quote": "Obesity and other health-related concerns may reduce demand for some of our products."},
+        {"value": "Competition can force lower prices.", "quote": "Competitive pressures may cause the Company and our bottling partners to reduce prices"}
+      ],
+      "legal_matters": [
+        {"value": "Long-running tax dispute with the IRS; the Tax Court mostly sided with the IRS.", "quote": "the U.S. Tax Court (\"Tax Court\") issued an opinion (\"Opinion\") predominantly siding with the IRS"}
+      ]
+    }
+  },
+  "JPM": {
+    "accession": "0001628280-26-008131",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Global bank: consumer banking, investment banking, wealth", "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")"},
+      "what_they_do": {"value": "A financial services firm offering banking, investment banking and asset management.", "quote": "is a leading financial services firm based in the United States of America"},
+      "mission": {"value": "", "quote": ""},
+      "ceo": {"value": "James Dimon", "quote": "/s/ JAMES DIMON Director, Chairman and Chief Executive Officer (Principal Executive Officer)"},
+      "employees": {"value": "318,512", "quote": "JPMorganChase had 318,512 employees globally"},
+      "founded_year": {"value": "1968", "quote": "a financial holding company incorporated under Delaware law in 1968"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Consumer & Community Banking", "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")"},
+        {"value": "Commercial & Investment Bank", "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")"},
+        {"value": "Asset & Wealth Management", "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")"}
+      ],
+      "risks": [
+        {"value": "Losses if borrowers or counterparties can't pay.", "quote": "Credit risks, including the effects from adverse changes in the financial condition of clients, customers, counterparties"},
+        {"value": "A successful cyber attack could cause serious harm.", "quote": "the harm that could be caused by a successful cyber attack affecting JPMorganChase"},
+        {"value": "Heavy regulation that can change.", "quote": "the impact of extensive supervision and regulation"}
+      ],
+      "legal_matters": []
+    }
+  },
+  "LLY": {
+    "accession": "0000059478-26-000013",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Medicines such as Mounjaro and Zepbound", "quote": "revenues of more than $3 billion for each of Mounjaro, Zepbound, Verzenio, Trulicity, Taltz, and Jardiance"},
+      "what_they_do": {"value": "Discovers, develops, makes and sells prescription medicines.", "quote": "We discover, develop, manufacture, and market products in a single business segment"},
+      "mission": {"value": "Unite caring with discovery to create medicines that make life better for people around the world.", "quote": "Our purpose is to unite caring with discovery to create medicines that make life better for people around the world."},
+      "ceo": {"value": "David Ricks", "quote": "David Ricks 58 Chair, President, and Chief Executive Officer (CEO) (since 2017)"},
+      "employees": {"value": "50,000", "quote": "we employed approximately 50,000 people, including approximately 27,000 employees outside the U.S."},
+      "founded_year": {"value": "1876", "quote": "founded in Indianapolis, Indiana, in 1876 by Colonel Eli Lilly"},
+      "founder_led": {"value": "no", "quote": "founded in Indianapolis, Indiana, in 1876 by Colonel Eli Lilly"},
+      "segments": [
+        {"value": "Human pharmaceutical products (single segment)", "quote": "in a single business segment—human pharmaceutical products"}
+      ],
+      "risks": [
+        {"value": "Six medicines make up 82% of revenue, led by Mounjaro and Zepbound.", "quote": "collectively accounted for 82 percent of our total revenues in 2025"},
+        {"value": "Pricing pressure, rebates and government price-setting.", "quote": "We continue to experience additional pricing pressures, rebates, clawbacks, and other changes in reimbursement policies"},
+        {"value": "Losing patent protection lets competitors in.", "quote": "lose intellectual property exclusivity, are displaced by competing products"}
+      ],
+      "legal_matters": []
+    }
+  },
+  "WMT": {
+    "accession": "0000104169-26-000055",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Walmart and Sam's Club stores, plus e-commerce", "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S."},
+      "what_they_do": {"value": "A retailer selling in stores and online, built around low prices.", "quote": "is a people-led, technology-powered omnichannel retailer dedicated to helping people around the world save money and live better"},
+      "mission": {"value": "Help people save money and live better.", "quote": "As part of our purpose to help people save money and live better"},
+      "ceo": {"value": "John Furner", "quote": "John Furner President and Chief Executive Officer, effective February 2026"},
+      "employees": {"value": "2.1 million", "quote": "approximately 2.1 million associates as of January 31, 2026"},
+      "founded_year": {"value": "", "quote": ""},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Walmart U.S.", "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S."},
+        {"value": "Walmart International", "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S."},
+        {"value": "Sam's Club U.S.", "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S."}
+      ],
+      "risks": [
+        {"value": "Tariffs and trade policy changes affect its costs.", "quote": "Significant changes in tax and trade policies, including tariffs, trade barriers"},
+        {"value": "Tech failures or cybersecurity incidents could disrupt online sales.", "quote": "a cybersecurity incident, such failure can significantly interfere with our ability to meet our customers' changing expectations"}
+      ],
+      "legal_matters": [
+        {"value": "Opioid-related lawsuits; about $3.3B set aside for settlements in fiscal 2023.", "quote": "approximately $3.3 billion in fiscal year 2023 for certain opioid-related settlements"}
+      ]
+    }
+  },
+  "TSM": {
+    "accession": "0001628280-26-025362",
+    "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)",
+    "fields": {
+      "tagline": {"value": "Makes chips for other companies (dedicated foundry)", "quote": "we have built a strong position in manufacturing capacity as a dedicated foundry"},
+      "what_they_do": {"value": "Manufactures chips designed by other companies, leading in the most advanced chips.", "quote": "we are the technology leader among the dedicated foundries in terms of our net revenue of advanced semiconductors"},
+      "mission": {"value": "", "quote": ""},
+      "ceo": {"value": "C.C. Wei", "quote": "C.C. Wei 71-75 Chairman; Chief Executive Officer"},
+      "employees": {"value": "", "quote": ""},
+      "founded_year": {"value": "1987", "quote": "We were founded in 1987 as a joint venture among the R.O.C. government and other private investors"},
+      "founder_led": {"value": "unknown", "quote": ""},
+      "segments": [
+        {"value": "Foundry", "quote": "focusing on operating income generated by foundry segment"}
+      ],
+      "risks": [
+        {"value": "Depends on a small number of large customers.", "quote": "This customer concentration results in part from the changing dynamics of the electronics industry"},
+        {"value": "Tensions between Taiwan and China can affect the company.", "quote": "certain past developments in relations between the R.O.C. and the P.R.C. as occasions to depress general market prices"},
+        {"value": "Earthquakes and other disasters can disrupt its factories.", "quote": "to our operations caused by natural or man-made disasters, including earthquakes"}
+      ],
+      "legal_matters": []
+    }
+  }
+}

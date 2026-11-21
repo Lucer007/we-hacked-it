@@ -1,0 +1,263 @@
+{
+  "NVDA": {
+    "fiscal_year": "FY ending Jan 2026",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Nvidia makes semiconductors, and its revenue reached $215.9B in the fiscal year ending January 2026, up 65.5% in one year.",
+        "refs": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It kept 55.6% of that revenue as net income ($120.1B) and spent $18.5B on research and development.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "Its long-term debt of $7.5B is small next to its shareholders' equity: 0.05 times.",
+        "refs": [
+          9
+        ]
+      }
+    ]
+  },
+  "AAPL": {
+    "fiscal_year": "FY ending Sep 2026",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Apple, a technology hardware company, had $478.8B in revenue in the fiscal year ending September 2026, up 15.1%.",
+        "refs": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "text": "Its net income was $132.2B, a 27.6% net margin, and it paid $15.7B in dividends.",
+        "refs": [
+          5,
+          7
+        ]
+      },
+      {
+        "text": "Its long-term debt of $68.2B is 0.61 times its shareholders' equity.",
+        "refs": [
+          9
+        ]
+      }
+    ]
+  },
+  "MSFT": {
+    "fiscal_year": "FY ending Jun 2026",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Microsoft's revenue grew 17.8% to $331.8B in the fiscal year ending June 2026.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It kept 40.3% of revenue as net income and spent 10.7% of revenue on research and development.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "It paid $26.4B in dividends, and its long-term debt is 0.07 times its shareholders' equity.",
+        "refs": [
+          7,
+          9
+        ]
+      }
+    ]
+  },
+  "AMZN": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Amazon's revenue grew 12.4% to $716.9B in 2025.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "Its net margin was 10.8%, and it reported no dividend payments.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "It held $86.8B in cash at the end of 2025, more than its $65.6B of long-term debt.",
+        "refs": [
+          7,
+          8
+        ]
+      }
+    ]
+  },
+  "GOOGL": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Alphabet's revenue grew 15.1% to $402.8B in 2025, with a net margin of 32.8%.",
+        "refs": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "text": "It spent $61.1B on research and development, 15.2% of its revenue.",
+        "refs": [
+          6
+        ]
+      },
+      {
+        "text": "It paid $10.0B in dividends, and its long-term debt is 0.11 times its shareholders' equity.",
+        "refs": [
+          7,
+          9
+        ]
+      }
+    ]
+  },
+  "TSLA": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Tesla's revenue fell 2.9% to $94.8B in 2025.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It kept 4.1% of revenue as net income ($3.9B) and reported no dividend payments.",
+        "refs": [
+          5,
+          7
+        ]
+      },
+      {
+        "text": "Its long-term debt of $6.6B is small next to its $16.5B of cash.",
+        "refs": [
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "KO": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Coca-Cola's revenue grew 1.9% to $47.9B in 2025.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It kept 27.3% of revenue as net income and paid $8.8B in dividends.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "It has been in the S&P 500 since 1957.",
+        "refs": [
+          2
+        ]
+      }
+    ]
+  },
+  "JPM": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "JPMorgan Chase, a diversified bank, reported $182.4B in revenue in 2025, up 2.8%.",
+        "refs": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "text": "Its net income was $57.0B, and it paid $16.6B in dividends.",
+        "refs": [
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "LLY": {
+    "fiscal_year": "FY ending Dec 2025",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Eli Lilly's revenue grew 44.7% to $65.2B in 2025.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It spent 20.5% of revenue on research and development and kept 31.7% as net income.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "Its long-term debt is 1.54 times its shareholders' equity.",
+        "refs": [
+          9
+        ]
+      }
+    ]
+  },
+  "WMT": {
+    "fiscal_year": "FY ending Jan 2026",
+    "generated_by": "claude-opus-5-5 (written in a Claude Code session, same rules as summarize.py)",
+    "sentences": [
+      {
+        "text": "Walmart's revenue grew 4.7% to $713.2B in the fiscal year ending January 2026.",
+        "refs": [
+          3,
+          4
+        ]
+      },
+      {
+        "text": "It kept 3.1% of revenue as net income ($21.9B) and paid $7.5B in dividends.",
+        "refs": [
+          5,
+          6
+        ]
+      },
+      {
+        "text": "Its long-term debt is 0.35 times its shareholders' equity.",
+        "refs": [
+          8
+        ]
+      }
+    ]
+  }
+}

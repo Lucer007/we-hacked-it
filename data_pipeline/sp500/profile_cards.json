@@ -1,0 +1,1751 @@
+{
+  "generated_at": "2026-11-21T01:36:11+00:00",
+  "cards": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "front": {
+        "name": "Apple Inc.",
+        "tagline": "iPhone, Mac, iPad, wearables and services",
+        "sector": "Technology Hardware, Storage & Peripherals",
+        "ceo": "John Ternus",
+        "employees": "167,000",
+        "headquarters": "Cupertino, California",
+        "mission": null,
+        "what_they_do": "Designs and sells smartphones, computers, tablets and wearables, plus related services.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1977",
+          "founded_source": "S&P 500 constituents list",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Americas",
+          "Europe",
+          "Greater China",
+          "Japan",
+          "Rest of Asia Pacific"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Sep 2026",
+            "value": "$478.8B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+15.1%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "27.6%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$15.7B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Sep 2026",
+        "risks": [
+          "Most manufacturing is done by partners in Asia, mainly China.",
+          "EU rules (Digital Markets Act) force changes to the App Store.",
+          "Depends on keeping its CEO and key people."
+        ],
+        "legal_matters": [
+          "EU investigation into whether Apple complies with the Digital Markets Act."
+        ]
+      },
+      "reveal": {
+        "ticker": "AAPL",
+        "exchange": "Nasdaq",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "The Company designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "The Company designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "/s/ John Ternus Chief Executive Officer and Director (Principal Executive Officer)",
+            "section": "Item 16. Form 10-K Summary",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "the Company had approximately 167,000 full-time equivalent employees",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "The Company's reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "as it seeks to comply with the Digital Markets Act (\"DMA\"), including new business terms and alternative fee structures for iOS and iPadOS apps",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          },
+          {
+            "quote": "key personnel, including its Chief Executive Officer, executive team and other highly skilled employees",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "the Commission announced that it had opened a formal noncompliance investigation against the Company under Article 5(4) of the EU DMA",
+            "section": "Item 3. Legal Proceedings",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2026-09-26",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices",
+      "front": {
+        "name": "Advanced Micro Devices",
+        "tagline": "Global semiconductor company",
+        "sector": "Semiconductors",
+        "ceo": "Lisa T. Su",
+        "employees": "31,000",
+        "headquarters": "Santa Clara, California",
+        "mission": "Build great products that accelerate next-generation computing experiences.",
+        "what_they_do": "Designs AI accelerators and processors (CPUs) for data centers, PCs and gaming.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1969",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Data Center",
+          "Client and Gaming",
+          "Embedded"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$34.6B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+34.3%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "12.5%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "None",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Its markets are highly competitive and change fast.",
+          "Depends on outside manufacturers to make its chips.",
+          "The chip industry goes through severe downturns."
+        ],
+        "legal_matters": []
+      },
+      "reveal": {
+        "ticker": "AMD",
+        "exchange": "Nasdaq",
+        "dividend": "No",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "Advanced Micro Devices, Inc. is a global semiconductor company.",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "AMD's products include Artificial Intelligence (AI) Accelerators, microprocessors (CPUs)",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "Our Mission - Build great products that accelerate next-generation computing experiences.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "/s/Lisa T. Su President and Chief Executive Officer (Principal Executive Officer)",
+            "section": "ITEM 16. FORM 10-K SUMMARY",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "we had approximately 31,000 employees in our global workforce",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "Founded in 1969 as a Silicon Valley start-up",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "Our three reportable segments are: • the Data Center segment",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          },
+          {
+            "quote": "• the Client and Gaming segment, which",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          },
+          {
+            "quote": "Total Client and Gaming 14,550 9,649 Embedded 3,454 3,557",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "in which our products are sold are highly competitive and rapidly evolving",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          },
+          {
+            "quote": "It is important to have reliable relationships with all of these third-party manufacturing suppliers to ensure adequate product supply",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          },
+          {
+            "quote": "The semiconductor industry is highly cyclical and has experienced severe downturns.",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-27",
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "front": {
+        "name": "Amazon",
+        "tagline": "Online and physical stores, plus AWS cloud",
+        "sector": "Broadline Retail",
+        "ceo": "Andrew R. Jassy",
+        "employees": "1,576,000 (full- and part-time)",
+        "headquarters": "Seattle, Washington",
+        "mission": "Be Earth's most customer-centric company.",
+        "what_they_do": "Sells products online and in stores, and rents computing power through Amazon Web Services.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1994",
+          "founded_source": "S&P 500 constituents list",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "North America",
+          "International",
+          "AWS"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$716.9B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+12.4%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "10.8%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "None",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Intense competition in retail and cloud.",
+          "International operations bring extra risks.",
+          "Some countries restrict foreign-owned data centers and retail."
+        ],
+        "legal_matters": [
+          "Recorded $2.5B in 2025 to settle a lawsuit with the FTC."
+        ]
+      },
+      "reveal": {
+        "ticker": "AMZN",
+        "exchange": "Nasdaq",
+        "dividend": "No",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "We serve consumers through our online and physical stores",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "We have organized our operations into three segments: North America, International, and Amazon Web Services (\"AWS\").",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "We seek to be Earth's most customer-centric company.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "Mr. Jassy has served as President and Chief Executive Officer since July 2021",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "we employed approximately 1,576,000 full-time and part-time employees",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "three segments: North America, International, and AWS",
+            "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Opera",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          },
+          {
+            "quote": "three segments: North America, International, and AWS",
+            "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Opera",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          },
+          {
+            "quote": "three segments: North America, International, and AWS",
+            "section": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Opera",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "Our businesses are rapidly evolving and intensely competitive",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          },
+          {
+            "quote": "Our International Operations Expose Us to a Number of Risks",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          },
+          {
+            "quote": "foreign investment in and operation of the internet, IT infrastructure, data centers, retail, delivery",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "we recorded $ 2.5 billion of expense related to the settlement of a lawsuit with the FTC",
+            "section": "Item 8. Financial Statements and Supplementary Data",
+            "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc. (Class A)",
+      "front": {
+        "name": "Alphabet Inc. (Class A)",
+        "tagline": "Google services and Google Cloud",
+        "sector": "Interactive Media & Services",
+        "ceo": "Sundar Pichai",
+        "employees": "190,820",
+        "headquarters": "Mountain View, California",
+        "mission": "Organize the world's information and make it universally accessible and useful.",
+        "what_they_do": "Makes most of its money from advertising on Google's services.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1998",
+          "founded_source": "annual report",
+          "founder_led": "No",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Google Services",
+          "Google Cloud"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$402.8B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+15.1%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "32.8%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$10.0B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Depends heavily on advertising revenue.",
+          "Several antitrust lawsuits, including from the US government.",
+          "New AI laws add safety duties for frontier models."
+        ],
+        "legal_matters": [
+          "US antitrust lawsuits over its ad technology, Search and Android."
+        ]
+      },
+      "reveal": {
+        "ticker": "GOOGL",
+        "exchange": "Nasdaq",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "Google comprises two segments: Google Services and Google Cloud",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "We generate a significant portion of our revenues from advertising.",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "Our mission to organize the world's information and make it universally accessible and useful",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "Our Chief Operating Decision Maker (CODM) is our Chief Executive Officer, Sundar Pichai.",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "Alphabet had 190,820 employees",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "Google was incorporated in California in September 1998",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "founder_led": [
+          {
+            "quote": "As our founders Larry and Sergey wrote in the original founders' letter",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "Google comprises two segments: Google Services and Google Cloud",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          },
+          {
+            "quote": "Google comprises two segments: Google Services and Google Cloud",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "We generate a significant portion of our revenues from advertising.",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          },
+          {
+            "quote": "The US Department of Justice (DOJ), various states, and other plaintiffs have filed, and may continue to file in the future, several antitrust lawsuits",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          },
+          {
+            "quote": "each of which imposes safety and reporting obligations on developers of frontier models",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "several antitrust lawsuits about aspects of our business, including our advertising technologies and practices, the operation and distribution of Google Search",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase",
+      "front": {
+        "name": "JPMorgan Chase",
+        "tagline": "Global bank: consumer banking, investment banking, wealth",
+        "sector": "Diversified Banks",
+        "ceo": "James Dimon",
+        "employees": "318,512",
+        "headquarters": "New York City, New York",
+        "mission": null,
+        "what_they_do": "A financial services firm offering banking, investment banking and asset management.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1968",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Consumer & Community Banking",
+          "Commercial & Investment Bank",
+          "Asset & Wealth Management"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$182.4B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+2.8%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "31.2%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$16.6B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Losses if borrowers or counterparties can't pay.",
+          "A successful cyber attack could cause serious harm.",
+          "Heavy regulation that can change."
+        ],
+        "legal_matters": []
+      },
+      "reveal": {
+        "ticker": "JPM",
+        "exchange": "NYSE",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "is a leading financial services firm based in the United States of America",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "/s/ JAMES DIMON Director, Chairman and Chief Executive Officer (Principal Executive Officer)",
+            "section": "Item 15. Exhibits, Financial Statement Schedules.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "JPMorganChase had 318,512 employees globally",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "a financial holding company incorporated under Delaware law in 1968",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          },
+          {
+            "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          },
+          {
+            "quote": "three reportable business segments - Consumer & Community Banking (\"CCB\"), Commercial & Investment Bank (\"CIB\") and Asset & Wealth Management (\"AWM\")",
+            "section": "Item 1. Business.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "Credit risks, including the effects from adverse changes in the financial condition of clients, customers, counterparties",
+            "section": "Item 1A. Risk Factors.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          },
+          {
+            "quote": "the harm that could be caused by a successful cyber attack affecting JPMorganChase",
+            "section": "Item 1A. Risk Factors.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          },
+          {
+            "quote": "the impact of extensive supervision and regulation",
+            "section": "Item 1A. Risk Factors.",
+            "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola Company (The)",
+      "front": {
+        "name": "Coca-Cola Company (The)",
+        "tagline": "Beverages sold in more than 200 countries",
+        "sector": "Soft Drinks & Non-alcoholic Beverages",
+        "ceo": "Henrique Braun (CEO from March 31, 2026)",
+        "employees": "65,900",
+        "headquarters": "Atlanta, Georgia",
+        "mission": "Refresh the world and make a difference.",
+        "what_they_do": "A total beverage company selling drinks under its brands worldwide.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1892",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "EMEA",
+          "Latin America",
+          "North America",
+          "Asia Pacific",
+          "Bottling Investments"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$47.9B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+1.9%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "27.3%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$8.8B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Health concerns such as obesity may reduce demand.",
+          "Competition can force lower prices."
+        ],
+        "legal_matters": [
+          "Long-running tax dispute with the IRS; the Tax Court mostly sided with the IRS."
+        ]
+      },
+      "reveal": {
+        "ticker": "KO",
+        "exchange": "NYSE",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "are now sold in more than 200 countries",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "The Coca-Cola Company is a total beverage company",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "We are guided by our purpose, which is to refresh the world and make a difference.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "the Board of Directors elected Mr. Braun to serve as Chief Executive Officer of the Company, effective March 31, 2026",
+            "section": "ITEM 4. MINE SAFETY DISCLOSURES",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "our Company had approximately 65,900 and 69,700 employees, respectively",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "a Georgia corporation with the same name that had been organized in 1892",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          },
+          {
+            "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          },
+          {
+            "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          },
+          {
+            "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          },
+          {
+            "quote": "following operating segments: EMEA; Latin America; North America; Asia Pacific; and Bottling Investments",
+            "section": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERA",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "Obesity and other health-related concerns may reduce demand for some of our products.",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          },
+          {
+            "quote": "Competitive pressures may cause the Company and our bottling partners to reduce prices",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "the U.S. Tax Court (\"Tax Court\") issued an opinion (\"Opinion\") predominantly siding with the IRS",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "LLY",
+      "name": "Lilly (Eli)",
+      "front": {
+        "name": "Lilly (Eli)",
+        "tagline": "Medicines such as Mounjaro and Zepbound",
+        "sector": "Pharmaceuticals",
+        "ceo": "David Ricks",
+        "employees": "50,000",
+        "headquarters": "Indianapolis, Indiana",
+        "mission": "Unite caring with discovery to create medicines that make life better for people around the world.",
+        "what_they_do": "Discovers, develops, makes and sells prescription medicines.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1876",
+          "founded_source": "annual report",
+          "founder_led": "No",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Human pharmaceutical products (single segment)"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$65.2B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+44.7%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "31.7%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$5.4B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Six medicines make up 82% of revenue, led by Mounjaro and Zepbound.",
+          "Pricing pressure, rebates and government price-setting.",
+          "Losing patent protection lets competitors in."
+        ],
+        "legal_matters": []
+      },
+      "reveal": {
+        "ticker": "LLY",
+        "exchange": "NYSE",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "revenues of more than $3 billion for each of Mounjaro, Zepbound, Verzenio, Trulicity, Taltz, and Jardiance",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "We discover, develop, manufacture, and market products in a single business segment",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "Our purpose is to unite caring with discovery to create medicines that make life better for people around the world.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "David Ricks 58 Chair, President, and Chief Executive Officer (CEO) (since 2017)",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "we employed approximately 50,000 people, including approximately 27,000 employees outside the U.S.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "founded in Indianapolis, Indiana, in 1876 by Colonel Eli Lilly",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "founder_led": [
+          {
+            "quote": "founded in Indianapolis, Indiana, in 1876 by Colonel Eli Lilly",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "in a single business segment—human pharmaceutical products",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "collectively accounted for 82 percent of our total revenues in 2025",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          },
+          {
+            "quote": "We continue to experience additional pricing pressures, rebates, clawbacks, and other changes in reimbursement policies",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          },
+          {
+            "quote": "lose intellectual property exclusivity, are displaced by competing products",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "front": {
+        "name": "Microsoft",
+        "tagline": "Software, cloud and AI for people and businesses",
+        "sector": "Systems Software",
+        "ceo": "Satya Nadella",
+        "employees": "223,000",
+        "headquarters": "Redmond, Washington",
+        "mission": "Empower every person and every organization on the planet to achieve more.",
+        "what_they_do": "Makes money from software, cloud services and devices.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1975",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Productivity and Business Processes",
+          "Intelligent Cloud",
+          "More Personal Computing"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Jun 2026",
+            "value": "$331.8B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+17.8%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "40.3%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$26.4B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Jun 2026",
+        "risks": [
+          "Heavy spending on AI infrastructure could reduce margins.",
+          "Cyberattacks could hurt revenue and reputation.",
+          "Intense competition in every market."
+        ],
+        "legal_matters": [
+          "Irish privacy regulator investigated LinkedIn's targeted advertising under GDPR."
+        ]
+      },
+      "reveal": {
+        "ticker": "MSFT",
+        "exchange": "Nasdaq",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "We develop and support a broad portfolio of technology solutions for individuals and businesses",
+            "section": "ITEM 1. . B",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "Founded in 1975, we develop and support software, services, devices, and solutions",
+            "section": "ITEM 1. . B",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "Our mission is to empower every person and every organization on the planet to achieve more.",
+            "section": "ITEM 1. . B",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "Satya Nadella 58 Chairman and Chief Executive Officer",
+            "section": "Item 1. INFORMATION ABOUT OUR EXECUTIV",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "we employed approximately 223,000 people on a full-time basis",
+            "section": "Item 1. The gamer remains at the heart of the XBOX ecosystem. We are identifying new opp",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "Founded in 1975, we develop and support software",
+            "section": "ITEM 1. . B",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing",
+            "section": "Item 1. Commitment to Sustainability",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          {
+            "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing",
+            "section": "Item 1. Commitment to Sustainability",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          {
+            "quote": "three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing",
+            "section": "Item 1. Commitment to Sustainability",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "developing proprietary hardware, infrastructure, and artificial intelligence (\"AI\") models, could increase our cost structure, reduce margins",
+            "section": "Item 1A. ITEM 1A. RIS",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          {
+            "quote": "Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation or competitive position.",
+            "section": "Item 1A. RISKS RELATING TO THE EVOLUTION OF OUR BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          {
+            "quote": "We face intense competition across all markets for our products and services",
+            "section": "Item 1A. ITEM 1A. RIS",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "the Irish Data Protection Commission (\"IDPC\") began investigating a complaint against LinkedIn as to whether LinkedIn's targeted advertising practices violated",
+            "section": "Item 8. NOTE 14 — CONTINGENCIES",
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2026-06-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia",
+      "front": {
+        "name": "Nvidia",
+        "tagline": "AI computing infrastructure for data centers",
+        "sector": "Semiconductors",
+        "ceo": "Jen-Hsun Huang",
+        "employees": "42,000",
+        "headquarters": "Santa Clara, California",
+        "mission": null,
+        "what_they_do": "Sells AI computing and networking platforms and software for data centers.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1993",
+          "founded_source": "annual report",
+          "founder_led": "Yes",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Compute & Networking",
+          "Graphics"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Jan 2026",
+            "value": "$215.9B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+65.5%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "55.6%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$974.0M",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Jan 2026",
+        "risks": [
+          "One customer made up 22% of revenue and another 14%.",
+          "Export controls and tariffs can limit sales.",
+          "Relies on outside foundries such as TSMC to make its chips."
+        ],
+        "legal_matters": []
+      },
+      "reveal": {
+        "ticker": "NVDA",
+        "exchange": "Nasdaq",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "NVIDIA is now a data center scale AI infrastructure company reshaping all industries.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "The Compute & Networking segment includes our Data Center accelerated computing and networking platforms and AI solutions and software",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "Jen-Hsun Huang 63 President and Chief Executive Officer",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "we had approximately 42,000 employees in 38 countries",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "NVIDIA was incorporated in California in April 1993",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "founder_led": [
+          {
+            "quote": "Jen-Hsun Huang co-founded NVIDIA in 1993 and has served as our President, Chief Executive Officer",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\"",
+            "section": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Opera",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          },
+          {
+            "quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\"",
+            "section": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Opera",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "sales to one direct customer represented 22% of total revenue and sales to another direct customer represented 14% of total revenue",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          },
+          {
+            "quote": "government actions or changes in governmental policies, such as export controls, increased restrictions on gaming usage, or tariffs",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          },
+          {
+            "quote": "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers.",
+            "section": "Item 1. Business",
+            "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2026-01-25",
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla, Inc.",
+      "front": {
+        "name": "Tesla, Inc.",
+        "tagline": "Electric cars and energy storage",
+        "sector": "Automobile Manufacturers",
+        "ceo": "Elon Musk",
+        "employees": null,
+        "headquarters": "Austin, Texas",
+        "mission": "Building a world of amazing abundance.",
+        "what_they_do": "Makes electric cars and batteries, and is working on self-driving and robots.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "2003",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Automotive",
+          "Energy generation and storage"
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Dec 2025",
+            "value": "$94.8B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "-2.9%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "4.1%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "None",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Dec 2025",
+        "risks": [
+          "Highly dependent on Elon Musk, who does not work full time at Tesla.",
+          "Competition from other electric, hybrid and fuel-efficient cars.",
+          "Must scale factories and supply chains efficiently."
+        ],
+        "legal_matters": [
+          "Shareholder lawsuits over Musk's 2018 statements about taking Tesla private."
+        ]
+      },
+      "reveal": {
+        "ticker": "TSLA",
+        "exchange": "Nasdaq",
+        "dividend": "No",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "We operate as two reportable segments: (i) automotive and (ii) energy generation and storage.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "We are focused on bringing artificial intelligence (\"AI\") into the real world, through products and services like Full Self-Driving",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "Our mission is building a world of amazing abundance.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "Elon Musk, Technoking of Tesla and our Chief Executive Officer",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "was incorporated in the State of Delaware on July 1, 2003",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "two reportable segments: (i) automotive and (ii) energy generation and storage",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          },
+          {
+            "quote": "two reportable segments: (i) automotive and (ii) energy generation and storage",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "he does not devote his full time and attention to Tesla",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          },
+          {
+            "quote": "competition, including from other types of alternative fuel vehicles, plug-in hybrid electric vehicles and high fuel-economy internal combustion engine vehicles",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          },
+          {
+            "quote": "ramp efficient and cost-effective manufacturing capabilities, processes and supply chains",
+            "section": "ITEM 1A. RISK FACTORS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "seven derivative lawsuits were filed in the Delaware Court of Chancery, purportedly on behalf of Tesla, against Mr. Musk",
+            "section": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA",
+            "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "front": {
+        "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+        "tagline": "Makes chips for other companies (dedicated foundry)",
+        "sector": "Semiconductors & Related Devices",
+        "ceo": "C.C. Wei",
+        "employees": null,
+        "headquarters": "Hsinchu",
+        "mission": null,
+        "what_they_do": "Manufactures chips designed by other companies, leading in the most advanced chips.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1987",
+          "founded_source": "annual report",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Foundry"
+        ],
+        "key_numbers": [],
+        "key_numbers_period": null,
+        "risks": [
+          "Depends on a small number of large customers.",
+          "Tensions between Taiwan and China can affect the company.",
+          "Earthquakes and other disasters can disrupt its factories."
+        ],
+        "legal_matters": []
+      },
+      "reveal": {
+        "ticker": "TSM",
+        "exchange": "NYSE",
+        "dividend": null,
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "we have built a strong position in manufacturing capacity as a dedicated foundry",
+            "section": "ITEM 4. INFORMATION ON THE COMPANY",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "we are the technology leader among the dedicated foundries in terms of our net revenue of advanced semiconductors",
+            "section": "ITEM 4. INFORMATION ON THE COMPANY",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "C.C. Wei 71-75 Chairman; Chief Executive Officer",
+            "section": "ITEM 6. DIRECTORS, SENIOR MANAGEMENT AND EMPLOYEES",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ],
+        "founded_year": [
+          {
+            "quote": "We were founded in 1987 as a joint venture among the R.O.C. government and other private investors",
+            "section": "ITEM 4. INFORMATION ON THE COMPANY",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "focusing on operating income generated by foundry segment",
+            "section": "ITEM 19. EXHIBITS",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "This customer concentration results in part from the changing dynamics of the electronics industry",
+            "section": "ITEM 3. KEY INFORMATION",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          },
+          {
+            "quote": "certain past developments in relations between the R.O.C. and the P.R.C. as occasions to depress general market prices",
+            "section": "ITEM 3. KEY INFORMATION",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          },
+          {
+            "quote": "to our operations caused by natural or man-made disasters, including earthquakes",
+            "section": "ITEM 3. KEY INFORMATION",
+            "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "20-F",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    },
+    {
+      "ticker": "WMT",
+      "name": "Walmart",
+      "front": {
+        "name": "Walmart",
+        "tagline": "Walmart and Sam's Club stores, plus e-commerce",
+        "sector": "Consumer Staples Merchandise Retail",
+        "ceo": "John Furner",
+        "employees": "2.1 million",
+        "headquarters": "Bentonville, Arkansas",
+        "mission": "Help people save money and live better.",
+        "what_they_do": "A retailer selling in stores and online, built around low prices.",
+        "photo": null
+      },
+      "back": {
+        "profile": {
+          "founded": "1962",
+          "founded_source": "S&P 500 constituents list",
+          "founder_led": "Not stated",
+          "size": "Large company (S&P 500)"
+        },
+        "segments": [
+          "Walmart U.S.",
+          "Walmart International",
+          "Sam's Club U.S."
+        ],
+        "key_numbers": [
+          {
+            "label": "Revenue Jan 2026",
+            "value": "$713.2B",
+            "official": true
+          },
+          {
+            "label": "Revenue growth",
+            "value": "+4.7%",
+            "official": true
+          },
+          {
+            "label": "Net margin",
+            "value": "3.1%",
+            "official": true
+          },
+          {
+            "label": "Dividends paid",
+            "value": "$7.5B",
+            "official": true
+          }
+        ],
+        "key_numbers_period": "FY ending Jan 2026",
+        "risks": [
+          "Tariffs and trade policy changes affect its costs.",
+          "Tech failures or cybersecurity incidents could disrupt online sales."
+        ],
+        "legal_matters": [
+          "Opioid-related lawsuits; about $3.3B set aside for settlements in fiscal 2023."
+        ]
+      },
+      "reveal": {
+        "ticker": "WMT",
+        "exchange": "Nasdaq",
+        "dividend": "Yes",
+        "market_cap": null
+      },
+      "sources": {
+        "tagline": [
+          {
+            "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "what_they_do": [
+          {
+            "quote": "is a people-led, technology-powered omnichannel retailer dedicated to helping people around the world save money and live better",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "mission": [
+          {
+            "quote": "As part of our purpose to help people save money and live better",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "ceo": [
+          {
+            "quote": "John Furner President and Chief Executive Officer, effective February 2026",
+            "section": "Item 1A. Risk Factors",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "employees": [
+          {
+            "quote": "approximately 2.1 million associates as of January 31, 2026",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "segments": [
+          {
+            "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          },
+          {
+            "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          },
+          {
+            "quote": "Our operations comprise three reportable segments: Walmart U.S., Walmart International and Sam's Club U.S.",
+            "section": "ITEM 1. BUSINESS",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "risks": [
+          {
+            "quote": "Significant changes in tax and trade policies, including tariffs, trade barriers",
+            "section": "Item 1A. . Such attacks, if successful, may result in potential data and personal",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          },
+          {
+            "quote": "a cybersecurity incident, such failure can significantly interfere with our ability to meet our customers' changing expectations",
+            "section": "Item 1A. . The availability of our information systems and the integrity of data are esse",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ],
+        "legal_matters": [
+          {
+            "quote": "approximately $3.3 billion in fiscal year 2023 for certain opioid-related settlements",
+            "section": "Item 8. Financial Statements and Supplementary Data",
+            "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+          }
+        ]
+      },
+      "dropped_unverified": [],
+      "report": {
+        "form": "10-K",
+        "period": "2026-01-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm"
+      },
+      "extracted_by": "manual, Claude Code session (same rules as the extraction prompt)"
+    }
+  ]
+}

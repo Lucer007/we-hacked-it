@@ -1,0 +1,893 @@
+<meta charset="utf-8">
+<title>Loi en Jeu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+/* Layout : un écran de jeu rétro. Barre d'onglets en haut, une vue à la fois, boîte de dialogue RPG collée en bas. */
+:root {
+  /* Palette Sweetie 16 (Lospec), seule source de couleur du site */
+  --ink: #1a1c2c; --plum: #5d275d; --red: #b13e53; --orange: #ef7d57;
+  --gold: #ffcd75; --lime: #a7f070; --green: #38b764; --teal: #257179;
+  --navy: #29366f; --blue: #3b5dc9; --sky: #41a6f6; --cyan: #73eff7;
+  --paper: #f4f4f4; --mist: #94b0c2; --steel: #566c86; --night: #333c57;
+  --shadow: rgba(10, 11, 20, .55);
+  --f-pixel: "Press Start 2P", ui-monospace, "Courier New", monospace;
+  --f-body: "Pixelify Sans", "VT323", ui-monospace, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(var(--night) 2px, transparent 2px),
+    linear-gradient(90deg, var(--night) 2px, transparent 2px);
+  background-size: 48px 48px;
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: 18px;
+  line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 24px;
+}
+canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.h-pixel { font-family: var(--f-pixel); font-size: 13px; line-height: 1.7; font-weight: 400; text-wrap: balance; letter-spacing: .02em; }
+.eyebrow { font-family: var(--f-pixel); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--steel); }
+
+/* Cadres façon boîte de jeu : bord sombre, liseré clair, ombre portée sans flou */
+.frame {
+  background: var(--paper); color: var(--ink);
+  border: 4px solid var(--ink);
+  box-shadow: inset 0 0 0 4px var(--mist), 8px 8px 0 var(--shadow);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-width: 0;
+}
+.frame-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* Boutons */
+.btn {
+  font-family: var(--f-pixel); font-size: 10px; line-height: 1.3; letter-spacing: .03em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 14px; cursor: pointer; text-decoration: none;
+  background: var(--gold); color: var(--ink);
+  border: 4px solid var(--ink);
+  box-shadow: inset -4px -4px 0 rgba(26, 28, 44, .22), inset 4px 4px 0 rgba(255, 255, 255, .5), 4px 4px 0 var(--shadow);
+}
+.btn:hover { background: var(--lime); }
+.btn:active { transform: translate(2px, 2px); box-shadow: inset -4px -4px 0 rgba(26, 28, 44, .22), inset 4px 4px 0 rgba(255, 255, 255, .5), 2px 2px 0 var(--shadow); }
+.btn:disabled { background: var(--mist); color: var(--steel); cursor: not-allowed; }
+.btn-sm { padding: 8px 10px; font-size: 9px; }
+.btn-ghost { background: var(--paper); }
+.btn-big { font-size: 12px; padding: 16px 20px; }
+.btn-pour { background: var(--green); }
+.btn-contre { background: var(--red); color: var(--paper); }
+.btn-abst { background: var(--gold); }
+:focus-visible { outline: 4px dashed var(--cyan); outline-offset: 3px; }
+
+/* Barre du haut */
+.topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-name { font-family: var(--f-pixel); font-size: 18px; color: var(--gold); text-shadow: 3px 3px 0 var(--plum); }
+.brand-sub { font-family: var(--f-pixel); font-size: 8px; color: var(--mist); margin-top: 8px; letter-spacing: .06em; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tabs a { font-size: 9px; padding: 10px 12px; background: var(--paper); }
+.tabs a[aria-current="page"] { background: var(--sky); }
+.badges { display: flex; align-items: center; gap: 10px; }
+.badges-label { font-family: var(--f-pixel); font-size: 8px; color: var(--mist); }
+.badges-label b { color: var(--gold); font-weight: 400; }
+.badge-row { display: flex; gap: 4px; }
+.badge {
+  width: 24px; height: 24px; display: grid; place-items: center;
+  font-family: var(--f-pixel); font-size: 7px; color: var(--steel);
+  background: var(--night); border: 2px solid var(--steel);
+}
+.badge.is-won { background: var(--gold); color: var(--ink); border-color: var(--paper); }
+
+/* Vue carte du monde */
+.monde-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.map-scroll { overflow: auto; max-height: 72vh; background: var(--ink); border: 4px solid var(--ink); }
+.map-inner { position: relative; width: max-content; margin: 0 auto; }
+.hotspot {
+  position: absolute; padding: 0; margin: 0; cursor: pointer;
+  background: transparent; border: 0;
+}
+.hotspot:hover .hotspot-label, .hotspot:focus-visible .hotspot-label { background: var(--gold); color: var(--ink); }
+.hotspot-label {
+  position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%);
+  white-space: nowrap; font-family: var(--f-pixel); font-size: 8px; line-height: 1;
+  padding: 5px 6px; background: var(--ink); color: var(--paper); border: 2px solid var(--paper);
+}
+.hotspot.is-won .hotspot-label::after { content: " ★"; color: var(--gold); }
+.map-hint { font-size: 16px; color: var(--steel); }
+.zoom { display: flex; gap: 6px; }
+.quests { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.quest {
+  width: 100%; text-align: left; cursor: pointer; font: inherit; color: var(--ink);
+  display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: start;
+  padding: 10px 12px; background: var(--paper); border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--mist);
+}
+.quest:hover { background: var(--cyan); }
+.quest-title { font-weight: 600; line-height: 1.25; min-width: 0; }
+.quest-step { grid-column: 1 / -1; font-size: 15px; color: var(--steel); }
+.chip {
+  font-family: var(--f-pixel); font-size: 7px; line-height: 1; letter-spacing: .05em;
+  padding: 5px 6px; border: 2px solid var(--ink); white-space: nowrap; color: var(--ink);
+}
+.chip-gold { background: var(--gold); } .chip-green { background: var(--green); }
+.chip-red { background: var(--red); color: var(--paper); } .chip-mist { background: var(--mist); }
+.chip-sky { background: var(--sky); }
+
+/* Vue fiche loi */
+.loi-grid { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 24px; align-items: start; }
+.card-loi {
+  background: var(--gold); color: var(--ink);
+  border: 4px solid var(--ink);
+  box-shadow: inset 0 0 0 4px var(--orange), 8px 8px 0 var(--shadow);
+  padding: 18px; display: flex; flex-direction: column; gap: 12px;
+}
+.card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.card-num { font-family: var(--f-pixel); font-size: 10px; margin-right: auto; }
+.card-art {
+  background: var(--sky); border: 4px solid var(--ink);
+  background-image: linear-gradient(var(--cyan) 4px, transparent 4px); background-size: 100% 24px;
+  display: grid; place-items: center; padding-block: 18px;
+}
+.card-title { font-family: var(--f-pixel); font-size: 14px; line-height: 1.6; text-wrap: balance; }
+.card-sub { font-size: 15px; color: var(--plum); }
+.stats { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.stat { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; }
+.stat dt { font-size: 15px; } .stat dd { margin: 0; font-family: var(--f-pixel); font-size: 10px; font-variant-numeric: tabular-nums; }
+.bar { grid-column: 1 / -1; height: 12px; background: var(--paper); border: 2px solid var(--ink); }
+.bar span { display: block; height: 100%; width: calc(var(--v) * 100%); background: var(--red); }
+.card-status { font-family: var(--f-pixel); font-size: 9px; line-height: 1.6; padding: 8px; background: var(--paper); border: 2px solid var(--ink); }
+.loi-main { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.board { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.case {
+  cursor: pointer; font: inherit; color: var(--ink); width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  padding: 10px 4px; border: 3px solid var(--ink); background: var(--mist);
+}
+.case-ico { font-family: var(--f-pixel); font-size: 12px; width: 28px; height: 28px; display: grid; place-items: center; background: var(--paper); border: 3px solid var(--ink); }
+.case-name { font-size: 14px; line-height: 1.15; }
+.case.is-done { background: var(--green); }
+.case.is-now { background: var(--gold); box-shadow: 0 0 0 3px var(--red); }
+.case:hover { filter: brightness(1.08); }
+.changes { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.changes li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; max-width: 64ch; }
+.changes li::before { content: ""; width: 12px; height: 12px; margin-top: 7px; background: var(--red); border: 2px solid var(--ink); }
+.term {
+  font: inherit; color: var(--ink); cursor: pointer; padding: 0 3px;
+  background: var(--cyan); border: 0; border-bottom: 3px solid var(--blue);
+}
+.term:hover, .term.is-open { background: var(--gold); border-bottom-color: var(--orange); }
+.hint { font-size: 15px; color: var(--steel); }
+.cta-row { display: flex; justify-content: flex-end; }
+
+/* Vue vote */
+.vote-head { gap: 16px; }
+.vote-choices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.verdict { font-family: var(--f-pixel); font-size: 18px; color: var(--green); text-shadow: 3px 3px 0 var(--ink); -webkit-text-stroke: 1px var(--ink); }
+.tallies { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.tally { display: grid; grid-template-columns: 110px minmax(0, 1fr) 48px; gap: 10px; align-items: center; }
+.tally-name { font-family: var(--f-pixel); font-size: 9px; }
+.tally-track { height: 18px; background: var(--night); border: 3px solid var(--ink); }
+.tally-fill { height: 100%; width: 0; transition: width 1.2s steps(24); }
+.tally-n { font-family: var(--f-pixel); font-size: 10px; text-align: right; font-variant-numeric: tabular-nums; }
+#vote-match { margin-top: 12px; max-width: 64ch; }
+.vote-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+#hemi { width: 100%; max-width: 912px; height: auto; margin: 0 auto; cursor: pointer; background: var(--ink); border: 4px solid var(--ink); }
+.seg { display: flex; }
+.seg-btn { font-family: var(--f-pixel); font-size: 8px; padding: 8px 10px; cursor: pointer; background: var(--paper); color: var(--ink); border: 3px solid var(--ink); }
+.seg-btn + .seg-btn { border-left: 0; }
+.seg-btn.is-on { background: var(--sky); }
+.seg-btn:disabled { color: var(--mist); cursor: not-allowed; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.legend-item {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  font: inherit; font-size: 15px; color: var(--ink); padding: 4px 8px;
+  background: var(--paper); border: 2px solid var(--ink);
+}
+.legend-item.is-dim { opacity: .45; }
+.legend-sw { width: 14px; height: 14px; border: 2px solid var(--ink); }
+.dep-card { align-items: center; text-align: center; }
+.dep-sprite { background: var(--sky); border: 4px solid var(--ink); padding: 12px; background-image: linear-gradient(transparent 70%, var(--green) 70%); }
+.dep-name { font-family: var(--f-pixel); font-size: 11px; line-height: 1.6; }
+.dep-rows { width: 100%; margin: 0; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.dep-rows div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 2px dashed var(--mist); padding-bottom: 4px; }
+.dep-rows dt { color: var(--steel); } .dep-rows dd { margin: 0; font-weight: 600; text-align: right; }
+.dep-empty { color: var(--steel); }
+
+/* Boîte de dialogue RPG, collée en bas de l'écran */
+.dialog {
+  position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 5;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: start;
+  background: var(--paper); color: var(--ink);
+  border: 4px solid var(--ink);
+  box-shadow: inset 0 0 0 4px var(--blue), 8px 8px 0 var(--shadow);
+  padding: 14px 16px;
+}
+.dialog-guide { background: var(--cyan); border: 3px solid var(--ink); padding: 4px; }
+.dialog-name { font-family: var(--f-pixel); font-size: 9px; color: var(--red); margin-bottom: 6px; }
+#dialog-text { min-height: 2.9em; max-width: 70ch; }
+.dialog-source { margin-top: 8px; font-size: 15px; color: var(--teal); border-left: 4px solid var(--teal); padding-left: 10px; max-width: 70ch; }
+.dialog-next {
+  align-self: end; font-family: var(--f-pixel); font-size: 12px; cursor: pointer;
+  background: transparent; border: 0; color: var(--red); padding: 6px;
+  animation: bob 0.8s steps(2) infinite;
+}
+
+/* Fenêtre des tutos */
+.modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 16px; background: rgba(26, 28, 44, .78); }
+.modal-box { width: min(560px, 100%); max-height: calc(100% - 32px); overflow: auto; }
+.modal-head { display: flex; align-items: center; gap: 14px; }
+.modal-art { background: var(--green); border: 3px solid var(--ink); padding: 6px; flex: none; }
+.modal-text { font-size: 19px; min-height: 5.5em; max-width: 60ch; }
+.steps { display: flex; gap: 6px; }
+.step-dot { width: 14px; height: 14px; border: 2px solid var(--ink); background: var(--paper); }
+.step-dot.is-on { background: var(--red); }
+.modal-actions { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.blink { animation: blink 1s steps(1) infinite; }
+.footnote { font-size: 15px; color: var(--mist); text-align: center; max-width: 70ch; margin: 0 auto; }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) {
+  .blink, .dialog-next { animation: none; }
+  .tally-fill { transition: none; }
+}
+@media (max-width: 900px) {
+  .monde-grid, .loi-grid, .vote-grid { grid-template-columns: minmax(0, 1fr); }
+  .board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  body { font-size: 17px; }
+  .tally { grid-template-columns: 84px minmax(0, 1fr) 40px; }
+  .dialog { grid-template-columns: minmax(0, 1fr) auto; }
+  .dialog-guide { display: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <canvas id="logo-owl" width="16" height="16" aria-hidden="true"></canvas>
+      <div>
+        <p class="brand-name">LOI EN JEU</p>
+        <p class="brand-sub">MAQUETTE · DONNÉES FICTIVES</p>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Écrans de la maquette">
+      <a class="btn" href="#monde" data-tab="monde">Carte du monde</a>
+      <a class="btn" href="#loi" data-tab="loi">Fiche loi</a>
+      <a class="btn" href="#vote" data-tab="vote">Vote</a>
+    </nav>
+    <div class="badges">
+      <span class="badges-label">BADGES <b id="badge-count">0/6</b></span>
+      <div class="badge-row" id="badge-row"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="view" id="view-monde">
+      <div class="monde-grid">
+        <div class="frame">
+          <div class="frame-head">
+            <h1 class="h-pixel">Le quartier des institutions</h1>
+            <div class="zoom">
+              <button class="btn btn-sm btn-ghost" id="zoom-out" aria-label="Dézoomer la carte">−</button>
+              <button class="btn btn-sm btn-ghost" id="zoom-in" aria-label="Zoomer la carte">+</button>
+            </div>
+          </div>
+          <div class="map-scroll" id="map-scroll">
+            <div class="map-inner" id="map-inner">
+              <canvas id="map" width="192" height="120" aria-label="Carte en pixel art des institutions"></canvas>
+            </div>
+          </div>
+          <p class="map-hint">Clique sur un bâtiment pour entrer et gagner son badge. Le rouleau qui clignote, c'est la loi que tu suis.</p>
+        </div>
+        <aside class="frame">
+          <h2 class="h-pixel">Journal des lois</h2>
+          <ol class="quests" id="quests"></ol>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="view-loi" hidden>
+      <div class="loi-grid">
+        <article class="card-loi" aria-label="Carte de la loi">
+          <div class="card-top">
+            <span class="card-num">N°042</span>
+            <span class="chip chip-sky">CONSOMMATION</span>
+            <span class="chip chip-green">ENVIRONNEMENT</span>
+          </div>
+          <div class="card-art"><canvas id="loi-art" width="24" height="20" aria-hidden="true"></canvas></div>
+          <h1 class="card-title">Loi pour le droit à la réparation</h1>
+          <p class="card-sub">Texte d'exemple, inventé pour la maquette.</p>
+          <dl class="stats">
+            <div class="stat"><dt>Articles</dt><dd>12</dd><div class="bar"><span style="--v:.24"></span></div></div>
+            <div class="stat"><dt>Amendements déposés</dt><dd>248</dd><div class="bar"><span style="--v:.62"></span></div></div>
+            <div class="stat"><dt>Jours dans la navette</dt><dd>96</dd><div class="bar"><span style="--v:.4"></span></div></div>
+          </dl>
+          <p class="card-status"><span class="blink" aria-hidden="true">■</span> Au Sénat · 1re lecture</p>
+        </article>
+        <div class="loi-main">
+          <section class="frame">
+            <h2 class="h-pixel">Le parcours</h2>
+            <ol class="board" id="board"></ol>
+          </section>
+          <section class="frame">
+            <h2 class="h-pixel">Ce qui change</h2>
+            <ul class="changes">
+              <li><span>Les fabricants de téléphones et d'ordinateurs devront afficher un <button class="term" data-term="indice">indice de réparabilité</button> sur chaque produit.</span></li>
+              <li><span>Les <button class="term" data-term="pieces">pièces détachées</button> devront rester disponibles 7 ans après la fin de la vente.</span></li>
+              <li><span>Le texte est en <button class="term" data-term="navette">navette parlementaire</button> : après l'Assemblée, c'est au Sénat de l'examiner.</span></li>
+            </ul>
+            <p class="hint">Touche un mot surligné : Plume l'explique en bas de l'écran, avec la phrase exacte du texte.</p>
+          </section>
+          <div class="cta-row"><a class="btn btn-big" href="#vote">Passer au vote ▶</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-vote" hidden>
+      <div class="vote-grid">
+        <div class="frame vote-head">
+          <p class="eyebrow">Scrutin public · Assemblée nationale · 1re lecture</p>
+          <h1 class="h-pixel">Loi pour le droit à la réparation</h1>
+          <div id="vote-ask">
+            <p>Avant de voir le résultat : et toi, tu aurais voté quoi ?</p>
+            <div class="vote-choices">
+              <button class="btn btn-pour" data-choice="pour">Pour</button>
+              <button class="btn btn-contre" data-choice="contre">Contre</button>
+              <button class="btn btn-abst" data-choice="abst">Abstention</button>
+            </div>
+          </div>
+          <div id="vote-result" hidden>
+            <p class="verdict" id="verdict"></p>
+            <div class="tallies" id="tallies"></div>
+            <p id="vote-match"></p>
+          </div>
+        </div>
+        <aside class="frame dep-card" id="dep-card" aria-live="polite">
+          <p class="h-pixel">Fiche député</p>
+          <p class="dep-empty">Clique sur un siège de l'hémicycle pour ouvrir la fiche d'un député.</p>
+        </aside>
+      </div>
+      <div class="frame" style="margin-top:20px">
+        <div class="frame-head">
+          <h2 class="h-pixel">L'hémicycle · 577 sièges</h2>
+          <div class="seg" role="group" aria-label="Couleur des sièges">
+            <button class="seg-btn is-on" data-mode="group">Groupes</button>
+            <button class="seg-btn" data-mode="vote" id="mode-vote" disabled title="Vote d'abord pour révéler">Votes</button>
+          </div>
+        </div>
+        <canvas id="hemi" width="304" height="156" aria-label="Hémicycle : 577 sièges colorés par groupe ou par vote"></canvas>
+        <div class="legend" id="legend"></div>
+        <div><button class="btn btn-sm btn-ghost" id="random-dep">Un député au hasard</button></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="dialog" id="dialog">
+    <div class="dialog-guide"><canvas id="guide" width="16" height="16" aria-hidden="true"></canvas></div>
+    <div>
+      <p class="dialog-name">PLUME · TON GUIDE</p>
+      <p id="dialog-text" aria-hidden="true"></p>
+      <p class="sr-only" id="dialog-sr" aria-live="polite"></p>
+      <p class="dialog-source" id="dialog-source" hidden></p>
+    </div>
+    <button class="dialog-next" id="dialog-next" aria-label="Message suivant">▼</button>
+  </div>
+
+  <p class="footnote">Maquette de travail. La loi, les groupes, les députés et les votes sont inventés ; le site final utilisera les données ouvertes de l'Assemblée nationale.</p>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="frame modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <canvas class="modal-art" id="modal-art" width="32" height="24" aria-hidden="true"></canvas>
+      <div>
+        <p class="eyebrow">Tuto · <span id="modal-step"></span></p>
+        <h2 class="h-pixel" id="modal-title"></h2>
+      </div>
+    </div>
+    <p class="modal-text" id="modal-text"></p>
+    <div class="steps" id="modal-steps"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modal-close">Quitter</button>
+      <button class="btn" id="modal-next">Suite ▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Outils pixel ---------- */
+var C = { k:'#1a1c2c', p:'#5d275d', r:'#b13e53', o:'#ef7d57', y:'#ffcd75', l:'#a7f070', g:'#38b764', t:'#257179',
+          v:'#29366f', b:'#3b5dc9', s:'#41a6f6', c:'#73eff7', w:'#f4f4f4', m:'#94b0c2', e:'#566c86', n:'#333c57' };
+var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function $(id) { return document.getElementById(id); }
+function px(ctx, col, x, y, w, h) { ctx.fillStyle = col; ctx.fillRect(x, y, w, h); }
+function drawSprite(ctx, rows, x, y, map) {
+  for (var j = 0; j < rows.length; j++) for (var i = 0; i < rows[j].length; i++) {
+    var ch = rows[j][i]; if (ch === '.') continue;
+    px(ctx, (map && map[ch]) || C[ch], x + i, y + j, 1, 1);
+  }
+}
+function scaleCanvas(cv, s) { cv.style.width = (cv.width * s) + 'px'; cv.style.height = (cv.height * s) + 'px'; }
+function rng(seed) { var s = seed >>> 0; return function () { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; }; }
+
+/* ---------- Sprites (dessinés à la main, 1 caractère = 1 pixel) ---------- */
+var OWL = [
+  '..kk........kk..', '..kok......kok..', '..kookkkkkkook..', '.kooooooooooook.',
+  '.kowwwkookwwwok.', '.kowkwkookwkwok.', '.kowwwkyykwwwok.', '.koookkyykkoook.',
+  '.kbbbbbbbbbbbbk.', '.koowwwwwwwwook.', '.koowwwwwwwwook.', '..koowwwwwwook..',
+  '..kooooooooook..', '...kkkkkkkkkk...', '....yy....yy....', '................'];
+var OWL_CLOSED = OWL.slice();
+OWL_CLOSED[4] = '.kooooooooooook.'; OWL_CLOSED[5] = '.kokkkkookkkkok.'; OWL_CLOSED[6] = '.kooookyykooook.';
+var SCROLL = ['kkkkkkkk', 'koyyyyok', '.kwwwwk.', '.kwkkwk.', '.kwwwwk.', '.kwkkwk.', 'koyyyyok', 'kkkkkkkk'];
+var TREE = ['.kkkk.', 'kltttk', 'kttltk', 'kttttk', '.kkkk.', '..pp..', '..pp..'];
+var PHONE = ['kkkkkkkkkk', 'knnnnnnnnk', 'knccccccnk', 'kncwccccnk', 'knccwcccnk', 'kncccwwcnk', 'knccccwcnk',
+  'knccccccnk', 'knccccccnk', 'knccccccnk', 'knccccccnk', 'knnnnnnnnk', 'knnnkknnnk', 'knnnnnnnnk', 'kkkkkkkkkk'];
+var WRENCH = ['kk.kk...', 'kmkmk...', 'kmmmk...', '.kmmk...', '..kmmk..', '...kmmk.', '....kmmk', '.....kkk'];
+var DEPUTY = ['...kkkkkk...', '..khhhhhhk..', '..kSkSSkSk..', '..kSSSSSSk..', '...kSSSSk...', '..kccSScck..',
+  '.kcccwwccck.', '.kcccwwccck.', '.kcccccccck.', '..kddkkddk..', '..kddk.kddk.', '..kkkk.kkkk.'];
+
+function drawOwl(cv, closed) { var ctx = cv.getContext('2d'); ctx.clearRect(0, 0, 16, 16); drawSprite(ctx, closed ? OWL_CLOSED : OWL, 0, 0); }
+
+/* ---------- Institutions et tutos (contenu à relire par l'équipe) ---------- */
+var INST = [
+  { id: 'gouv', code: 'GV', label: 'Gouvernement', name: 'Le Gouvernement', place: 'Matignon',
+    b: { x: 10, y: 74, w: 30, h: 22, roof: 'trap', rc: C.p },
+    steps: ['Le Premier ministre dirige le Gouvernement, installé à Matignon. Les ministres l\'entourent, chacun avec son domaine.',
+            'Le Gouvernement dépose des projets de loi. Les députés et les sénateurs, eux, déposent des propositions de loi.',
+            'Avec l\'article 49.3, il peut faire adopter un texte sans vote, sauf si les députés votent une motion de censure qui le renverse.'] },
+  { id: 'an', code: 'AN', label: 'Assemblée', name: 'L\'Assemblée nationale', place: 'Palais Bourbon',
+    b: { x: 52, y: 66, w: 40, h: 24, roof: 'pediment', columns: true },
+    steps: ['577 députés, élus directement par les citoyens pour 5 ans.',
+            'Un texte passe d\'abord en commission, où il est amendé, puis en séance, où tous les députés le débattent et le votent.',
+            'Si le désaccord avec le Sénat persiste, le Gouvernement peut demander à l\'Assemblée de trancher : elle a le dernier mot.'] },
+  { id: 'senat', code: 'SN', label: 'Sénat', name: 'Le Sénat', place: 'Palais du Luxembourg',
+    b: { x: 128, y: 72, w: 36, h: 26, roof: 'dome', rc: C.b },
+    steps: ['348 sénateurs, élus pour 6 ans par des élus locaux : maires, conseillers départementaux et régionaux.',
+            'Il examine les mêmes textes que l\'Assemblée et peut les modifier. Le texte fait alors des allers-retours : c\'est la navette.',
+            'Il représente les collectivités territoriales : communes, départements, régions.'] },
+  { id: 'cmp', code: 'CM', label: 'CMP', name: 'La commission mixte paritaire', place: '7 députés + 7 sénateurs', labelPos: 'left',
+    b: { x: 96, y: 105, w: 20, h: 12, rh: 5, roof: 'tent', rc: C.o, flag: false },
+    steps: ['Quand l\'Assemblée et le Sénat n\'arrivent pas à voter le même texte, on réunit 7 députés et 7 sénateurs.',
+            'Ensemble, ils cherchent une version commune sur les articles encore en désaccord.',
+            'Si la CMP échoue, le Gouvernement peut donner le dernier mot à l\'Assemblée nationale.'] },
+  { id: 'cc', code: 'CC', label: 'Conseil const.', name: 'Le Conseil constitutionnel', place: 'Palais-Royal',
+    b: { x: 148, y: 14, w: 32, h: 22, roof: 'trap', rc: C.e },
+    steps: ['9 membres, nommés pour 9 ans par le Président de la République et les présidents des deux assemblées.',
+            'Il peut être saisi par le Président, le Premier ministre, les présidents des assemblées, 60 députés ou 60 sénateurs.',
+            'Il vérifie que la loi respecte la Constitution, et peut censurer tout ou partie du texte avant sa promulgation.'] },
+  { id: 'elysee', code: 'PR', label: 'Élysée', name: 'Le Président de la République', place: 'Palais de l\'Élysée',
+    b: { x: 14, y: 12, w: 36, h: 24, roof: 'trap', rc: C.b },
+    steps: ['Une fois la loi adoptée, le Président la promulgue dans les 15 jours.',
+            'Pendant ce délai, il peut demander au Parlement une nouvelle délibération, qui ne peut pas être refusée.',
+            'La loi est ensuite publiée au Journal officiel : elle peut alors s\'appliquer.'] }
+];
+var won = {};
+
+/* ---------- Carte du monde ---------- */
+var ROADS = [[25, 100, 172, 100], [25, 96, 25, 100], [72, 90, 72, 100], [146, 98, 146, 100], [106, 100, 106, 105],
+             [172, 40, 172, 100], [32, 40, 172, 40], [32, 36, 32, 40], [164, 36, 164, 40]];
+var TREES = [[60, 10], [74, 22], [90, 8], [108, 18], [122, 6], [134, 26], [184, 16], [52, 24], [100, 28], [4, 42],
+             [2, 66], [44, 70], [100, 70], [112, 80], [118, 66], [180, 76], [4, 108], [40, 110], [62, 108], [124, 108], [150, 108], [184, 108]];
+function riverY(x) { return 56 + Math.round(3 * Math.sin(x / 14)); }
+function road(ctx, s, border) {
+  var x1 = Math.min(s[0], s[2]), x2 = Math.max(s[0], s[2]), y1 = Math.min(s[1], s[3]), y2 = Math.max(s[1], s[3]), pad = border ? 3 : 2;
+  px(ctx, border ? C.o : C.y, x1 - pad, y1 - pad, x2 - x1 + pad * 2, y2 - y1 + pad * 2);
+}
+function bridge(ctx, x) {
+  for (var i = 0; i < 9; i++) { var yc = riverY(x + i); px(ctx, C.m, x + i, yc - 8, 1, 17); }
+  px(ctx, C.k, x, riverY(x) - 8, 1, 17); px(ctx, C.k, x + 8, riverY(x + 8) - 8, 1, 17);
+}
+function drawBuilding(ctx, b) {
+  var x = b.x, y = b.y, w = b.w, h = b.h, rh = b.rh || Math.max(5, Math.round(h * 0.32)), cx = x + Math.floor(w / 2), top = y, i;
+  px(ctx, C.t, x + 2, y + 3, w, h - 1);
+  px(ctx, C.k, x, y + rh - 1, w, h - rh + 1); px(ctx, C.w, x + 1, y + rh, w - 2, h - rh - 1);
+  px(ctx, C.m, x + 1, y + h - 3, w - 2, 1);
+  if (b.columns) { for (var cc = x + 3; cc < x + w - 3; cc += 4) if (Math.abs(cc + 1 - cx) > 2) px(ctx, C.m, cc, y + rh + 1, 2, h - rh - 4); }
+  else { for (var wx = x + 3; wx <= x + w - 5; wx += 5) { if (Math.abs(wx + 1 - cx) < 4) continue; px(ctx, C.v, wx, y + rh + 2, 2, 3); if (h - rh > 13) px(ctx, C.v, wx, y + rh + 8, 2, 3); } }
+  px(ctx, C.k, cx - 2, y + h - 7, 4, 6); px(ctx, C.y, cx - 2, y + h - 8, 4, 1);
+  if (b.roof === 'pediment') {
+    for (i = 0; i < rh; i++) { var hw = Math.round((w / 2 + 1) * (i + 1) / rh); px(ctx, C.k, cx - hw, y + i, hw * 2, 1); if (i > 0 && i < rh - 1) px(ctx, C.w, cx - hw + 1, y + i, hw * 2 - 2, 1); }
+    px(ctx, C.y, cx - 1, y + Math.floor(rh / 2), 2, 2);
+  } else {
+    for (i = 0; i < rh; i++) {
+      var inset = rh - 1 - i, rx = x - 1 + inset, rw = w + 2 - inset * 2;
+      px(ctx, C.k, rx, y + i, rw, 1);
+      if (i > 0) { px(ctx, b.rc, rx + 1, y + i, rw - 2, 1); if (b.roof === 'tent') for (var sx = rx + 2; sx < rx + rw - 2; sx += 4) px(ctx, C.y, sx, y + i, 2, 1); }
+    }
+    if (b.roof === 'dome') {
+      var R = 6; for (var j = 0; j < R; j++) { var dy = R - 1 - j, hw2 = Math.round(Math.sqrt(R * R - dy * dy)); px(ctx, C.k, cx - hw2 - 1, y - R + j, hw2 * 2 + 2, 1); px(ctx, C.e, cx - hw2, y - R + j, hw2 * 2, 1); }
+      px(ctx, C.m, cx - 3, y - R + 2, 1, 3); top = y - R;
+    }
+  }
+  if (b.flag !== false) { var fy = top - 6; px(ctx, C.k, cx, fy, 1, top - fy); px(ctx, C.b, cx + 1, fy, 2, 4); px(ctx, C.w, cx + 3, fy, 2, 4); px(ctx, C.r, cx + 5, fy, 2, 4); }
+}
+function drawMap() {
+  var ctx = $('map').getContext('2d'), W = 192, H = 120, r = rng(7), i;
+  px(ctx, C.g, 0, 0, W, H);
+  for (i = 0; i < 170; i++) px(ctx, r() < .5 ? C.l : C.t, Math.floor(r() * W), Math.floor(r() * H), 1, 1);
+  for (var x = 0; x < W; x++) { var yc = riverY(x); px(ctx, C.m, x, yc - 6, 1, 1); px(ctx, C.b, x, yc - 5, 1, 11); px(ctx, C.m, x, yc + 6, 1, 1); }
+  for (i = 0; i < 40; i++) { var hx = Math.floor(r() * (W - 4)); px(ctx, r() < .7 ? C.s : C.c, hx, riverY(hx) - 3 + Math.floor(r() * 7), 3, 1); }
+  bridge(ctx, 168); bridge(ctx, 90);
+  ROADS.forEach(function (s) { road(ctx, s, true); }); ROADS.forEach(function (s) { road(ctx, s, false); });
+  TREES.forEach(function (t) { drawSprite(ctx, TREE, t[0], t[1]); });
+  INST.forEach(function (inst) { drawBuilding(ctx, inst.b); });
+}
+function buildHotspots() {
+  var inner = $('map-inner');
+  INST.forEach(function (inst) {
+    var b = inst.b, dome = b.roof === 'dome' ? 6 : 0, btn = document.createElement('button');
+    btn.className = 'hotspot'; btn.id = 'hot-' + inst.id; btn.setAttribute('aria-label', inst.name + ' : ouvrir le tuto');
+    btn.style.left = (b.x / 192 * 100) + '%'; btn.style.top = ((b.y - dome) / 120 * 100) + '%';
+    btn.style.width = (b.w / 192 * 100) + '%'; btn.style.height = ((b.h + dome) / 120 * 100) + '%';
+    var lab = document.createElement('span'); lab.className = 'hotspot-label'; lab.textContent = inst.label;
+    if (inst.labelPos === 'left') { lab.style.left = 'auto'; lab.style.right = 'calc(100% + 4px)'; lab.style.top = '30%'; lab.style.transform = 'none'; }
+    btn.appendChild(lab);
+    btn.addEventListener('click', function () { openTuto(inst); });
+    inner.appendChild(btn);
+  });
+  var tok = document.createElement('canvas'); tok.width = 8; tok.height = 8; tok.className = 'blink'; tok.setAttribute('aria-hidden', 'true');
+  tok.style.cssText = 'position:absolute;left:' + (136 / 192 * 100) + '%;top:' + (94 / 120 * 100) + '%;width:' + (8 / 192 * 100) + '%;height:auto;pointer-events:none';
+  drawSprite(tok.getContext('2d'), SCROLL, 0, 0); inner.appendChild(tok);
+}
+var mapScale = 0, userZoom = false;
+function fitMap() {
+  var avail = $('map-scroll').clientWidth - 8;
+  if (avail <= 0) return;
+  if (!userZoom || !mapScale) mapScale = Math.max(1, Math.floor(avail / 192));
+  scaleCanvas($('map'), mapScale);
+}
+
+/* ---------- Badges ---------- */
+function renderBadges() {
+  var row = $('badge-row'), n = 0; row.innerHTML = '';
+  INST.forEach(function (inst) {
+    var s = document.createElement('span'); s.className = 'badge' + (won[inst.id] ? ' is-won' : ''); s.textContent = inst.code; s.title = inst.name;
+    row.appendChild(s); if (won[inst.id]) n++;
+    var hot = $('hot-' + inst.id); if (hot) hot.classList.toggle('is-won', !!won[inst.id]);
+  });
+  $('badge-count').textContent = n + '/' + INST.length;
+  return n;
+}
+
+/* ---------- Tutos ---------- */
+var modalInst = null, modalStep = 0, lastFocus = null;
+function openTuto(inst) {
+  modalInst = inst; modalStep = 0; lastFocus = document.activeElement;
+  var cv = $('modal-art'), ctx = cv.getContext('2d'), b = inst.b;
+  cv.width = 48; cv.height = 44; px(ctx, C.g, 0, 0, 48, 44); px(ctx, C.l, 0, 40, 48, 4);
+  drawBuilding(ctx, { x: Math.floor((48 - b.w) / 2), y: 40 - b.h, w: b.w, h: b.h, rh: b.rh, roof: b.roof, rc: b.rc, columns: b.columns, flag: b.flag });
+  scaleCanvas(cv, 2);
+  $('modal').hidden = false; renderTuto(); $('modal-next').focus();
+}
+function renderTuto() {
+  var steps = modalInst.steps, dots = $('modal-steps');
+  $('modal-title').textContent = modalInst.name; $('modal-step').textContent = modalInst.place;
+  $('modal-text').textContent = steps[modalStep];
+  dots.innerHTML = ''; steps.forEach(function (_, i) { var d = document.createElement('span'); d.className = 'step-dot' + (i <= modalStep ? ' is-on' : ''); dots.appendChild(d); });
+  $('modal-next').textContent = modalStep === steps.length - 1 ? 'Gagner le badge' : 'Suite ▶';
+}
+function closeTuto() { $('modal').hidden = true; if (lastFocus) lastFocus.focus(); }
+function nextTuto() {
+  if (modalStep < modalInst.steps.length - 1) { modalStep++; renderTuto(); return; }
+  var first = !won[modalInst.id]; won[modalInst.id] = true; var n = renderBadges(); var name = modalInst.name; closeTuto();
+  if (!first) { say('Tu avais déjà ce badge. Va voir un autre bâtiment !'); return; }
+  say(n === INST.length ? 'Les 6 badges ! Tu connais maintenant tout le parcours d\'une loi, du dépôt à la promulgation.'
+    : 'Badge gagné : ' + name + '. Il t\'en reste ' + (INST.length - n) + ' à trouver sur la carte.');
+}
+
+/* ---------- Boîte de dialogue de Plume ---------- */
+var D = { queue: [], source: null, timer: null, full: '' };
+function say(lines, source) { D.queue = [].concat(lines); D.source = source || null; $('dialog-source').hidden = true; finishTyping(true); showNext(); }
+function showNext() { if (D.timer) { finishTyping(); return; } if (!D.queue.length) return; typeLine(D.queue.shift()); }
+function typeLine(text) {
+  var el = $('dialog-text'); D.full = text; $('dialog-sr').textContent = text; $('dialog-next').style.visibility = 'visible';
+  if (REDUCED) { el.textContent = text; afterLine(); return; }
+  var i = 0; el.textContent = '';
+  D.timer = setInterval(function () { i += 2; el.textContent = text.slice(0, i); if (i >= text.length) finishTyping(); }, 24);
+}
+function finishTyping(silent) {
+  if (D.timer) { clearInterval(D.timer); D.timer = null; }
+  if (silent) return;
+  $('dialog-text').textContent = D.full; afterLine();
+}
+function afterLine() {
+  var more = D.queue.length > 0; $('dialog-next').style.visibility = more ? 'visible' : 'hidden';
+  if (!more && D.source) { var s = $('dialog-source'); s.textContent = D.source; s.hidden = false; }
+}
+
+/* ---------- Journal des lois, parcours, mots expliqués ---------- */
+var QUESTS = [
+  { t: 'Loi pour le droit à la réparation', chip: ['EN COURS', 'gold'], step: 'Au Sénat · 1re lecture', go: 'loi' },
+  { t: 'Accès aux services publics en ligne', chip: ['EN COURS', 'gold'], step: 'En CMP · 7 députés, 7 sénateurs' },
+  { t: 'Écrans à l\'école primaire', chip: ['DÉPOSÉ', 'mist'], step: 'Proposition de loi · en commission' },
+  { t: 'Covoiturage dans les zones rurales', chip: ['ADOPTÉ', 'green'], step: 'Promulguée · publiée au Journal officiel' },
+  { t: 'Statut des pêcheurs côtiers', chip: ['REJETÉ', 'red'], step: 'Rejetée par l\'Assemblée en 1re lecture' }
+];
+var BOARD = [
+  { n: 'Dépôt', s: 'done', d: 'Étape 1, terminée : le Gouvernement a déposé ce projet de loi à l\'Assemblée nationale.' },
+  { n: 'Assemblée', s: 'done', d: 'Étape 2, terminée : les députés l\'ont adopté en 1re lecture, après 248 amendements déposés.' },
+  { n: 'Sénat', s: 'now', d: 'Étape 3, en cours : les sénateurs l\'examinent. S\'ils le modifient, il repart à l\'Assemblée : c\'est la navette.' },
+  { n: 'CMP', s: 'todo', d: 'Étape possible : si les deux chambres ne s\'accordent pas, 7 députés et 7 sénateurs cherchent un texte commun.' },
+  { n: 'Conseil const.', s: 'todo', d: 'Étape possible : s\'il est saisi, le Conseil constitutionnel vérifie que la loi respecte la Constitution.' },
+  { n: 'Promulgation', s: 'todo', d: 'Dernière étape : le Président promulgue la loi, puis elle est publiée au Journal officiel.' }
+];
+var TERMS = {
+  indice: { t: 'Une note sur 10 qui dit si un produit se répare facilement : démontage, prix des pièces, notice. Elle doit être visible au moment de l\'achat.',
+            src: '« Les producteurs affichent, au moment de la vente, une note de réparabilité sur dix. » Article 2, alinéa 1 (texte fictif)' },
+  pieces: { t: 'Ce sont les pièces qui servent à réparer un appareil : écran, batterie, connecteur. Le texte oblige à en vendre encore 7 ans après le dernier modèle vendu.',
+            src: '« Les pièces détachées indispensables restent disponibles pendant sept ans à compter de la fin de la commercialisation. » Article 3, alinéa 2 (texte fictif)' },
+  navette: { t: 'Les allers-retours d\'un texte entre l\'Assemblée et le Sénat, jusqu\'à ce que les deux votent la même version. Si ça bloque, une CMP cherche un compromis.',
+             src: '« Tout projet ou proposition de loi est examiné successivement dans les deux assemblées du Parlement en vue de l\'adoption d\'un texte identique. » Constitution, article 45' }
+};
+function buildQuests() {
+  var ol = $('quests');
+  QUESTS.forEach(function (q) {
+    var li = document.createElement('li'), b = document.createElement('button');
+    b.className = 'quest';
+    b.innerHTML = '<span class="quest-title"></span><span class="chip chip-' + q.chip[1] + '">' + q.chip[0] + '</span><span class="quest-step"></span>';
+    b.querySelector('.quest-title').textContent = q.t; b.querySelector('.quest-step').textContent = q.step;
+    b.addEventListener('click', function () {
+      if (q.go) location.hash = q.go;
+      else say('Dans cette maquette, seule la loi sur la réparation est jouable. Les autres arriveront avec les vraies données de l\'Assemblée.');
+    });
+    li.appendChild(b); ol.appendChild(li);
+  });
+}
+function buildBoard() {
+  var ol = $('board');
+  BOARD.forEach(function (st) {
+    var li = document.createElement('li'), b = document.createElement('button');
+    b.className = 'case is-' + st.s;
+    var ico = st.s === 'done' ? 'OK' : (st.s === 'now' ? '!' : '?');
+    b.innerHTML = '<span class="case-ico' + (st.s === 'now' ? ' blink' : '') + '" style="font-size:' + (ico === 'OK' ? '8px' : '12px') + '">' + ico + '</span><span class="case-name"></span>';
+    b.querySelector('.case-name').textContent = st.n;
+    b.addEventListener('click', function () { say(st.d); });
+    li.appendChild(b); ol.appendChild(li);
+  });
+}
+function bindTerms() {
+  Array.prototype.forEach.call(document.querySelectorAll('.term'), function (el) {
+    el.addEventListener('click', function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.term'), function (o) { o.classList.toggle('is-open', o === el); });
+      var term = TERMS[el.getAttribute('data-term')]; say(term.t, term.src);
+    });
+  });
+}
+</script>
+<script>
+/* ---------- Hémicycle (groupes et votes fictifs) ---------- */
+var GROUPS = [
+  { name: 'Groupe A', col: C.b, n: 120, v: [.85, .02, .03] },
+  { name: 'Groupe B', col: C.m, n: 95, v: [.05, .80, .05] },
+  { name: 'Groupe C', col: C.o, n: 72, v: [.70, .10, .10] },
+  { name: 'Groupe D', col: C.s, n: 66, v: [.10, .75, .05] },
+  { name: 'Groupe E', col: C.t, n: 60, v: [.60, .05, .25] },
+  { name: 'Groupe F', col: C.c, n: 50, v: [.80, 0, .10] },
+  { name: 'Groupe G', col: C.l, n: 64, v: [.20, .40, .30] },
+  { name: 'Groupe H', col: C.w, n: 50, v: [.02, .30, .55] }
+];
+var VOTES = [
+  { id: 'pour', label: 'Pour', col: C.g },
+  { id: 'contre', label: 'Contre', col: C.r },
+  { id: 'abst', label: 'Abstention', col: C.y },
+  { id: 'nv', label: 'Pas de vote', col: C.e }
+];
+var VOTE = {}; VOTES.forEach(function (v) { VOTE[v.id] = v; });
+var FIRST = ['Camille', 'Hugo', 'Inès', 'Louis', 'Nadia', 'Thomas', 'Léa', 'Karim', 'Sophie', 'Antoine', 'Yasmine', 'Julien', 'Claire', 'Mehdi', 'Élise', 'Paul'];
+var LAST = ['Arnaud', 'Berthier', 'Caron', 'Delmas', 'Ferrand', 'Garnier', 'Hamel', 'Jacquet', 'Lacombe', 'Marchal', 'Nicolas', 'Perrot', 'Raynaud', 'Tessier', 'Vidal', 'Weber'];
+var HW = 304, HH = 146, HC = { x: 152, y: 140 }, SEATS = [];
+var hemiMode = 'group', revealed = false, focusGroup = null, selSeat = -1, revealCount = 577, userChoice = null;
+
+function layoutSeats() {
+  var radii = [], r, total = 577, sum = 0;
+  for (r = 48; r <= 132; r += 7) { radii.push(r); sum += r; }
+  var counts = radii.map(function (rr) { return Math.round(total * rr / sum); });
+  counts[counts.length - 1] += total - counts.reduce(function (a, b) { return a + b; }, 0);
+  radii.forEach(function (rr, ri) {
+    var n = counts[ri];
+    for (var i = 0; i < n; i++) {
+      var a = Math.PI - (i + 0.5) * Math.PI / n;
+      SEATS.push({ a: a, r: rr, x: Math.round(HC.x + rr * Math.cos(a)) - 2, y: Math.round(HC.y - rr * Math.sin(a)) - 2 });
+    }
+  });
+  SEATS.sort(function (p, q) { return (q.a - p.a) || (p.r - q.r); });
+  var k = 0, rand = rng(42);
+  GROUPS.forEach(function (g) {
+    var p = Math.round(g.n * g.v[0]), c = Math.round(g.n * g.v[1]), ab = Math.round(g.n * g.v[2]), list = [], i;
+    for (i = 0; i < g.n; i++) list.push(i < p ? 'pour' : i < p + c ? 'contre' : i < p + c + ab ? 'abst' : 'nv');
+    for (i = list.length - 1; i > 0; i--) { var j = Math.floor(rand() * (i + 1)), t = list[i]; list[i] = list[j]; list[j] = t; }
+    g.count = { pour: 0, contre: 0, abst: 0, nv: 0 };
+    for (i = 0; i < g.n; i++) { var s = SEATS[k]; s.g = g; s.vote = list[i]; s.idx = k; g.count[list[i]]++; k++; }
+  });
+}
+function drawHemi() {
+  var ctx = $('hemi').getContext('2d');
+  px(ctx, C.k, 0, 0, HW, HH);
+  px(ctx, C.n, HC.x - 22, HC.y - 8, 44, 10); px(ctx, C.e, HC.x - 16, HC.y - 5, 32, 3); px(ctx, C.y, HC.x - 2, HC.y - 11, 4, 3);
+  SEATS.forEach(function (s, i) {
+    var col = s.g.col;
+    if (hemiMode === 'vote') col = i < revealCount ? VOTE[s.vote].col : C.n;
+    if (focusGroup && s.g !== focusGroup) col = C.n;
+    px(ctx, col, s.x, s.y, 4, 4);
+  });
+  if (selSeat >= 0) {
+    var s = SEATS[selSeat];
+    px(ctx, C.w, s.x - 2, s.y - 2, 8, 1); px(ctx, C.w, s.x - 2, s.y + 5, 8, 1);
+    px(ctx, C.w, s.x - 2, s.y - 2, 1, 8); px(ctx, C.w, s.x + 5, s.y - 2, 1, 8);
+  }
+}
+function renderLegend() {
+  var box = $('legend'); box.innerHTML = '';
+  if (hemiMode === 'vote') {
+    VOTES.forEach(function (v) {
+      var n = SEATS.filter(function (s) { return s.vote === v.id; }).length;
+      var it = document.createElement('span'); it.className = 'legend-item';
+      it.innerHTML = '<span class="legend-sw" style="background:' + v.col + '"></span>' + v.label + ' · ' + n;
+      box.appendChild(it);
+    });
+    return;
+  }
+  GROUPS.forEach(function (g) {
+    var it = document.createElement('button'); it.className = 'legend-item' + (focusGroup && focusGroup !== g ? ' is-dim' : '');
+    it.innerHTML = '<span class="legend-sw" style="background:' + g.col + '"></span>' + g.name + ' · ' + g.n;
+    it.setAttribute('aria-pressed', focusGroup === g ? 'true' : 'false');
+    it.addEventListener('click', function () {
+      focusGroup = focusGroup === g ? null : g; renderLegend(); drawHemi();
+      if (focusGroup) say(g.name + ' : ' + g.n + ' députés, soit ' + Math.round(g.n / 5.77) + ' % des sièges. Touche un de ses sièges pour ouvrir une fiche.');
+    });
+    box.appendChild(it);
+  });
+}
+function setMode(mode) {
+  hemiMode = mode;
+  Array.prototype.forEach.call(document.querySelectorAll('.seg-btn'), function (b) { b.classList.toggle('is-on', b.getAttribute('data-mode') === mode); });
+  if (mode === 'vote') focusGroup = null;
+  renderLegend(); drawHemi();
+}
+function showDeputy(i) {
+  selSeat = i; drawHemi();
+  var s = SEATS[i], card = $('dep-card'), name = FIRST[(i * 7) % FIRST.length] + ' ' + LAST[(i * 11 + 3) % LAST.length];
+  card.innerHTML = '<p class="h-pixel">Fiche député</p><div class="dep-sprite"><canvas width="12" height="12" aria-hidden="true"></canvas></div>' +
+    '<p class="dep-name"></p><dl class="dep-rows"><div><dt>Groupe</dt><dd class="dd-g"></dd></div><div><dt>Circonscription</dt><dd class="dd-c"></dd></div>' +
+    '<div><dt>Vote sur ce texte</dt><dd class="dd-v"></dd></div></dl><p class="hint">Profil inventé pour la maquette.</p>';
+  var cv = card.querySelector('canvas');
+  drawSprite(cv.getContext('2d'), DEPUTY, 0, 0, { h: [C.k, C.p, C.o, C.y, C.e][i % 5], S: [C.y, C.o][(i >> 1) % 2], c: s.g.col, d: C.n, w: C.w });
+  scaleCanvas(cv, 7);
+  card.querySelector('.dep-name').textContent = name;
+  card.querySelector('.dd-g').textContent = s.g.name;
+  card.querySelector('.dd-c').textContent = 'n°' + ((i % 11) + 1) + ', département fictif';
+  var dv = card.querySelector('.dd-v');
+  if (!revealed) dv.textContent = 'Vote d\'abord pour le voir';
+  else if (s.vote === 'nv') dv.textContent = 'N\'a pas pris part au vote';
+  else dv.textContent = VOTE[s.vote].label;
+  if (revealed && s.vote === 'nv') say('Ne pas avoir pris part à un vote ne veut pas dire être absent de l\'Assemblée : commission, circonscription, mission… On ne classe donc pas les députés là-dessus.');
+}
+function seatAt(evt) {
+  var cv = $('hemi'), rect = cv.getBoundingClientRect();
+  var x = (evt.clientX - rect.left - cv.clientLeft) * HW / cv.clientWidth, y = (evt.clientY - rect.top - cv.clientTop) * HH / cv.clientHeight;
+  var best = -1, bd = 26;
+  SEATS.forEach(function (s, i) { var dx = s.x + 2 - x, dy = s.y + 2 - y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = i; } });
+  return best;
+}
+
+/* ---------- Le vote du joueur, puis la révélation ---------- */
+function castVote(choice) {
+  userChoice = choice; revealed = true;
+  $('vote-ask').hidden = true; $('vote-result').hidden = false;
+  var tot = { pour: 0, contre: 0, abst: 0, nv: 0 };
+  SEATS.forEach(function (s) { tot[s.vote]++; });
+  var adopted = tot.pour > tot.contre, verdict = $('verdict');
+  verdict.textContent = adopted ? 'ADOPTÉ !' : 'REJETÉ';
+  verdict.style.color = adopted ? C.g : C.r;
+  var box = $('tallies'); box.innerHTML = '';
+  VOTES.forEach(function (v) {
+    var row = document.createElement('div'); row.className = 'tally';
+    row.innerHTML = '<span class="tally-name">' + v.label + '</span><span class="tally-track"><span class="tally-fill" style="background:' + v.col + '"></span></span><span class="tally-n">0</span>';
+    box.appendChild(row);
+    var fill = row.querySelector('.tally-fill'), num = row.querySelector('.tally-n'), target = tot[v.id];
+    requestAnimationFrame(function () { requestAnimationFrame(function () { fill.style.width = (target / 577 * 100) + '%'; }); });
+    countUp(num, target);
+  });
+  var same = GROUPS.filter(function (g) {
+    var c = g.count, best = ['pour', 'contre', 'abst'].sort(function (a, b) { return c[b] - c[a]; })[0];
+    return best === choice;
+  }).map(function (g) { return g.name.replace('Groupe ', ''); });
+  var mine = VOTE[choice].label.toLowerCase();
+  $('vote-match').textContent = same.length
+    ? 'Tu as choisi « ' + mine + ' ». La majorité des groupes ' + same.join(', ') + ' a fait le même choix que toi.'
+    : 'Tu as choisi « ' + mine + ' ». Aucun groupe n\'a majoritairement fait ce choix : regarde les sièges un par un.';
+  $('mode-vote').disabled = false; $('mode-vote').removeAttribute('title');
+  setMode('vote'); revealSeats();
+  if (selSeat >= 0) showDeputy(selSeat);
+  say(['Voilà le résultat : ' + tot.pour + ' pour, ' + tot.contre + ' contre. Le texte est ' + (adopted ? 'adopté' : 'rejeté') + ' en 1re lecture.',
+       'Touche un siège pour voir comment ce député a voté, ou repasse en couleurs « Groupes » pour comparer.']);
+}
+function countUp(el, target) {
+  if (REDUCED) { el.textContent = target; return; }
+  var t0 = null;
+  function step(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(target * k); if (k < 1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+function revealSeats() {
+  if (REDUCED) { revealCount = SEATS.length; drawHemi(); return; }
+  revealCount = 0; var t0 = null;
+  function step(t) { if (!t0) t0 = t; revealCount = Math.round(SEATS.length * Math.min(1, (t - t0) / 1400)); drawHemi(); if (revealCount < SEATS.length) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+
+/* ---------- Navigation entre les écrans ---------- */
+var VIEWS = ['monde', 'loi', 'vote'];
+var INTRO = {
+  monde: ['Salut, moi c\'est Plume ! Ici, chaque bâtiment est une institution. Clique dessus pour découvrir son rôle et gagner son badge.',
+          'Le petit rouleau qui clignote devant le Sénat, c\'est la loi pour le droit à la réparation. Ouvre-la dans le Journal des lois.'],
+  loi: ['Voici la carte de la loi. En haut, son parcours : l\'Assemblée l\'a adoptée, et elle est maintenant au Sénat.',
+        'Touche les mots surlignés : je t\'explique le jargon et je te montre la phrase exacte du texte.'],
+  vote: ['Les députés ont voté ce texte en 1re lecture. Mais d\'abord : toi, tu aurais voté quoi ?']
+};
+function route() {
+  var v = (location.hash || '').slice(1); if (VIEWS.indexOf(v) < 0) v = 'monde';
+  VIEWS.forEach(function (n) { $('view-' + n).hidden = n !== v; });
+  Array.prototype.forEach.call(document.querySelectorAll('.tabs a'), function (a) {
+    if (a.getAttribute('data-tab') === v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  if (v === 'monde') fitMap();
+  say(v === 'vote' && revealed ? 'Touche un siège pour ouvrir la fiche d\'un député.' : INTRO[v]);
+}
+
+/* ---------- Démarrage ---------- */
+function init() {
+  drawOwl($('guide')); scaleCanvas($('guide'), 4); drawOwl($('logo-owl')); scaleCanvas($('logo-owl'), 3);
+  if (!REDUCED) setInterval(function () {
+    drawOwl($('guide'), true); drawOwl($('logo-owl'), true);
+    setTimeout(function () { drawOwl($('guide')); drawOwl($('logo-owl')); }, 160);
+  }, 3400);
+
+  drawMap(); buildHotspots(); renderBadges(); buildQuests(); buildBoard(); bindTerms();
+  var la = $('loi-art').getContext('2d');
+  drawSprite(la, PHONE, 3, 2); drawSprite(la, WRENCH, 13, 10); px(la, C.w, 19, 2, 1, 3); px(la, C.w, 18, 3, 3, 1);
+  scaleCanvas($('loi-art'), 5);
+
+  var hemi = $('hemi'); hemi.width = HW; hemi.height = HH;
+  layoutSeats(); drawHemi(); renderLegend();
+  hemi.addEventListener('click', function (e) { var i = seatAt(e); if (i >= 0) showDeputy(i); });
+  $('random-dep').addEventListener('click', function () { showDeputy(Math.floor(Math.random() * SEATS.length)); });
+  Array.prototype.forEach.call(document.querySelectorAll('.seg-btn'), function (b) {
+    b.addEventListener('click', function () { if (!b.disabled) setMode(b.getAttribute('data-mode')); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-choice]'), function (b) {
+    b.addEventListener('click', function () { castVote(b.getAttribute('data-choice')); });
+  });
+
+  $('zoom-in').addEventListener('click', function () { userZoom = true; mapScale = Math.min(8, mapScale + 1); scaleCanvas($('map'), mapScale); });
+  $('zoom-out').addEventListener('click', function () { userZoom = true; mapScale = Math.max(1, mapScale - 1); scaleCanvas($('map'), mapScale); });
+  window.addEventListener('resize', fitMap);
+  if (window.ResizeObserver) new ResizeObserver(fitMap).observe($('map-scroll'));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMap);
+
+  $('dialog-next').addEventListener('click', showNext);
+  $('modal-next').addEventListener('click', nextTuto);
+  $('modal-close').addEventListener('click', closeTuto);
+  $('modal').addEventListener('click', function (e) { if (e.target === $('modal')) closeTuto(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('modal').hidden) closeTuto(); });
+
+  window.addEventListener('hashchange', route);
+  route();
+}
+init();
+</script>
