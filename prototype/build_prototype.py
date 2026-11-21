@@ -100,8 +100,8 @@ def comparison_question(db) -> dict:
     return {"question": COMPARISON["question"], "answer": parts, "quotes": quotes}
 
 
-def main() -> int:
-    sys.stdout.reconfigure(encoding="utf-8")
+def build_data() -> dict:
+    """Cards for the app: verified profile cards + ready-made questions. Also used by the backend."""
     cards = json.loads((PIPELINE / "profile_cards.json").read_text(encoding="utf-8"))["cards"]
     db = duckdb.connect(str(DB_PATH), read_only=True)
     comparison = comparison_question(db)
@@ -128,16 +128,29 @@ def main() -> int:
             "questions": questions,
         })
 
-    data = {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "cards": out}
+    db.close()
+    return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "cards": out}
+
+
+def render_page(data: dict) -> str:
+    """The standalone page: template + inlined brand images + embedded data."""
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     template = (HERE / "app.template.html").read_text(encoding="utf-8")
     # Brand images (cut from the pitch deck) are inlined: the published page cannot load other files.
     for placeholder, name, mime in (("__LOGO__", "logo.png", "image/png"), ("__HERO__", "hero.jpg", "image/jpeg")):
         encoded = base64.b64encode((HERE / "assets" / name).read_bytes()).decode("ascii")
         template = template.replace(placeholder, f"data:{mime};base64,{encoded}")
-    (HERE / "index.html").write_text(template.replace("__DATA__", payload), encoding="utf-8")
-    print(f"Wrote index.html: {len(out)} companies, {sum(len(c['questions']) for c in out)} ready-made questions, "
-          f"{len(payload) // 1024} KB of data")
+    return template.replace("__DATA__", payload)
+
+
+def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
+    data = build_data()
+    page = render_page(data)
+    (HERE / "index.html").write_text(page, encoding="utf-8")
+    cards = data["cards"]
+    print(f"Wrote index.html: {len(cards)} companies, {sum(len(c['questions']) for c in cards)} ready-made questions, "
+          f"{len(page) // 1024} KB page")
     return 0
 
 

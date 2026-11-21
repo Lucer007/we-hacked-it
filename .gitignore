@@ -25,3 +25,6 @@ data_pipeline/raw/
 
 # SEC downloads (about 50 MB, rebuilt by the scripts)
 data_pipeline/sp500/cache/
+
+# App state of each developer (orders, wishlist); the product data dealdeck.duckdb is in git
+backend/app_state.duckdb*

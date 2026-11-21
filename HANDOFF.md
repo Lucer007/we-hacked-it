@@ -68,6 +68,14 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   Not done on purpose: ETF/fund cards (no data), light mode, price chart (no price source).
   Kept from compliance: the risk answer changes how risks are explained, never the ranking.
 
+- **Backend (13:30):** `backend/app.py` (FastAPI) serves the page and the product routes: cards,
+  5-year financials and portfolio by sector from DuckDB, orders, wishlist, swipes, analyst agent
+  (`/api/ask`, needs ANTHROPIC_API_KEY). Run: `python -m uvicorn backend.app:app --port 8000`.
+  The page detects the API ("Live API" badge); on claude.ai it falls back to embedded data.
+  `dealdeck.duckdb` is now in git for the co-developer; app state stays local. See `backend/README.md`.
+- **Portfolio tab** (was Wishlist): network map, you → sectors (size = number of companies) →
+  companies; sector table; wishlist below. Demo account Camille has a sample portfolio.
+
 ## Constraints and gotchas
 
 - **No Anthropic API key** (the hackathon gives Claude Pro only). Every AI output so far was
