@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Equiteas</title>
 <link rel="icon" type="image/png" href="__FAVICON__">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -48,12 +49,18 @@
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+/* Phones: the viewport meta above lays the page out at the device width. The padding keeps the app clear
+   of the notch and the home bar (the artifact wrapper pads :root the same way, so it is not doubled);
+   no text inflation in landscape, no double-tap zoom, no pull-to-refresh reloading the demo. */
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+        -webkit-text-size-adjust: 100%; text-size-adjust: 100%; touch-action: manipulation; overscroll-behavior-y: none; }
+button, a, summary, label { -webkit-tap-highlight-color: transparent; }
 body {
   background: radial-gradient(70% 55% at 100% 0%, var(--glow) 0%, transparent 72%),
               radial-gradient(60% 50% at 0% 100%, var(--glow-2) 0%, transparent 70%), var(--bg);
   color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 0; overflow: hidden;
+  margin: 0; padding-block: 0; overflow: hidden;  /* margin: the backend serves the page without the artifact's reset */
 }
 button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
@@ -62,7 +69,7 @@ a { color: var(--accent); }
 .mono { font-family: var(--font-mono); }
 
 .app { max-width: 440px; height: 100%; margin: 0 auto; display: flex; flex-direction: column; position: relative; }
-@media (min-width: 720px) {
+@media (min-width: 720px) and (min-height: 600px) {  /* not on a phone turned sideways */
   .app { height: calc(100% - 32px); margin-block: 16px; background: linear-gradient(165deg, var(--surface-3) 0%, var(--bg) 60%); border: 1px solid var(--line-strong);
          border-radius: 30px; padding-inline: 18px; overflow: hidden; box-shadow: var(--shadow); }
 }
@@ -139,11 +146,14 @@ h2.display { font-size: 28px; }
 .discover { gap: 12px; }
 .deck { position: relative; flex: 1; min-height: 430px; }
 .card { position: absolute; inset: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
-        box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden; touch-action: pan-y; user-select: none;
+        box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden; touch-action: pan-y;
+        -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
         transition: transform 0.22s ease; --like: 0; --pass: 0; }
 .card.dragging { transition: none; }
 .card.under { transform: translateY(10px) scale(0.96); opacity: 0.7; box-shadow: none; }
-.card-body { flex: 1; min-height: 0; overflow-y: auto; padding: 18px 18px 8px; display: flex; flex-direction: column; gap: 14px; }
+/* touch-action again on the scrolling body: a scroller re-allows sideways panning, and the browser would
+   then take a finger swipe (pointercancel) before it reaches the swipe code. */
+.card-body { flex: 1; min-height: 0; overflow-y: auto; touch-action: pan-y; padding: 18px 18px 8px; display: flex; flex-direction: column; gap: 14px; }
 .stamp { position: absolute; top: 18px; padding: 4px 12px; border-radius: 8px; font-family: var(--font-display); font-weight: 700;
          font-size: 22px; letter-spacing: 1px; border: 3px solid; pointer-events: none; z-index: 3; }
 .stamp.like { right: 18px; color: var(--accent); border-color: var(--accent); transform: rotate(10deg); opacity: var(--like); }
@@ -284,6 +294,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
 .field label { font-size: 12.5px; color: var(--muted); font-weight: 600; font-family: var(--font-display); }
 .field input, .code { min-height: 48px; border: 1px solid var(--line-strong); border-radius: var(--r-ctl); background: var(--surface);
                       padding: 0 14px; color: var(--ink); width: 100%; }
+.field input { font-size: 16px; }  /* below 16px, iPhone Safari zooms into the field and stays zoomed */
 .code { font-family: var(--font-display); font-size: 28px; letter-spacing: 0.5em; text-align: center; padding-left: 0.5em; min-height: 64px; }
 .form-error { margin: 0; color: var(--pass); font-size: 13px; }
 .tag { align-self: flex-start; display: inline-block; font-family: var(--font-display); font-size: 11px; font-weight: 600; color: var(--accent);
@@ -611,6 +622,19 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 .card-meta { display: flex; flex-direction: column; gap: 3px; }
 .app:has(.discover.immersive .actions) .toast { bottom: 176px; }  /* above the floating swipe buttons */
 .card-meta .why { text-align: left; }
+
+/* Short phone screens (iPhone SE, a browser with both toolbars showing): slimmer header, tabs and swipe
+   buttons, so the card keeps more of the screen. Touch targets stay at 44px or more. */
+@media (max-height: 700px) {
+  .topbar { padding-block: 8px 4px; }
+  .brand { font-size: 20px; }
+  .brand img { width: 28px; height: 28px; }
+  .tabs { padding-block: 2px 4px; }
+  .tab { min-height: 44px; }
+  .round { width: 54px; height: 54px; }
+  .round.small { width: 44px; height: 44px; }
+  .discover.immersive .actions { bottom: 14px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .card, .progress-fill, .mini-track i { transition: none !important; }
@@ -1249,7 +1273,10 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.removeAttribute("hidden");
       dot.setAttribute("cx", px); dot.setAttribute("cy", py); dot.removeAttribute("hidden");
       tip.textContent = fmtDay(st.pts[i][0]) + " · " + fmtPrice(st.pts[i][1], st.cur);
-      tip.style.left = Math.max(12, Math.min(88, px / st.W * 100)) + "%"; tip.style.top = (py / st.H * 100) + "%"; tip.hidden = false;
+      tip.hidden = false;
+      // Keep the whole label inside the plot: on a phone the chart is narrower than the label near the edges.
+      var plotW = tip.parentNode.clientWidth, half = tip.offsetWidth / 2;
+      tip.style.left = Math.max(half, Math.min(plotW - half, px / st.W * plotW)) + "px"; tip.style.top = (py / st.H * 100) + "%";
     }
     function hide() { cross.setAttribute("hidden", ""); dot.setAttribute("hidden", ""); tip.hidden = true; }
     svg.addEventListener("pointermove", show);
