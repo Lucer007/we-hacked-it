@@ -106,6 +106,10 @@ h2.display { font-size: 28px; }
 
 /* Quiz */
 .progress { display: flex; flex-direction: column; gap: 8px; }
+.progress-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 22px; }
+.skip-q { padding: 2px 4px; font-size: 14px; }
+.lead.def { color: var(--ink); }  /* a definition reads brighter than the other hints */
+.lead.def .hl { font-weight: 600; }
 .progress-track { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
 .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.25s ease; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -722,6 +726,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     portfolio: null, fin: {}, expanded: {}, opening: [], closing: null, focus: null, viewBox: [0, 0, 460, 460], sheet: null, justDragged: false,
     bot: null, reportShown: false, reportFresh: false
   };
+  var PREF_DEFAULTS = JSON.stringify(S.prefs);  // "Skip" on a question puts its default answer back
+  var SKIP_FROM = 8;  // questions 9 and later can be skipped
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
   // On claude.ai the page runs on its embedded data. Served by backend/app.py it uses the API:
@@ -916,7 +922,9 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     assets: { title: "What do you want to swipe?", help: "Pick one or more.", multi: true,
       options: [["Companies", "Companies", "One business, one share"], ["ETFs", "ETFs", "A basket of companies in one share"], ["Funds", "Mutual funds", "A basket picked by a fund manager"]] },
     sectors: { title: "Which sectors do you want to see?", help: "Tap a sector to see its sub-sectors, then pick as many as you like. You’ll still see a few others now and then." },
-    esg: { title: "Are you interested in ESG investing?", help: "ESG rates how a company treats the environment, people and its own rules (governance).",
+    esg: { title: "Are you interested in ESG investing?",
+      helpHtml: '<strong>ESG</strong> = <span class="hl">Environment</span>, <span class="hl">Social</span>, <span class="hl">Governance</span>: ' +
+        "how a company treats the planet, people and its own rules.",
       options: [["lot", "Yes, a lot", "ESG near the top of every card"], ["bit", "A little", "Show it, lower down"], ["no", "Not really", "Keep cards shorter"]] },
     hide: { title: "Hide these sectors?", help: "Tap to switch. Hidden = these companies never appear in your feed." },
     legal: { title: "Do you want to see past controversies or scandals?", help: "Lawsuits and investigations the company reports itself.",
@@ -1009,9 +1017,11 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     var pct = Math.round((S.step + 1) / list.length * 100), from = quizPct;
     quizPct = pct;
     return '<section class="screen' + (JUST.step ? " step-in" + (JUST.step === "back" ? " back" : "") : "") + '">' +
-      '<div class="progress"><p class="eyebrow">' + (S.step + 1) + " / " + list.length + "</p>" +
+      '<div class="progress"><div class="progress-top"><p class="eyebrow">' + (S.step + 1) + " / " + list.length + "</p>" +
+      (S.step >= SKIP_FROM ? '<button class="link-btn skip-q" type="button" data-action="skipQuestion">Skip</button>' : "") + "</div>" +
       '<div class="progress-track"><div class="progress-fill" style="width:' + from + '%" data-grow="' + pct + '%"></div></div></div>' +
-      '<h2 class="display">' + esc(q.title) + "</h2>" + (q.help ? '<p class="lead">' + esc(q.help) + "</p>" : "") + body +
+      '<h2 class="display">' + esc(q.title) + "</h2>" +
+      (q.helpHtml ? '<p class="lead def">' + q.helpHtml + "</p>" : q.help ? '<p class="lead">' + esc(q.help) + "</p>" : "") + body +
       (note ? '<p class="fine">' + esc(note) + "</p>" : "") + '<div class="spacer"></div>' +
       '<div class="quiz-foot"><button class="btn" type="button" data-action="quizBack">Back</button>' +
       '<button class="btn primary" type="button" data-action="quizNext"' + (canGo ? "" : " disabled") + ">" + label + "</button></div></section>";
@@ -2012,6 +2022,11 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     quizNext: function () {
       if (S.step < steps().length - 1) { S.step++; JUST.step = "in"; render(); return; }
       JUST.ready = true; afterRender.push(celebrate); go("ready");
+    },
+    skipQuestion: function () {
+      var key = steps()[S.step];
+      S.prefs[key] = JSON.parse(PREF_DEFAULTS)[key];  // no answer: back to the default
+      ACTIONS.quizNext();
     },
     quizBack: function () { if (S.step > 0) { S.step--; JUST.step = "back"; render(); } else go("setup"); },
     moreQuestions: function () { S.prefs.setup = "full"; S.step = QUICK_STEPS.length; JUST.step = "in"; go("quiz"); },
