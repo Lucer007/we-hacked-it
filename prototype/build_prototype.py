@@ -152,8 +152,10 @@ def render_page(data: dict) -> str:
     """The standalone page: template + inlined brand images + embedded data."""
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     template = (HERE / "app.template.html").read_text(encoding="utf-8")
-    # Brand images (cut from the pitch deck) are inlined: the published page cannot load other files.
-    for placeholder, name, mime in (("__LOGO__", "logo.png", "image/png"), ("__HERO__", "hero.jpg", "image/jpeg")):
+    # Brand images are inlined: the published page cannot load other files. The favicon is a 64 px
+    # copy of the logo so the page does not carry the 192 px one twice.
+    for placeholder, name, mime in (("__LOGO__", "logo.png", "image/png"), ("__FAVICON__", "favicon.png", "image/png"),
+                                    ("__HERO__", "hero.jpg", "image/jpeg")):
         encoded = base64.b64encode((HERE / "assets" / name).read_bytes()).decode("ascii")
         template = template.replace(placeholder, f"data:{mime};base64,{encoded}")
     return template.replace("__DATA__", payload)

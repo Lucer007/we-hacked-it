@@ -42,7 +42,18 @@ DEMO_PORTFOLIO = {"NVDA": 40, "AMD": 20, "TSM": 15, "AAPL": 30, "MSFT": 25, "AMZ
 
 DATA = build_data()
 CARDS = {card["id"]: card for card in DATA["cards"]}
-PAGE = render_page(DATA)
+# The page is rebuilt when the template or a brand image changes, so front-end edits show on the
+# next reload without restarting the server (the company data is read once, at start).
+PAGE_FILES = [ROOT / "prototype" / "app.template.html", *sorted((ROOT / "prototype" / "assets").glob("*"))]
+_page = {"stamp": None, "html": ""}
+
+
+def current_page() -> str:
+    stamp = tuple(f.stat().st_mtime_ns for f in PAGE_FILES)
+    if stamp != _page["stamp"]:
+        _page["html"], _page["stamp"] = render_page(DATA), stamp
+    return _page["html"]
+
 
 data_db = duckdb.connect(str(DB_PATH), read_only=True)
 state_db = duckdb.connect(STATE_DB)
@@ -107,7 +118,7 @@ def portfolio(user: str) -> dict:
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 def page():
-    return PAGE
+    return current_page()
 
 
 @app.get("/api/health")
