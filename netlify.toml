@@ -1,0 +1,18 @@
+# Equiteas prototype: a self-contained static page (data embedded at build time by
+# prototype/build_prototype.py). No build step runs on Netlify; rebuild index.html locally.
+[build]
+  publish = "prototype"
+  command = ""
+
+# Keep source files of the page out of the public site
+[[redirects]]
+  from = "/app.template.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/build_prototype.py"
+  to = "/"
+  status = 301
+  force = true
