@@ -591,6 +591,27 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 .ranges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .ranges .chip { justify-content: center; }
 
+/* Discover, full height: the card fills the screen between the header and the tabs; the filters and
+   the swipe buttons float over it, and gradients let the card's text fade out under them. */
+.discover.immersive { position: relative; gap: 0; }
+.discover.immersive .deck { min-height: 0; }
+.discover.immersive .filters { position: absolute; top: 10px; left: 10px; right: 10px; z-index: 6; padding-bottom: 0; scrollbar-width: none; }
+.discover.immersive .filters::-webkit-scrollbar { display: none; }
+.discover.immersive .filters .chip { -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.discover.immersive .filters .chip:not(.on) { background: rgba(10, 22, 17, 0.72); }
+.discover.immersive .card-body { padding-top: 62px; padding-bottom: 120px; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.discover.immersive .card-body.tune { padding-bottom: 24px; }
+.discover.immersive .stamp { top: 64px; }
+.discover.immersive .card::before, .discover.immersive .card::after { content: ""; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 2; }
+.discover.immersive .card::before { top: 0; height: 66px; background: linear-gradient(to bottom, rgba(19, 36, 29, 0.97) 40%, rgba(19, 36, 29, 0)); }
+.discover.immersive .card::after { bottom: 0; height: 136px; background: linear-gradient(to top, rgba(10, 22, 17, 0.98) 32%, rgba(10, 22, 17, 0)); }
+.discover.immersive .card.under::before, .discover.immersive .card.under::after, .discover.immersive .card.tune-card::after { display: none; }
+.discover.immersive .actions { position: absolute; left: 0; right: 0; bottom: 18px; z-index: 6; pointer-events: none; }
+.discover.immersive .actions .round { pointer-events: auto; }
+.card-meta { display: flex; flex-direction: column; gap: 3px; }
+.app:has(.discover.immersive .actions) .toast { bottom: 176px; }  /* above the floating swipe buttons */
+.card-meta .why { text-align: left; }
+
 @media (prefers-reduced-motion: reduce) {
   .card, .progress-fill, .mini-track i { transition: none !important; }
   .step-in *, .ready-in *, .just, .just *, .just::after, .nudge, .bump, .hint { animation: none !important; }
@@ -1077,7 +1098,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   function esgSection() {
     return soonSection("ESG rating", "Rating from an ESG data partner. Annual reports don’t give a comparable score, so we don’t guess one.");
   }
-  function cardBody(c) {
+  function cardBody(c, meta) {
     var f = c.front, b = c.back, p = b.profile, html = "";
     function fact(label, value) {
       return '<div class="fact"><dt>' + esc(label) + "</dt>" + (value ? "<dd>" + esc(value) + "</dd>" : '<dd class="none">Not stated in the report</dd>') + "</div>";
@@ -1085,7 +1106,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     html += '<div class="card-head">' + logo(c) + '<div><h2 class="cname">' + esc(c.name) + "</h2>" +
       (f.tagline ? '<p class="tagline">' + esc(f.tagline) + "</p>" : "") + "</div></div>" +
       '<div class="chips"><span class="chip">' + esc(c.sector) + '</span><span class="chip soft">' + esc(c.subsector) + "</span>" +
-      (p.founder_led === "Yes" ? '<span class="chip soft">Founder-led</span>' : "") + "</div>" +
+      (p.founder_led === "Yes" ? '<span class="chip soft">Founder-led</span>' : "") + "</div>" + (meta || "") +
       '<dl class="facts">' + fact("CEO", f.ceo) + fact("Staff", f.employees) + fact("HQ", f.headquarters) + fact("Founded", p.founded) + "</dl>";
     if (f.mission) html += '<figure class="quote-block"><p class="eyebrow">Mission</p><p>“' + esc(f.mission) + "”</p>" + source(c, "mission") + "</figure>";
     html += '<p class="scroll-hint" aria-hidden="true">Scroll for more ↓</p>';
@@ -1111,15 +1132,16 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     addWords(["10-K"]);
     return html;
   }
-  function cardHtml(c) {
+  function cardHtml(c, why) {
+    // "Facts checked" and why the card is shown sit under the sector chips (the swipe buttons float over the card's foot).
+    var meta = '<div class="card-meta"><span class="verified">✓ ' + quoteCount(c) + " facts checked in its " + esc(c.report.form) + "</span>" +
+      (why ? '<p class="why">' + esc(why) + "</p>" : "") + "</div>";
     return '<article class="card top" aria-label="' + esc(c.name) + '">' +
       '<span class="stamp like" aria-hidden="true">LIKE</span><span class="stamp nope" aria-hidden="true">PASS</span>' +
-      '<div class="card-body">' + cardBody(c) + "</div>" +
-      '<div class="card-foot"><span class="verified">✓ ' + quoteCount(c) + " facts checked in its " + esc(c.report.form) + "</span>" +
-      '<span class="scroll-cue" aria-hidden="true">Scroll ↓</span></div></article>';
+      '<div class="card-body">' + cardBody(c, meta) + "</div></article>";
   }
   function tuneCard() {
-    return '<article class="card top" aria-label="Tune your feed"><div class="card-body tune">' +
+    return '<article class="card top tune-card" aria-label="Tune your feed"><div class="card-body tune">' +
       '<p class="eyebrow">Tune your feed · optional</p><div class="tune-art" aria-hidden="true"></div><h2 class="display">See founder-led companies?</h2>' +
       '<p class="lead">Still run by the person who started them.</p>' +
       '<div class="quiz-foot"><button class="btn" type="button" data-action="tune" data-value="no">No</button>' +
@@ -1154,9 +1176,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
         : "A sector you didn’t pick, so your feed doesn’t get too narrow.";
     }
     var remaining = CARDS.filter(function (x) { return S.seen.indexOf(x.id) < 0; }).length;
-    return '<section class="screen discover">' + filters() +
-      '<div class="deck">' + (remaining > 1 ? '<div class="card under" aria-hidden="true"></div>' : "") + (S.showTune ? tuneCard() : cardHtml(c)) + "</div>" +
-      (c ? '<p class="why">' + esc(why) + "</p>" : "") +
+    return '<section class="screen discover immersive">' + filters() +
+      '<div class="deck">' + (remaining > 1 ? '<div class="card under" aria-hidden="true"></div>' : "") + (S.showTune ? tuneCard() : cardHtml(c, why)) + "</div>" +
       (c ? '<div class="actions">' +
         '<button class="round nope" type="button" data-action="pass" aria-label="Pass"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>' +
         '<button class="round small" type="button" data-action="undo" aria-label="Undo last pass"' + (S.history.length ? "" : " disabled") + '><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-15-6.7L3 13"></path></svg></button>' +
