@@ -43,3 +43,9 @@ Edit the page in `app.template.html`, never in `index.html` (it is overwritten).
   report describes the portfolio and gives no advice. Code: `botAnalysis`, `startBot` in the template.
 - **Recommender:** sector weights from the answers, updated by each swipe (pass ×0.6, like ×1.3),
   with some randomness so other sectors still appear, and one "Tune your feed" card after 4 swipes.
+
+## Netlify
+
+`netlify.toml` at the repository root publishes this folder as is (no build step), so the site root
+serves `index.html`. Rebuild and commit `index.html` before pushing. On Netlify there is no FastAPI
+backend: the `/api/health` check fails and the page runs on its embedded data.
