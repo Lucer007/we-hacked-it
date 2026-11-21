@@ -62,6 +62,12 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
 - Local preview: `cd prototype; python -m http.server 8791 --bind 127.0.0.1` then open
   http://127.0.0.1:8791/index.html (port 8765 is taken by an old server on Théo's machine).
 
+- **Wireframe v2 (noon):** the app now follows https://claude.ai/artifact/24yQRUjVSvunEx8p1i6BbY
+  (sign-up, verify email, quick/full setup, 6–8 questions, scroll card, buy flow with KYC and share,
+  Learn, Social, Profile, 5 tabs). Front-end only; see `prototype/README.md` for what is real data.
+  Not done on purpose: ETF/fund cards (no data), light mode, price chart (no price source).
+  Kept from compliance: the risk answer changes how risks are explained, never the ranking.
+
 ## Constraints and gotchas
 
 - **No Anthropic API key** (the hackathon gives Claude Pro only). Every AI output so far was

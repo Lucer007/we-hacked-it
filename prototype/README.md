@@ -3,9 +3,20 @@
 `index.html` is a single, self-contained page: the swipe app from Lijith's mockup running on
 12 real companies (NVDA, AMD, TSM, AAPL, MSFT, GOOGL, AMZN, WMT, TSLA, KO, JPM, LLY).
 
-Flow: welcome → 3 preference questions → feed summary → blind swipe (front, tap for the back
-with sources) → right swipe reveals ticker and key numbers → demo buy with the compliance
-checkbox → wishlist. "Ask" opens ready-made questions answered only from verified quotes.
+Screens follow the wireframe v2 (https://claude.ai/artifact/24yQRUjVSvunEx8p1i6BbY):
+
+1. Welcome → Create account (Apple / Google / email, front-end only) → Verify email (any 6 digits).
+   "I already have an account" signs in a demo user (Camille) and goes straight to the feed: handy for the video.
+2. Quick (6) or Full (8) setup: how new, what to swipe, sectors, ESG, risk (€100 → €80), hidden sectors
+   (+ controversies and founder-led in Full) → Feed ready → How it works (brand-new users).
+3. Discover: filter chips, one card you scroll down (no flip), pass/undo, Tune your feed, Ask with cited answers.
+4. Reveal + "New word" pop-up → amount → ID check (first buy, demo) → review with the risk checkbox →
+   share with friends → Social.
+5. Learn (4 lessons with a quiz, words met while swiping, glossary search), Social (sample friends,
+   friend profile), Wishlist, Profile and settings.
+
+Real data: the 12 company cards, their sources and the Ask answers. Showcase only (no backend):
+account, ID check, order, ESG rating, friends and lessons progress; everything lives in the page's memory.
 
 ## Rebuild after the data changes
 
