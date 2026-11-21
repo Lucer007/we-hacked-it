@@ -438,7 +438,75 @@ h2.display { font-size: 26px; line-height: 1.15; }
 .pgraph .pg-you[data-action] { cursor: zoom-out; }
 .pgraph .pg-amt { fill: var(--accent); font: 600 8.5px var(--font-display); text-anchor: middle; pointer-events: none; }
 
-@media (prefers-reduced-motion: reduce) { .card, .progress-fill { transition: none !important; } }
+/* Quiz life: questions slide in, picks pop, a right answer throws confetti, a wrong one shakes. */
+.btn, .option, .chip, .q-btn, .round, .react { transition: transform 0.14s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease; }
+.btn:not([disabled]):active, .option:not([disabled]):active, button.chip:active, .q-btn:active, .round:not([disabled]):active, .react:active { transform: scale(0.96); }
+.progress-fill { transition: width 0.55s cubic-bezier(0.3, 1.3, 0.4, 1); }
+.option[role="radio"], .option[role="checkbox"] { position: relative; padding-right: 52px; }
+.option[role="radio"]::after, .option[role="checkbox"]::after { content: ""; position: absolute; right: 16px; top: 50%; width: 22px; height: 22px; margin-top: -11px;
+  border-radius: 50%; border: 2px solid var(--line-strong); transition: background-color 0.2s ease, border-color 0.2s ease; }
+.option[role="checkbox"]::after { border-radius: 7px; }
+.option.on[role="radio"]::after, .option.on[role="checkbox"]::after { border-color: var(--accent);
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2304110B' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 13px no-repeat; }
+.option.just, .chip.just { animation: pop 0.36s cubic-bezier(0.3, 1.7, 0.5, 1) backwards; }
+.option.just::after { animation: tick 0.42s cubic-bezier(0.3, 1.7, 0.5, 1) backwards; }
+.step-in > .display, .step-in > .lead, .step-in > .drop, .step-in > .fine, .step-in .options > *, .step-in .chips > * {
+  animation: slide-in 0.46s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 50ms); }
+.step-in.back > .display, .step-in.back > .lead, .step-in.back > .drop, .step-in.back > .fine, .step-in.back .options > *, .step-in.back .chips > * { animation-name: slide-back; }
+.step-in > .lead, .step-in > .drop { --i: 1; }
+.step-in > .fine { --i: 5; }
+.ready-in > .display, .ready-in > .lead, .ready-in .row, .ready-in .panel-btn { animation: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+.ready-in > .lead { --i: 1; }
+.ready-in .row:nth-child(1) { --i: 2; } .ready-in .row:nth-child(2) { --i: 3; } .ready-in .row:nth-child(3) { --i: 4; }
+.ready-in .row:nth-child(4) { --i: 5; } .ready-in .row:nth-child(5) { --i: 6; } .ready-in .row:nth-child(6) { --i: 7; }
+.ready-in .panel-btn { --i: 8; }
+/* Lesson quick check */
+.options.quick .option { flex-direction: row; align-items: center; gap: 12px; }
+.opt-key { width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center; border: 1.5px solid var(--line-strong);
+           font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--muted); transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.option:not([disabled]):hover .opt-key { border-color: var(--accent); color: var(--accent); }
+.option.right .opt-key { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.option.wrong { background: rgba(255, 138, 122, 0.08); }
+.option.wrong .opt-key { background: var(--pass); border-color: var(--pass); color: var(--accent-ink); }
+.option.faded { opacity: 0.45; }
+.option.right.just { animation: pop-big 0.55s cubic-bezier(0.3, 1.7, 0.5, 1) backwards, ring 1.1s ease-out 0.1s; }
+.option.right.hint { animation: ring 1.1s ease-out 0.45s 2; }
+.option.wrong.just { animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+.option.just .opt-key { animation: tick 0.45s cubic-bezier(0.3, 1.7, 0.5, 1) 0.06s backwards; }
+.feedback { display: flex; gap: 12px; align-items: flex-start; border-radius: 14px; padding: 12px 14px; margin-top: 2px; }
+.feedback.good { background: var(--verified-soft); border: 1px solid var(--verified); }
+.feedback.bad { background: rgba(255, 138, 122, 0.08); border: 1px solid var(--pass); }
+.feedback-icon { width: 32px; height: 32px; flex: none; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display);
+                 font-size: 16px; font-weight: 700; color: var(--accent-ink); }
+.feedback.good .feedback-icon { background: var(--accent); }
+.feedback.bad .feedback-icon { background: var(--pass); }
+.feedback strong { display: block; font-size: 16px; }
+.feedback.good strong { color: var(--accent); }
+.feedback.bad strong { color: var(--pass); }
+.feedback p { margin: 2px 0 0; font-size: 14px; }
+.feedback.just { animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s backwards; }
+.feedback.just .feedback-icon { animation: spin-in 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) 0.22s backwards; }
+.btn.primary.nudge { animation: ring 1.3s ease-out 0.7s 2; }
+/* Learn progress */
+.mini-track { display: block; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; margin-top: 6px; }
+.mini-track i { display: block; height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.8s cubic-bezier(0.3, 1.2, 0.4, 1) 0.25s; }
+.pill.bump { animation: pop-big 0.55s cubic-bezier(0.3, 1.7, 0.5, 1) 0.2s backwards; }
+.lesson-mark.just { animation: tick 0.55s cubic-bezier(0.3, 1.7, 0.5, 1) 0.2s backwards, ring 1s ease-out 0.5s; }
+canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; }
+@keyframes pop { from { transform: scale(0.94); } }
+@keyframes pop-big { from { transform: scale(0.88); } }
+@keyframes tick { from { transform: scale(0.2); opacity: 0; } }
+@keyframes spin-in { from { transform: scale(0) rotate(-140deg); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes slide-in { from { opacity: 0; transform: translateX(34px); } }
+@keyframes slide-back { from { opacity: 0; transform: translateX(-34px); } }
+@keyframes ring { from { box-shadow: 0 0 0 0 var(--accent-glow); } to { box-shadow: 0 0 0 14px rgba(94, 229, 168, 0); } }
+@keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-7px); } 40%, 60% { transform: translateX(7px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .progress-fill, .mini-track i { transition: none !important; }
+  .step-in *, .ready-in *, .just, .just *, .just::after, .nudge, .bump, .hint { animation: none !important; }
+}
 </style>
 
 <div class="app" id="app">
@@ -481,7 +549,16 @@ h2.display { font-size: 26px; line-height: 1.15; }
   var TUNE_AFTER = 4;
   var HIDEABLE = ["Fossil fuels", "Weapons", "Tobacco", "Gambling"];
   var LEVEL = { "new": "Brand new", basics: "Knows the basics", pro: "Experienced" };
-  var ESG = { lot: "A lot", bit: "A bit", no: "Not a priority" };
+  var ESG = { lot: "A lot", bit: "A little", no: "Not really" };
+  // The questionnaire's sectors, mapped onto the sectors of the demo companies (the full app has them all).
+  var SECTOR_MAP = { Tech: ["Tech", "Chips", "Internet"], Health: ["Health"], Energy: ["Cars & energy"], Food: ["Food & drinks"], Fashion: [],
+    Travel: [], Entertainment: ["Internet"], Finance: ["Finance"], Industry: ["Cars & energy"], "Real estate": [] };
+  var PREF_SECTORS = Object.keys(SECTOR_MAP);
+  var INNOVATION = ["NVDA", "AMD", "TSM", "MSFT", "GOOGL", "LLY", "TSLA"];   // AI, chips, biotech, clean energy
+  var EMERGING = ["TSM"];                                                    // Taiwan counts as an emerging market (MSCI)
+  var CONSUMER = ["AAPL", "AMZN", "WMT", "KO", "GOOGL", "MSFT", "TSLA"];     // products people use every day
+  var RIVALS = { NVDA: "AMD", AMD: "NVDA", WMT: "AMZN", AMZN: "WMT", AAPL: "MSFT", MSFT: "AAPL" };
+  var MONTHLY = { lt50: "Under €50", "50-200": "€50–200", "200-1000": "€200–1,000", gt1000: "Over €1,000" };
   var ASSET = { Companies: "Companies", ETFs: "ETFs", Funds: "Mutual funds" };
 
   var GLOSSARY = {
@@ -505,20 +582,24 @@ h2.display { font-size: 26px; line-height: 1.15; }
       body: ["A share is a small piece of a company. Own one and you own a tiny part of everything it does.",
              "If the company grows and earns more, people may pay more for its shares. If it struggles, the price can fall below what you paid.",
              "Some companies also pay part of their profit to shareholders. That payment is a dividend."],
-      quiz: { q: "What does a share give you?", options: [["A small piece of the company", true], ["A loan the company pays back", false], ["A guaranteed return", false]] } },
+      quiz: { q: "What does a share give you?", options: [["A small piece of the company", true], ["A loan the company pays back", false], ["A guaranteed return", false]],
+               why: "Owning a share makes you a part-owner. Nothing is guaranteed: its value can fall below what you paid." } },
     { id: "prices", title: "Why prices go up and down", mins: 3,
       body: ["A share’s price is set by buyers and sellers on the stock market, all day long.",
              "Results, news and the economy change what people are willing to pay, so prices move even when nothing changes inside the company."],
-      quiz: { q: "Who sets a share’s price?", options: [["Buyers and sellers on the market", true], ["The company, every morning", false], ["The stock exchange’s staff", false]] } },
+      quiz: { q: "Who sets a share’s price?", options: [["Buyers and sellers on the market", true], ["The company, every morning", false], ["The stock exchange’s staff", false]],
+               why: "Every trade happens at a price a buyer and a seller agree on. That’s why the price moves all day." } },
     { id: "etf", title: "ETF vs mutual fund: what’s the difference?", mins: 2,
       compare: [["ETF", ["Follows a list, like “top 50 clean-energy firms”.", "Price moves all day.", "Usually lower fees."]],
                 ["Mutual fund", ["A manager picks the companies.", "Price once a day.", "Often higher fees."]]],
-      quiz: { q: "Which one has its price updated once a day?", options: [["ETF", false], ["Mutual fund", true]] } },
+      quiz: { q: "Which one has its price updated once a day?", options: [["ETF", false], ["Mutual fund", true]],
+               why: "A mutual fund gets one price a day, after the market closes. An ETF trades all day, like a share." } },
     { id: "basket", title: "Don’t put all your eggs in one basket", mins: 2,
       body: ["If all your money sits in one company, one bad year hits all of it.",
              "Spreading money over many companies and sectors means one bad result hurts less. An ETF does this in a single share.",
              "Spreading out lowers the risk of a big loss from one company. It doesn’t remove the risk of losing money."],
-      quiz: { q: "Why spread your money over several companies?", options: [["So one bad result hurts less", true], ["To make gains certain", false], ["To pay no fees", false]] } }
+      quiz: { q: "Why spread your money over several companies?", options: [["So one bad result hurts less", true], ["To make gains certain", false], ["To pay no fees", false]],
+               why: "Bad news at one company then hits only a small part of your money. Spreading out never makes gains certain." } }
   ];
 
   var FRIENDS = {
@@ -530,11 +611,13 @@ h2.display { font-size: 26px; line-height: 1.15; }
   var S = {
     screen: "welcome", step: 0,
     user: { name: "", email: "", terms: false, verified: false, kyc: false },
-    prefs: { setup: "quick", level: "new", assets: ["Companies"], sectors: ["Tech", "Health", "Food & drinks"], esg: "lot", risk: null,
+    prefs: { setup: "quick", level: "new", assets: ["Companies"], sectors: ["Tech", "Health", "Food"], esg: "lot", risk: null,
+             terms: true, monthly: null, size: ["Large", "Mid-size", "Small"], emerging: null, rival: false, country: null, newtech: null,
+             age: null, products: null, productsText: "", carbon: false, women: false,
              hide: HIDEABLE.slice(), legal: true, founder: null, popups: true, shareAmounts: false },
     weights: {}, seen: [], current: null, history: [], swipes: 0, filter: "All", introSeen: false,
     tuneShown: false, showTune: false, wishlist: [], owned: {}, revealId: null, amount: 10, agreed: false,
-    shareMode: "pick", words: [], popupsShown: [], lessonsDone: [], lesson: null, lessonAnswer: null,
+    shareMode: "pick", words: [], popupsShown: [], lessonsDone: [], lesson: null, lessonAnswer: null, lessonCheer: "",
     friend: null, following: { sami: true, ines: true, hugo: true }, wishFilter: "All",
     posts: [
       { friend: "sami", what: "added to their wishlist", item: "NVDA", note: "Didn’t know one customer made up 22% of its sales.", when: "2 h ago", likes: 4, comments: 1 },
@@ -608,7 +691,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
       '<span class="where">' + esc(c.report.form) + " · " + esc(shortSection(s.section)) + "</span>" +
       '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">Open the report on sec.gov</a></details>';
   }
-  function explain() { return S.prefs.level !== "pro"; }
+  function explain() { return S.prefs.terms !== false; }
   function addWords(list) { list.forEach(function (w) { if (S.words.indexOf(w) < 0) S.words.push(w); }); }
   function money(v) { return "€" + Number(v).toFixed(2); }
   function userName() { return S.user.name || "You"; }
@@ -627,12 +710,25 @@ h2.display { font-size: 26px; line-height: 1.15; }
   /* ---------------------------------------------------------------- recommender */
   function initWeights() {
     S.weights = {};
-    SECTORS.forEach(function (s) { S.weights[s] = S.prefs.sectors.indexOf(s) >= 0 ? 1 : 0.3; });
+    SECTORS.forEach(function (s) { S.weights[s] = pickedFor(s) ? 1 : 0.3; });
+  }
+  function pickedFor(dataSector) {
+    return S.prefs.sectors.filter(function (p) { return (SECTOR_MAP[p] || [p]).indexOf(dataSector) >= 0; })[0] || null;
+  }
+  function productHit(id) {
+    if (S.prefs.products !== "which" || !S.prefs.productsText.trim()) return false;
+    var c = BY_ID[id], hay = (c.name + " " + (c.front.tagline || "") + " " + (c.front.what_they_do || "") + " " + c.back.segments.join(" ")).toLowerCase();
+    return S.prefs.productsText.toLowerCase().split(/[,;\n]+| and /).some(function (w) { w = w.trim(); return w.length >= 3 && hay.indexOf(w) >= 0; });
   }
   function score(c) {
     var w = S.weights[c.sector] || 0.3;
     if (S.prefs.founder === true && c.back.profile.founder_led === "Yes") w *= 1.6;
     if (S.prefs.founder === false && c.back.profile.founder_led === "Yes") w *= 0.6;
+    if (S.prefs.newtech === true && INNOVATION.indexOf(c.id) >= 0) w *= 1.3;
+    if (S.prefs.emerging === "yes" && EMERGING.indexOf(c.id) >= 0) w *= 1.5;
+    if (S.prefs.emerging === "no" && EMERGING.indexOf(c.id) >= 0) w *= 0.5;
+    if (S.prefs.products === "yes" && CONSUMER.indexOf(c.id) >= 0) w *= 1.2;
+    if (productHit(c.id)) w *= 1.8;
     return w * (0.6 + Math.random() * 0.8);  // a little randomness keeps other sectors in view
   }
   function pickNext() {
@@ -643,9 +739,13 @@ h2.display { font-size: 26px; line-height: 1.15; }
     return best.id;
   }
   function advance() {
-    var canTune = S.prefs.setup === "quick" && !S.tuneShown;  // Full setup already asked about founders
-    if (S.swipes >= TUNE_AFTER && canTune) { S.showTune = true; S.current = null; }
+    var canTune = S.prefs.founder === null && !S.tuneShown;
+    var rival = S.prefs.rival && S.lastSwiped ? RIVALS[S.lastSwiped] : null;
+    S.rivalOf = null;
+    if (rival && S.seen.indexOf(rival) < 0) { S.showTune = false; S.current = rival; S.rivalOf = S.lastSwiped; }  // Team Nvidia or Team AMD?
+    else if (S.swipes >= TUNE_AFTER && canTune) { S.showTune = true; S.current = null; }
     else { S.showTune = false; S.current = pickNext(); }
+    S.lastSwiped = null;
     S.screen = "discover";
     render();
   }
@@ -691,7 +791,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   }
   function signInDemo() {
     demoAccount(DEMO_LOGIN.name); S.user.id = DEMO_LOGIN.user; S.user.email = DEMO_LOGIN.user + "@example.com";
-    S.introSeen = true; S.prefs.sectors = ["Tech", "Chips", "Health"];
+    S.introSeen = true; S.prefs.sectors = ["Tech", "Health"];
     S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
     S.portfolio = null; S.expanded = {};
     resetFeed(); S.current = pickNext();
@@ -712,31 +812,47 @@ h2.display { font-size: 26px; line-height: 1.15; }
 
   /* ---------------------------------------------------------------- 2 · setup questions */
   var Q = {
-    level: { title: "How new are you to investing?", note: "Sets how many explanation pop-ups you get. Change it in Profile.",
-      options: [["new", "Brand new", "Explain everything as I go"], ["basics", "I know the basics", "Only explain the tricky stuff"], ["pro", "I’m experienced", "No pop-ups, more data"]] },
+    level: { title: "Have you invested before?", note: "No = beginner mode, with explanations as you go. Change it in Profile.",
+      options: [["new", "No, never", "Beginner mode"], ["basics", "Yes, a little", "Only explain the tricky stuff"], ["pro", "Yes, I’m experienced", "No pop-ups, more data"]] },
     assets: { title: "What do you want to swipe?", help: "Pick one or more.", multi: true,
       options: [["Companies", "Companies", "One business, one share"], ["ETFs", "ETFs", "A basket of companies in one share"], ["Funds", "Mutual funds", "A basket picked by a fund manager"]] },
-    sectors: { title: "Pick your sectors", help: "As many as you like. You’ll still see a few other sectors now and then." },
-    esg: { title: "Care about planet and people?", help: "ESG rates how a company treats the environment, people and its own rules.",
-      options: [["lot", "A lot", "ESG near the top of every card"], ["bit", "A bit", "Show it, lower down"], ["no", "Not a priority", "Keep cards shorter"]] },
-    risk: { title: "Your €100 drops to €80 in a month. You…", note: "No right answer. It changes how much we explain risks, never which companies you see.",
-      options: [["keep", "Keep it", "And wait"], ["sell", "Sell it", "And stop the loss"]] },
-    hide: { title: "Hide these sectors?", help: "Tap to switch. Hidden = never shown in your feed." },
-    legal: { title: "Show controversies on cards?", help: "Lawsuits and investigations the company reports itself.",
-      options: [[true, "Yes, show them", "A short, sourced line per case"], [false, "No, keep cards simple", "You can change this later"]] },
-    founder: { title: "See founder-led companies?", help: "Companies still run by the person who started them.",
-      options: [[true, "Yes, more of them", "They move up in your feed"], [false, "Fewer of them", "They move down"], [null, "No preference", "Your swipes decide"]] }
+    sectors: { title: "Which sectors do you want to see?", help: "Choose as many as you like. You’ll still see a few others now and then." },
+    esg: { title: "Are you interested in ESG investing?", help: "ESG rates how a company treats the environment, people and its own rules (governance).",
+      options: [["lot", "Yes, a lot", "ESG near the top of every card"], ["bit", "A little", "Show it, lower down"], ["no", "Not really", "Keep cards shorter"]] },
+    hide: { title: "Hide these sectors?", help: "Tap to switch. Hidden = these companies never appear in your feed." },
+    legal: { title: "Do you want to see past controversies or scandals?", help: "Lawsuits and investigations the company reports itself.",
+      options: [[true, "Yes", "Shown on the company card, with the source"], [false, "No", "Keep cards simple"]] },
+    terms: { title: "Do you want short explanations of financial terms?", help: "Like net margin or dividend, next to the numbers and as pop-ups.",
+      options: [[true, "Yes", "Explanation bubbles on"], [false, "No", "Numbers only"]] },
+    monthly: { title: "How much do you plan to invest per month?", note: "This never changes which companies you see.",
+      options: [["lt50", "Under €50", ""], ["50-200", "€50–200", ""], ["200-1000", "€200–1,000", ""], ["gt1000", "Over €1,000", ""]] },
+    risk: { title: "If your investment dropped 20% in a month, would you keep it?", note: "No right answer. It changes how much we explain risks, never which companies you see.",
+      options: [["keep", "Yes, I’d keep it", ""], ["sell", "No, I’d sell", "Risks move to the top of each card"]] },
+    size: { title: "Which company sizes do you want to see?", help: "Choose as many as you like. Size = market capitalisation.", multi: true,
+      options: [["Large", "Large", "Household names"], ["Mid-size", "Mid-size", ""], ["Small", "Small", ""]] },
+    emerging: { title: "Are you interested in emerging markets?", help: "Africa, Asia, Latin America.",
+      options: [["yes", "Yes", "More of them in your feed"], ["maybe", "Maybe", ""], ["no", "No, I prefer Europe and the US", "Fewer of them"]] },
+    rival: { title: "Do you want to see each company’s biggest rival?", help: "Team Coca-Cola or Team Pepsi? After a swipe, its rival comes right after.",
+      options: [[true, "Yes", "Swipe on rivals back to back"], [false, "No", ""]] },
+    country: { title: "Do you want to see companies from your country?", options: [["yes", "Yes", "More weight on companies based near you"], ["no", "No", ""]] },
+    newtech: { title: "Do you want to see companies working on new technology?", help: "AI, biotech, clean energy.",
+      options: [[true, "Yes", "They move up in your feed"], [false, "No", ""]] },
+    age: { title: "What is your age range?", note: "Adjusts the tone and the examples on cards.",
+      options: [["u18", "Under 18", ""], ["18-24", "18–24", ""], ["25-34", "25–34", ""], ["35-49", "35–49", ""], ["50+", "50+", ""]] },
+    products: { title: "Do you want to see companies whose products you use?",
+      options: [["yes", "Yes", ""], ["no", "No", ""], ["which", "Yes, I’ll tell you which ones", "Brands or products, separated by commas"]] },
+    carbon: { title: "Do you want to see each company’s carbon footprint?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] },
+    women: { title: "Do you want to see the share of women in leadership?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] }
   };
-  function steps() {
-    var s = ["level", "assets", "sectors", "esg", "risk", "hide"];
-    return S.prefs.setup === "full" ? s.concat(["legal", "founder"]) : s;
-  }
+  var QUICK_STEPS = ["level", "assets", "sectors", "esg", "hide"];
+  var FULL_EXTRA = ["legal", "terms", "monthly", "risk", "size", "emerging", "rival", "country", "newtech", "age", "products", "carbon", "women"];
+  function steps() { return S.prefs.setup === "full" ? QUICK_STEPS.concat(FULL_EXTRA) : QUICK_STEPS; }
   function setup() {
-    var opts = [["quick", "Quick", "6 questions", "~1 min"], ["full", "Full", "8 questions, sharper feed", "~2 min"]];
+    var opts = [["quick", "Quick", QUICK_STEPS.length + " questions", "~1 min"], ["full", "Full", QUICK_STEPS.length + FULL_EXTRA.length + " questions, sharper feed", "~3 min"]];
     return '<section class="screen"><h2 class="display">Let’s set up your feed</h2><p class="lead">Pick how long you have.</p>' +
       '<div class="options" role="radiogroup" aria-label="Setup length">' + opts.map(function (o) {
-        var on = S.prefs.setup === o[0];
-        return '<button type="button" role="radio" aria-checked="' + on + '" class="option' + (on ? " on" : "") + '" data-action="setSetup" data-value="' + o[0] + '">' +
+        var on = S.prefs.setup === o[0], just = JUST.pick === "setup|" + o[0] ? " just" : "";
+        return '<button type="button" role="radio" aria-checked="' + on + '" class="option' + (on ? " on" : "") + just + '" data-action="setSetup" data-value="' + o[0] + '">' +
           '<strong>' + o[1] + ' <em class="time">' + o[3] + "</em></strong><span>" + o[2] + "</span></button>";
       }).join("") + "</div>" +
       '<p class="fine">Skipped questions show up later as optional cards. Change anything anytime in Profile.</p>' +
@@ -746,28 +862,35 @@ h2.display { font-size: 26px; line-height: 1.15; }
   function quiz() {
     var list = steps(), key = list[S.step], q = Q[key], body = "", note = q.note || "";
     if (key === "sectors" || key === "hide") {
-      var items = key === "sectors" ? SECTORS : HIDEABLE, chosen = S.prefs[key];
-      body = '<div class="chips" role="group" aria-label="' + esc(q.title) + '">' + items.map(function (s) {
-        var on = chosen.indexOf(s) >= 0;
-        return '<button type="button" class="chip select' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-action="toggleList" data-key="' + key + '" data-value="' + esc(s) + '">' +
+      var items = key === "sectors" ? PREF_SECTORS : HIDEABLE, chosen = S.prefs[key];
+      body = '<div class="chips" role="group" aria-label="' + esc(q.title) + '">' + items.map(function (s, i) {
+        var on = chosen.indexOf(s) >= 0, just = JUST.pick === key + "|" + s ? " just" : "";
+        return '<button type="button" class="chip select' + (on ? " on" : "") + just + '" style="--i:' + (Math.min(i, 8) + 2) + '" aria-pressed="' + on + '" data-action="toggleList" data-key="' + key + '" data-value="' + esc(s) + '">' +
           (on ? (key === "hide" ? "⊘ " : "✓ ") : "") + esc(s) + "</button>";
       }).join("") + "</div>";
     } else {
-      body = '<div class="options" role="' + (q.multi ? "group" : "radiogroup") + '" aria-label="' + esc(q.title) + '">' + q.options.map(function (o) {
+      body = '<div class="options" role="' + (q.multi ? "group" : "radiogroup") + '" aria-label="' + esc(q.title) + '">' + q.options.map(function (o, i) {
         var on = q.multi ? S.prefs[key].indexOf(o[0]) >= 0 : S.prefs[key] === o[0];
         var soon = key === "assets" && o[0] !== "Companies" ? ' <span class="tag">Coming soon</span>' : "";
-        return '<button type="button" role="' + (q.multi ? "checkbox" : "radio") + '" aria-checked="' + on + '" class="option' + (on ? " on" : "") +
-          '" data-action="opt" data-key="' + key + '" data-value="' + String(o[0]) + '"><strong>' + esc(o[1]) + soon + "</strong>" + (o[2] ? "<span>" + esc(o[2]) + "</span>" : "") + "</button>";
+        var just = JUST.pick === key + "|" + String(o[0]) ? " just" : "";
+        return '<button type="button" role="' + (q.multi ? "checkbox" : "radio") + '" aria-checked="' + on + '" class="option' + (on ? " on" : "") + just +
+          '" style="--i:' + (i + 2) + '" data-action="opt" data-key="' + key + '" data-value="' + String(o[0]) + '"><strong>' + esc(o[1]) + soon + "</strong>" + (o[2] ? "<span>" + esc(o[2]) + "</span>" : "") + "</button>";
       }).join("") + "</div>";
     }
-    if (key === "risk") body = '<div class="drop" aria-hidden="true"><span>€100</span><span class="arrow">→</span><span class="down">€80</span></div>' + body;
+    if (key === "products" && S.prefs.products === "which") {
+      body += '<div class="field"><label for="products-q">Which brands or products?</label><input id="products-q" type="text" autocomplete="off" placeholder="iPhone, Coca-Cola, Google…" value="' + esc(S.prefs.productsText) + '"></div>';
+    }
+    if (key === "age" && S.prefs.age === "u18") note = "You need to be 18 to buy shares. You can still swipe, learn and build a wishlist.";
     if (key === "assets" && S.prefs.assets.some(function (a) { return a !== "Companies"; })) note = "ETF and fund cards come next. This demo swipes companies.";
     var last = S.step === list.length - 1;
-    var canGo = !(key === "sectors" && !S.prefs.sectors.length) && !(key === "assets" && !S.prefs.assets.length) && !(key === "risk" && !S.prefs.risk);
+    var canGo = !(key === "sectors" && !S.prefs.sectors.length) && !(key === "assets" && !S.prefs.assets.length);
     var label = key === "sectors" ? "Continue · " + S.prefs.sectors.length + " picked" : last ? "Finish" : "Continue";
-    return '<section class="screen">' +
+    // The bar is drawn at the previous step's width, then render() grows it to the new one.
+    var pct = Math.round((S.step + 1) / list.length * 100), from = quizPct;
+    quizPct = pct;
+    return '<section class="screen' + (JUST.step ? " step-in" + (JUST.step === "back" ? " back" : "") : "") + '">' +
       '<div class="progress"><p class="eyebrow">' + (S.step + 1) + " / " + list.length + "</p>" +
-      '<div class="progress-track"><div class="progress-fill" style="width:' + Math.round((S.step + 1) / list.length * 100) + '%"></div></div></div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + from + '%" data-grow="' + pct + '%"></div></div></div>' +
       '<h2 class="display">' + esc(q.title) + "</h2>" + (q.help ? '<p class="lead">' + esc(q.help) + "</p>" : "") + body +
       (note ? '<p class="fine">' + esc(note) + "</p>" : "") + '<div class="spacer"></div>' +
       '<div class="quiz-foot"><button class="btn" type="button" data-action="quizBack">Back</button>' +
@@ -775,15 +898,25 @@ h2.display { font-size: 26px; line-height: 1.15; }
   }
   function ready() {
     var hidden = S.prefs.hide.length ? S.prefs.hide.length + (S.prefs.hide.length > 1 ? " sectors" : " sector") : "None";
-    return '<section class="screen"><h2 class="display">Your feed is ready</h2>' +
+    return '<section class="screen' + (JUST.ready ? " ready-in" : "") + '"><h2 class="display">Your feed is ready</h2>' +
       '<p class="lead">Here’s what shapes it. Your swipes keep adjusting it.</p><dl class="rows">' +
       row("Level", esc(LEVEL[S.prefs.level]) + (S.prefs.popups ? " · pop-ups on" : "")) +
       row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
       row("Sectors", esc(S.prefs.sectors.join(", ") || "None")) + row("ESG", esc(ESG[S.prefs.esg])) + row("Hidden", esc(hidden)) +
+      (S.prefs.setup === "full" ? row("Monthly budget", S.prefs.monthly ? esc(MONTHLY[S.prefs.monthly]) : "Skipped") +
+        row("Rivals back to back", S.prefs.rival ? "On" : "Off") + row("On cards", esc(cardExtras().join(", ") || "Essentials only")) : "") +
       row("Ticker and price", "Hidden until you swipe right") + "</dl>" +
-      (S.prefs.setup === "quick" ? '<button class="panel-btn" type="button" data-action="moreQuestions"><span><strong>Answer 2 more for a sharper feed</strong><small>~30 s</small></span><span aria-hidden="true">›</span></button>' : "") +
+      (S.prefs.setup === "quick" ? '<button class="panel-btn" type="button" data-action="moreQuestions"><span><strong>Answer ' + FULL_EXTRA.length + ' more for a sharper feed</strong><small>~2 min</small></span><span aria-hidden="true">›</span></button>' : "") +
       '<div class="spacer"></div><div class="btn-col"><button class="btn primary" type="button" data-action="startSwiping">Start swiping</button>' +
       '<p class="fine center">Edit anytime in Profile</p></div></section>';
+  }
+  function cardExtras() {
+    var out = [];
+    if (S.prefs.legal) out.push("Controversies");
+    if (S.prefs.esg !== "no") out.push("ESG");
+    if (S.prefs.carbon) out.push("Carbon footprint");
+    if (S.prefs.women) out.push("Women in leadership");
+    return out;
   }
   function intro() {
     var items = [["↓", "Scroll", "to learn about the company"], ["✕", "Swipe left", "to pass, and see fewer like it"], ["♥", "Swipe right", "to see its stock"]];
@@ -808,9 +941,11 @@ h2.display { font-size: 26px; line-height: 1.15; }
         return "<span><b>" + g + ":</b> " + GLOSSARY[g].toLowerCase().replace(/\.$/, "") + "</span>";
       }).join("") + "</p>" : "");
   }
+  function soonSection(title, text) {
+    return '<div class="back-section"><h3>' + esc(title) + '</h3><div class="panel"><p class="soon-row"><span>' + esc(text) + '</span><span class="tag">Coming soon</span></p></div></div>';
+  }
   function esgSection() {
-    return '<div class="back-section"><h3>ESG rating</h3><div class="panel"><p class="soon-row"><span>Rating from an ESG data partner</span><span class="tag">Coming soon</span></p>' +
-      '<p class="fine">Carbon footprint and women in leadership come from the same partner. Annual reports don’t give them in a comparable form, so we don’t guess.</p></div></div>';
+    return soonSection("ESG rating", "Rating from an ESG data partner. Annual reports don’t give a comparable score, so we don’t guess one.");
   }
   function cardBody(c) {
     var f = c.front, b = c.back, p = b.profile, html = "";
@@ -834,6 +969,8 @@ h2.display { font-size: 26px; line-height: 1.15; }
     var numbers = '<div class="back-section"><h3>Key numbers</h3>' + keyNumbers(c) + "</div>";
     html += S.prefs.risk === "sell" ? risks + numbers : numbers + risks;
     if (S.prefs.esg === "bit") html += esgSection();
+    if (S.prefs.carbon) html += soonSection("Carbon footprint", "Tonnes of CO₂ a year and the trend, from our ESG data partner.");
+    if (S.prefs.women) html += soonSection("Women in leadership", "Share of women among executives and on the board, from our ESG data partner.");
     if (S.prefs.legal) html += '<div class="back-section"><h3>Controversies</h3>' + (b.legal_matters.length
       ? '<ul class="items">' + b.legal_matters.map(function (m, i) { return "<li><span>" + esc(m) + "</span>" + source(c, "legal_matters", i) + "</li>"; }).join("") + "</ul>"
       : '<p class="fine">No major case singled out in the report’s legal section.</p>') + "</div>";
@@ -880,8 +1017,10 @@ h2.display { font-size: 26px; line-height: 1.15; }
     var c = S.current ? BY_ID[S.current] : null;
     var why = "";
     if (c) {
-      why = S.prefs.sectors.indexOf(c.sector) >= 0
-        ? "Shown because you picked " + c.sector + ". Ranked by your answers and swipes, never a recommendation."
+      var picked = pickedFor(c.sector);
+      why = S.rivalOf ? "Team " + BY_ID[S.rivalOf].name + " or Team " + c.name + "? Its biggest rival, right after."
+        : productHit(c.id) ? "Shown because you said you use its products. Never a recommendation."
+        : picked ? "Shown because you picked " + picked + ". Ranked by your answers and swipes, never a recommendation."
         : "A sector you didn’t pick, so your feed doesn’t get too narrow.";
     }
     var remaining = CARDS.filter(function (x) { return S.seen.indexOf(x.id) < 0; }).length;
@@ -923,6 +1062,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
       }).join("") + "</div>" +
       '<dl class="rows">' + row("Company", esc(c.name)) + row("Order type", "Market order") + row("Price", "Live, from the broker partner") +
       row("Commission", "Shown before you confirm") + "</dl>" +
+      (S.prefs.monthly === "200-1000" || S.prefs.monthly === "gt1000" ? '<div class="panel hi"><p class="eyebrow">Go commission-free</p><p class="body-text">You plan to invest €200+ a month. Our subscription removes the commission on every order.</p></div>' : "") +
       '<div class="spacer"></div><button class="btn primary" type="button" data-action="reviewOrder">Review order</button></section>';
   }
   function kyc() {
@@ -1118,16 +1258,18 @@ h2.display { font-size: 26px; line-height: 1.15; }
   }
   function learn() {
     var done = S.lessonsDone.length, next = LESSONS.filter(function (l) { return S.lessonsDone.indexOf(l.id) < 0; })[0];
-    return '<section class="screen"><div class="title-row"><h2 class="display">Learn</h2><span class="pill">' + (done ? done + (done > 1 ? " lessons" : " lesson") + " today" : "Start a streak") + "</span></div>" +
+    var before = JUST.lessonDone ? done - 1 : done;  // the Basics bar grows from here after a finished lesson
+    return '<section class="screen"><div class="title-row"><h2 class="display">Learn</h2><span class="pill' + (JUST.lessonDone ? " bump" : "") + '">' + (done ? done + (done > 1 ? " lessons" : " lesson") + " today" : "Start a streak") + "</span></div>" +
       (next ? '<button class="panel hi continue" type="button" data-action="lesson" data-id="' + next.id + '"><p class="eyebrow">' + (done ? "Continue" : "Start") + " · " + next.mins + " min</p><strong>" + esc(next.title) + "</strong></button>"
             : '<div class="panel hi"><p class="eyebrow">Basics done</p><strong>Next steps unlock with the full app.</strong></div>') +
-      '<div class="levels"><div class="level on"><strong>Basics</strong><span>' + done + "/" + LESSONS.length + ' done</span></div><div class="level"><strong>Next steps</strong><span>0/6</span></div><div class="level"><strong>Confident</strong><span>0/6</span></div></div>' +
+      '<div class="levels"><div class="level on"><strong>Basics</strong><span>' + done + "/" + LESSONS.length + ' done</span>' +
+      '<span class="mini-track" aria-hidden="true"><i style="width:' + Math.round(before / LESSONS.length * 100) + '%" data-grow="' + Math.round(done / LESSONS.length * 100) + '%"></i></span></div><div class="level"><strong>Next steps</strong><span>0/6</span></div><div class="level"><strong>Confident</strong><span>0/6</span></div></div>' +
       '<h3 class="section-title">Words you met while swiping</h3>' +
       (S.words.length ? '<div class="chips">' + S.words.map(function (w) { return '<button type="button" class="chip" data-action="word" data-term="' + esc(w) + '">' + esc(w) + "</button>"; }).join("") + "</div>"
                       : '<p class="fine">Swipe a few cards: the terms you meet show up here.</p>') +
       '<h3 class="section-title">Basics</h3><ul class="list">' + LESSONS.map(function (l) {
         var ok = S.lessonsDone.indexOf(l.id) >= 0;
-        return '<li><button type="button" data-action="lesson" data-id="' + l.id + '"><span class="lesson-mark' + (ok ? " ok" : "") + '" aria-hidden="true">' + (ok ? "✓" : "") + '</span><span class="meta"><strong>' + esc(l.title) + "</strong><small>" + l.mins + " min" + (ok ? " · done" : "") + "</small></span></button></li>";
+        return '<li><button type="button" data-action="lesson" data-id="' + l.id + '"><span class="lesson-mark' + (ok ? " ok" : "") + (JUST.lessonDone === l.id ? " just" : "") + '" aria-hidden="true">' + (ok ? "✓" : "") + '</span><span class="meta"><strong>' + esc(l.title) + "</strong><small>" + l.mins + " min" + (ok ? " · done" : "") + "</small></span></button></li>";
       }).join("") + "</ul>" +
       '<h3 class="section-title">Glossary</h3><div class="field"><label class="sr" for="glossary-q">Search the glossary</label><input id="glossary-q" type="search" placeholder="Search the glossary" autocomplete="off"></div>' +
       '<ul class="glossary-list" id="glossary-list">' + glossaryItems("") + "</ul></section>";
@@ -1137,14 +1279,21 @@ h2.display { font-size: 26px; line-height: 1.15; }
     var content = l.compare
       ? '<div class="compare">' + l.compare.map(function (col) { return '<div class="panel"><p class="eyebrow">' + esc(col[0]) + "</p><ul>" + col[1].map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div>"; }).join("") + "</div>"
       : l.body.map(function (p) { return '<p class="body-text">' + esc(p) + "</p>"; }).join("");
-    var a = S.lessonAnswer;
-    var quiz = '<div class="panel"><p class="eyebrow">Quick check</p><strong>' + esc(l.quiz.q) + '</strong><div class="options">' + l.quiz.options.map(function (o, k) {
-      var cls = a === null ? "" : o[1] ? " right" : a === k ? " wrong" : "";
-      return '<button type="button" class="option' + cls + '" data-action="answer" data-i="' + k + '"' + (a !== null ? " disabled" : "") + "><strong>" + esc(o[0]) + "</strong></button>";
-    }).join("") + "</div>" + (a !== null ? '<p class="fine">' + (l.quiz.options[a][1] ? "Right." : "Not quite: the green answer is the right one.") + "</p>" : "") + "</div>";
+    var a = S.lessonAnswer, right = a !== null && l.quiz.options[a][1];
+    var answerText = l.quiz.options.filter(function (o) { return o[1]; })[0][0];
+    var quiz = '<div class="panel"><p class="eyebrow">Quick check</p><strong>' + esc(l.quiz.q) + '</strong><div class="options quick">' + l.quiz.options.map(function (o, k) {
+      // A/B/C before answering; then ✓ on the right answer, ✕ on a wrong pick, the rest fades.
+      var cls = a === null ? "" : o[1] ? " right" + (a === k ? "" : " hint") : a === k ? " wrong" : " faded";
+      if (a === k && JUST.answer) cls += " just";
+      var mark = a === null || (!o[1] && a !== k) ? String.fromCharCode(65 + k) : o[1] ? "✓" : "✕";
+      var sr = a === null ? "" : o[1] ? '<span class="sr"> (right answer)</span>' : a === k ? '<span class="sr"> (your answer)</span>' : "";
+      return '<button type="button" class="option' + cls + '" data-action="answer" data-i="' + k + '"' + (a !== null ? " disabled" : "") + '><span class="opt-key" aria-hidden="true">' + mark + "</span><strong>" + esc(o[0]) + "</strong>" + sr + "</button>";
+    }).join("") + "</div>" +
+      (a !== null ? '<div class="feedback ' + (right ? "good" : "bad") + (JUST.answer ? " just" : "") + '"><span class="feedback-icon" aria-hidden="true">' + (right ? "✓" : "✕") + "</span><div>" +
+        "<strong>" + esc(right ? S.lessonCheer : "Not quite") + "</strong><p>" + (right ? "" : "The answer is “" + esc(answerText) + "”. ") + esc(l.quiz.why) + "</p></div></div>" : "") + "</div>";
     return '<section class="screen"><button class="back-link" type="button" data-action="tab" data-tab="learn">' + ICON.back + "Learn</button>" +
       '<p class="eyebrow">Basics · ' + (i + 1) + " / " + LESSONS.length + '</p><h2 class="display">' + esc(l.title) + "</h2>" + content + quiz +
-      '<div class="spacer"></div><button class="btn primary" type="button" data-action="finishLesson"' + (a === null ? " disabled" : "") + ">Finish lesson</button></section>";
+      '<div class="spacer"></div><button class="btn primary' + (JUST.answer ? " nudge" : "") + '" type="button" data-action="finishLesson"' + (a === null ? " disabled" : "") + ">Finish lesson</button></section>";
   }
   function post(p, i) {
     var fr = p.friend ? FRIENDS[p.friend] : null, c = p.item ? BY_ID[p.item] : null;
@@ -1178,7 +1327,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     return '<section class="screen"><div class="profile-head"><span class="avatar big me">' + esc(initials(name)) + '</span><div><h2 class="display">' + esc(name) + '</h2><p class="fine">' +
       esc(LEVEL[S.prefs.level]) + " · " + (S.prefs.setup === "quick" ? "Quick setup" : "Full setup") + "</p></div></div>" +
       '<h3 class="section-title">My feed answers</h3><dl class="rows">' +
-      row("Setup length", S.prefs.setup === "quick" ? 'Quick (6) · <button class="link-btn" type="button" data-action="moreQuestions">Switch to full</button>' : "Full (8)") +
+      row("Setup length", S.prefs.setup === "quick" ? 'Quick (' + QUICK_STEPS.length + ') · <button class="link-btn" type="button" data-action="moreQuestions">Switch to full</button>' : "Full (" + (QUICK_STEPS.length + FULL_EXTRA.length) + ")") +
       row("How new am I", esc(LEVEL[S.prefs.level])) + row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
       row("Sectors, ESG, risk…", '<button class="link-btn" type="button" data-action="editAnswers">Edit ›</button>') + "</dl>" +
       '<h3 class="section-title">App</h3><dl class="rows">' + row("Theme", "Dark") + row("Concept pop-ups", switchBtn("togglePopups", S.prefs.popups, "Concept pop-ups")) + "</dl>" +
@@ -1272,6 +1421,86 @@ h2.display { font-size: 26px; line-height: 1.15; }
   }
   function hideToast() { toastEl.hidden = true; clearTimeout(toastTimer); }
 
+  /* ---------------------------------------------------------------- motion: confetti and one-shot effects */
+  // JUST holds what the next render should animate once (a pick, a step change, an answer); render()
+  // clears it, so later re-renders of the same screen stay still. afterRender runs once the DOM is in place.
+  var JUST = {}, afterRender = [], quizPct = 0;
+  var CHEERS = ["Nice!", "Spot on!", "Exactly!", "You got it!"];
+  var CONFETTI_COLORS = ["#5EE5A8", "#76D8AF", "#F5C451", "#FF8A7A", "#F2F6F0", "#8FB8FF"];
+  var appEl = document.getElementById("app");
+  var FX = { canvas: null, ctx: null, parts: [], frame: 0, last: 0 };
+  function reduceMotion() { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
+  function buzz(pattern) { try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) { /* not allowed in this frame */ } }
+  function fxBox() {
+    if (!FX.canvas) {
+      FX.canvas = document.createElement("canvas");
+      FX.canvas.className = "fx";
+      FX.canvas.setAttribute("aria-hidden", "true");
+      appEl.appendChild(FX.canvas);
+      FX.ctx = FX.canvas.getContext("2d");
+    }
+    var r = FX.canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+    if (FX.canvas.width !== w || FX.canvas.height !== h) { FX.canvas.width = w; FX.canvas.height = h; }
+    FX.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return r;
+  }
+  // o: x, y (viewport px), angle (deg, -90 = up), spread (deg), power (px per frame), count, w (launch width).
+  function confetti(o) {
+    if (reduceMotion()) return;
+    var box = fxBox(), n = o.count || 80;
+    for (var i = 0; i < n; i++) {
+      var a = ((o.angle == null ? -90 : o.angle) + (Math.random() - 0.5) * (o.spread || 80)) * Math.PI / 180;
+      var v = (o.power || 12) * (0.5 + Math.random() * 0.65);
+      FX.parts.push({ x: o.x - box.left + (Math.random() - 0.5) * (o.w || 0), y: o.y - box.top, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        w: 6 + Math.random() * 6, h: 4 + Math.random() * 5, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3,
+        tilt: Math.random() * 6.28, vt: 0.08 + Math.random() * 0.18, color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        round: Math.random() < 0.25, life: 0, max: 120 + Math.random() * 70 });
+    }
+    if (!FX.frame) { FX.last = 0; FX.frame = requestAnimationFrame(fxTick); }
+  }
+  function fxTick(now) {
+    var ctx = FX.ctx, W = FX.canvas.clientWidth, H = FX.canvas.clientHeight;
+    var dt = FX.last ? Math.min(3, (now - FX.last) / 16.7) : 1;  // same speed at 60 and 120 Hz
+    FX.last = now;
+    ctx.clearRect(0, 0, W, H);
+    FX.parts = FX.parts.filter(function (p) {
+      var drag = Math.pow(0.985, dt);
+      p.life += dt; p.vx *= drag; p.vy = Math.min(p.vy * drag + 0.3 * dt, 5);  // capped fall speed = flutter
+      p.x += (p.vx + Math.sin(p.tilt) * 0.6) * dt; p.y += p.vy * dt; p.rot += p.vr * dt; p.tilt += p.vt * dt;
+      var alpha = Math.min(1, (p.max - p.life) / 30);
+      if (alpha <= 0 || p.y > H + 20) return false;
+      ctx.save(); ctx.globalAlpha = alpha; ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color;
+      if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.h * 0.6, 0, 6.283); ctx.fill(); }
+      else { ctx.scale(1, Math.cos(p.tilt)); ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      ctx.restore();
+      return true;
+    });
+    FX.frame = FX.parts.length ? requestAnimationFrame(fxTick) : 0;
+  }
+  // Small burst from an element (kept inside the visible part of the screen).
+  function burstFrom(el, count) {
+    var r = el.getBoundingClientRect(), v = view.getBoundingClientRect();
+    var y = Math.min(Math.max(r.top + r.height / 2, v.top + 24), v.bottom - 24);
+    confetti({ x: r.left + r.width / 2, y: y, count: count, spread: 110, power: 12, w: r.width * 0.5 });
+  }
+  // Big moment: two confetti cannons from the bottom corners, in two waves.
+  function celebrate() {
+    var b = appEl.getBoundingClientRect();
+    [0, 280].forEach(function (delay) {
+      setTimeout(function () {
+        confetti({ x: b.left + 8, y: b.bottom - 70, angle: -62, spread: 40, power: 21, count: 65 });
+        confetti({ x: b.right - 8, y: b.bottom - 70, angle: -118, spread: 40, power: 21, count: 65 });
+      }, delay);
+    });
+    buzz([20, 40, 20, 40, 60]);
+  }
+  // Scroll the screen just enough to show el (scrollIntoView could also scroll the page hosting the iframe).
+  function scrollToShow(el) {
+    var v = view.getBoundingClientRect(), r = el.getBoundingClientRect();
+    if (r.bottom > v.bottom) view.scrollTo({ top: view.scrollTop + r.bottom - v.bottom + 16, behavior: reduceMotion() ? "auto" : "smooth" });
+  }
+
   /* ---------------------------------------------------------------- render */
   var SCREENS = { welcome: welcome, login: login, signup: signup, verify: verify, setup: setup, quiz: quiz, ready: ready, intro: intro,
     discover: discover, reveal: reveal, buy: buy, kyc: kyc, review: review, shared: shared, wishlist: wishlist,
@@ -1305,6 +1534,12 @@ h2.display { font-size: 26px; line-height: 1.15; }
       if (on) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
     });
     view.scrollTop = scrollTo;
+    // Bars drawn at their old width grow to the new one (quiz progress, Learn progress).
+    Array.prototype.forEach.call(view.querySelectorAll("[data-grow]"), function (el) { void el.offsetWidth; el.style.width = el.dataset.grow; });
+    JUST = {};
+    var queue = afterRender;
+    afterRender = [];
+    queue.forEach(function (fn) { fn(); });
     if (entering && S.screen === "verify") startResend();
     if (S.screen === "reveal" && LIVE) loadHistory(S.revealId);
     if (entering && S.screen === "wishlist") loadPortfolio();
@@ -1345,6 +1580,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     S.seen.push(c.id);
     S.swipes++;
     send("/api/swipes", { user: userId(), ticker: c.id, direction: "pass" });
+    S.lastSwiped = c.id;
     advance();
     toast("Fewer " + c.sector.toLowerCase() + " companies from now on.", true);
   }
@@ -1355,6 +1591,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     S.swipes++;
     S.history = [];
     send("/api/swipes", { user: userId(), ticker: c.id, direction: "like" });
+    S.lastSwiped = c.id;
     S.revealId = c.id;
     S.current = null;  // the Discover tab must not show the liked card again
     S.agreed = false;
@@ -1371,7 +1608,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
     S.weights[last.sector] = last.weight;
     S.seen = S.seen.filter(function (id) { return id !== last.id; });
     S.swipes--;
-    S.current = last.id;
+    S.current = last.id; S.rivalOf = null;
     S.showTune = false;
     hideToast();
     go("discover");
@@ -1418,26 +1655,32 @@ h2.display { font-size: 26px; line-height: 1.15; }
     socialSignup: function (d) { demoAccount(""); toast("Signed up with " + d.provider + " (demo).", false); go("setup"); },
     terms: function (d, el) { S.user.terms = el.checked; var b = document.getElementById("su-submit"); if (b) b.disabled = !el.checked; },
     resend: function () { var el = document.getElementById("resend"); if (el) el.textContent = "Resend in 0:30"; startResend(); toast("New code sent (demo).", false); },
-    setSetup: function (d) { S.prefs.setup = d.value; render(); },
-    beginQuiz: function () { S.step = 0; go("quiz"); },
+    setSetup: function (d) { S.prefs.setup = d.value; JUST.pick = "setup|" + d.value; render(); },
+    beginQuiz: function () { S.step = 0; quizPct = 0; JUST.step = "in"; go("quiz"); },
     opt: function (d) {
       var key = d.key, v = parseValue(d.value);
       if (Q[key].multi) {
         var list = S.prefs[key], i = list.indexOf(v);
         if (i >= 0) list.splice(i, 1); else list.push(v);
       } else S.prefs[key] = v;
-      if (key === "level") S.prefs.popups = v === "new";
+      if (key === "level") { S.prefs.popups = v === "new"; S.prefs.terms = v !== "pro"; }
+      if (key === "terms") S.prefs.popups = v === true && S.prefs.level === "new";
+      JUST.pick = key + "|" + d.value;
       render();
     },
     toggleList: function (d) {
       var list = S.prefs[d.key], i = list.indexOf(d.value);
       if (i >= 0) list.splice(i, 1); else list.push(d.value);
+      JUST.pick = d.key + "|" + d.value;
       render();
     },
-    quizNext: function () { if (S.step < steps().length - 1) { S.step++; render(); } else go("ready"); },
-    quizBack: function () { if (S.step > 0) { S.step--; render(); } else go("setup"); },
-    moreQuestions: function () { S.prefs.setup = "full"; S.step = 6; go("quiz"); },
-    editAnswers: function () { S.step = 0; go("quiz"); },
+    quizNext: function () {
+      if (S.step < steps().length - 1) { S.step++; JUST.step = "in"; render(); return; }
+      JUST.ready = true; afterRender.push(celebrate); go("ready");
+    },
+    quizBack: function () { if (S.step > 0) { S.step--; JUST.step = "back"; render(); } else go("setup"); },
+    moreQuestions: function () { S.prefs.setup = "full"; S.step = QUICK_STEPS.length; JUST.step = "in"; go("quiz"); },
+    editAnswers: function () { S.step = 0; quizPct = 0; JUST.step = "in"; go("quiz"); },
     startSwiping: function () {
       resetFeed();
       if (S.prefs.level === "new" && !S.introSeen) go("intro"); else advance();
@@ -1488,10 +1731,32 @@ h2.display { font-size: 26px; line-height: 1.15; }
     open: function (d) { S.revealId = d.id; go("reveal"); },
     wishFilter: function (d) { S.wishFilter = d.value; render(); },
     lesson: function (d) { S.lesson = d.id; S.lessonAnswer = null; go("lesson"); },
-    answer: function (d) { S.lessonAnswer = Number(d.i); render(); },
+    answer: function (d) {
+      if (S.lessonAnswer !== null) return;
+      var l = LESSONS.filter(function (x) { return x.id === S.lesson; })[0], k = Number(d.i), right = l.quiz.options[k][1];
+      S.lessonAnswer = k;
+      S.lessonCheer = right ? CHEERS[Math.floor(Math.random() * CHEERS.length)] : "";
+      JUST.answer = true;
+      afterRender.push(function () {
+        var picked = view.querySelector(".option.just"), fb = view.querySelector(".feedback"), fin = view.querySelector('[data-action="finishLesson"]');
+        if (!right) FX.parts = [];  // no leftover confetti over a wrong answer
+        if (right && picked) burstFrom(picked, 90);
+        buzz(right ? 30 : [40, 60, 40]);
+        if (fb) setTimeout(function () { scrollToShow(fb); }, 150);
+        if (fin) fin.focus({ preventScroll: true });
+      });
+      render();
+    },
     finishLesson: function () {
-      if (S.lessonsDone.indexOf(S.lesson) < 0) S.lessonsDone.push(S.lesson);
-      toast("Lesson done. " + S.lessonsDone.length + "/" + LESSONS.length + " in Basics.", false); go("learn");
+      var first = S.lessonsDone.indexOf(S.lesson) < 0;
+      if (first) { S.lessonsDone.push(S.lesson); JUST.lessonDone = S.lesson; }
+      var all = first && S.lessonsDone.length === LESSONS.length;
+      afterRender.push(function () {
+        if (all) { celebrate(); return; }
+        var mark = view.querySelector(".lesson-mark.just");
+        if (mark) setTimeout(function () { burstFrom(mark, 45); }, 250);
+      });
+      toast(all ? "Basics done: all " + LESSONS.length + " lessons finished!" : "Lesson done. " + S.lessonsDone.length + "/" + LESSONS.length + " in Basics.", false); go("learn");
     },
     word: function (d) { openSheet({ kind: "word", term: d.term }); },
     learnMore: function () { closeSheet(); go("learn"); },
@@ -1546,6 +1811,7 @@ h2.display { font-size: 26px; line-height: 1.15; }
   });
   document.addEventListener("input", function (e) {
     if (e.target.id === "glossary-q") document.getElementById("glossary-list").innerHTML = glossaryItems(e.target.value);
+    if (e.target.id === "products-q") S.prefs.productsText = e.target.value;
     if (e.target.id === "code") e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
   });
   function showError(id, message) { var el = document.getElementById(id); if (el) { el.textContent = message; el.hidden = false; } }
