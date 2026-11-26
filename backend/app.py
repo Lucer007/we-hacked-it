@@ -1,4 +1,4 @@
-"""Equiteas API: the product backend.
+"""Equitease API: the product backend.
 
 Serves the app page and the product routes: company cards, 5-year financials, portfolio by sector,
 orders, wishlist, swipes, and the analyst agent. Account screens (sign-up, email code, ID check)
@@ -86,8 +86,8 @@ def init_state():
 
 init_state()
 
-app = FastAPI(title="Equiteas API", version="0.1",
-              description="Product backend of the Equiteas prototype: cards from SEC filings, portfolio, orders, analyst agent.")
+app = FastAPI(title="Equitease API", version="0.1",
+              description="Product backend of the Equitease prototype: cards from SEC filings, portfolio, orders, analyst agent.")
 
 
 def check_ticker(ticker: str) -> str:

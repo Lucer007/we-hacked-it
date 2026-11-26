@@ -4,10 +4,10 @@
 
 ```
 pip install -r requirements.txt
-export SEC_USER_AGENT="Equiteas you@example.com"   # the SEC requires a contact email
+export SEC_USER_AGENT="Equitease you@example.com"   # the SEC requires a contact email
 ```
 
-On Windows PowerShell: `$env:SEC_USER_AGENT = "Equiteas you@example.com"`
+On Windows PowerShell: `$env:SEC_USER_AGENT = "Equitease you@example.com"`
 
 ## 1. Cards for the whole S&P 500
 

@@ -1,4 +1,4 @@
-# Handoff: Equiteas (Sciences Po AI Hackathon)
+# Handoff: Equitease (Sciences Po AI Hackathon)
 
 State on Saturday 21 November 2026. Read this first, then the READMEs it points to.
 
@@ -13,7 +13,7 @@ State on Saturday 21 November 2026. Read this first, then the READMEs it points 
 
 ## The product
 
-**Equiteas**, a "Tinder for investing" for people new to investing. Users answer a few
+**Equitease**, a "Tinder for investing" for people new to investing. Users answer a few
 preference questions, then swipe company cards that show facts (what the company does, CEO,
 employees, mission, risks, legal issues), never the ticker or price. A right swipe reveals the
 stock; a fractional buy goes through a licensed broker partner. Global scope, starting with
@@ -43,8 +43,9 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
 
 ## Decisions on 21 Nov (morning)
 
-- **Name: Equiteas** (was Dealdeck). Renamed in the app and the docs; file names such as
-  `dealdeck.duckdb` are unchanged.
+- **Name: Equitease** (since 26 Nov; it was Equiteas, and Dealdeck before that). Renamed in the app
+  and the docs; technical names such as `dealdeck.duckdb`, the `EQUITEAS_STATE_DB` variable and the
+  `md:equiteas` MotherDuck database are unchanged.
 - **Buy wording:** the reveal button says just "Buy" and the order type is "Market order"; no
   mention of fractional shares (too complex for the pitch). The amount is still picked in euros.
 - **Design = the pitch deck's:** deep green-black, mint accent `#5EE5A8`, Poppins for headings and
@@ -88,7 +89,7 @@ KO, JPM, LLY. Details: `data_pipeline/sp500/README.md`, `prototype/README.md`.
   on site for API credits; then run `analyst.py` on the demo questions and
   `build_profile_cards.py` (without `--assemble-only`), and fix what breaks at runtime.
 - **SEC www.sec.gov needs a contact email in the User-Agent.** Théo sets it himself in his
-  PowerShell terminal: `$env:SEC_USER_AGENT = "Equiteas <his email>"`. A privacy hook blocks
+  PowerShell terminal: `$env:SEC_USER_AGENT = "Equitease <his email>"`. A privacy hook blocks
   Claude from putting his email in commands. data.sec.gov (the XBRL API) works without it.
 - **No share-price source:** Stooq is behind an anti-bot check; don't work around it. The
   reveal screen says the price comes from the broker partner in the live app.

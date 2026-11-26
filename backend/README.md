@@ -1,4 +1,4 @@
-# Equiteas API (FastAPI)
+# Equitease API (FastAPI)
 
 The product backend. It serves the app page and these routes (interactive docs at `/docs`):
 

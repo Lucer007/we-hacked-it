@@ -1,4 +1,4 @@
-# Equiteas prototype
+# Equitease prototype
 
 `index.html` is a single, self-contained page: the swipe app from Lijith's mockup running on
 12 real companies (NVDA, AMD, TSM, AAPL, MSFT, GOOGL, AMZN, WMT, TSLA, KO, JPM, LLY).

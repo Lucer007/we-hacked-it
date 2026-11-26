@@ -18,7 +18,7 @@ import requests
 HERE = Path(__file__).resolve().parent
 TICKERS = ["NVDA", "AMD", "TSM", "AAPL", "MSFT", "GOOGL", "AMZN", "WMT", "TSLA", "KO", "JPM", "LLY"]
 URL = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
-HEADERS = {"User-Agent": "Mozilla/5.0 (equiteas-prototype)"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (equitease-prototype)"}
 
 
 def series(ticker: str, rng: str, interval: str) -> tuple[list, dict]:
