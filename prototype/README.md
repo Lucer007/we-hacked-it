@@ -12,8 +12,10 @@ Screens follow the wireframe v2 (https://claude.ai/artifact/24yQRUjVSvunEx8p1i6B
    controversies, risk, budget, rivals…) → Feed ready → How it works (brand-new users).
    A mission moves its sub-sectors up in the feed (`MISSION_SUBS` in the template); "How do you see your
    investment?" changes nothing in the ranking.
-3. Discover: filter chips, one card you scroll down (no flip), pass/undo, Tune your feed.
-4. Reveal + "New word" pop-up → amount → ID check (first buy, demo) → review with the risk checkbox →
+3. Discover: filter chips, one short card with the essentials only (name, tagline, sector, CEO, staff, HQ,
+   founded, mission, what they do), pass/undo, Tune your feed.
+4. Reveal = the company page: price chart, key numbers, then segments, risks, ESG, controversies and the
+   sources of the card's facts (`companyDetails` in the template) + "New word" pop-up → amount → ID check (first buy, demo) → review with the risk checkbox →
    share with friends → Social.
 5. Learn (4 lessons with a quiz, words met while swiping, glossary search), Social (sample friends,
    friend profile), Wishlist, Profile and settings.

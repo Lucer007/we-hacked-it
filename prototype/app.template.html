@@ -320,7 +320,6 @@ h2.display { font-size: 26px; line-height: 1.15; }
               border: 1px solid var(--line-strong); color: var(--accent); font-size: 20px; }
 .filters { display: flex; gap: 8px; flex: none; overflow-x: auto; padding-bottom: 2px; }
 .filters .chip { flex: none; }
-.scroll-hint { margin: 0; text-align: center; color: var(--muted); font-size: 12.5px; }
 .scroll-cue { font-size: 12.5px; color: var(--muted); font-family: var(--font-display); }
 .glance, .body-text { margin: 0; font-size: 14.5px; }
 .soon-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -989,16 +988,16 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     esg: { title: "Are you interested in ESG investing?",
       helpHtml: '<strong>ESG</strong> = <span class="hl">Environment</span>, <span class="hl">Social</span>, <span class="hl">Governance</span>: ' +
         "how a company treats the planet, people and its own rules.",
-      options: [["lot", "Yes, a lot", "ESG near the top of every card"], ["bit", "A little", "Show it, lower down"], ["no", "Not really", "Keep cards shorter"]] },
+      options: [["lot", "Yes, a lot", "ESG near the top of every company page"], ["bit", "A little", "Show it, lower down"], ["no", "Not really", "Keep company pages shorter"]] },
     hide: { title: "Hide these sectors?", help: "Tap to switch. Hidden = these companies never appear in your feed." },
     legal: { title: "Do you want to see past controversies or scandals?", help: "Lawsuits and investigations the company reports itself.",
-      options: [[true, "Yes", "Shown on the company card, with the source"], [false, "No", "Keep cards simple"]] },
+      options: [[true, "Yes", "Shown on the company page, with the source"], [false, "No", "Keep company pages simple"]] },
     terms: { title: "Do you want short explanations of financial terms?", help: "Like net margin or dividend, next to the numbers and as pop-ups.",
       options: [[true, "Yes", "Explanation bubbles on"], [false, "No", "Numbers only"]] },
     monthly: { title: "How much do you plan to invest per month?", note: "This never changes which companies you see.",
       options: [["lt50", "Under €50", ""], ["50-200", "€50–200", ""], ["200-1000", "€200–1,000", ""], ["gt1000", "Over €1,000", ""]] },
     risk: { title: "If your investment dropped 20% in a month, would you keep it?", note: "No right answer. It changes how much we explain risks, never which companies you see.",
-      options: [["keep", "Yes, I’d keep it", ""], ["sell", "No, I’d sell", "Risks move to the top of each card"]] },
+      options: [["keep", "Yes, I’d keep it", ""], ["sell", "No, I’d sell", "Risks come first on each company page"]] },
     size: { title: "Which company sizes do you want to see?", help: "Choose as many as you like. Size = market capitalisation.", multi: true,
       options: [["Large", "Large", "Household names"], ["Mid-size", "Mid-size", ""], ["Small", "Small", ""]] },
     emerging: { title: "Are you interested in emerging markets?", help: "Africa, Asia, Latin America.",
@@ -1012,8 +1011,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       options: [["u18", "Under 18", ""], ["18-24", "18–24", ""], ["25-34", "25–34", ""], ["35-49", "35–49", ""], ["50+", "50+", ""]] },
     products: { title: "Do you want to see companies whose products you use?",
       options: [["yes", "Yes", ""], ["no", "No", ""], ["which", "Yes, I’ll tell you which ones", "Brands or products, separated by commas"]] },
-    carbon: { title: "Do you want to see each company’s carbon footprint?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] },
-    women: { title: "Do you want to see the share of women in leadership?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] }
+    carbon: { title: "Do you want to see each company’s carbon footprint?", options: [[true, "Yes", "Shown on the company page"], [false, "No", ""]] },
+    women: { title: "Do you want to see the share of women in leadership?", options: [[true, "Yes", "Shown on the company page"], [false, "No", ""]] }
   };
   var QUICK_STEPS = ["level", "assets", "vision", "mission", "outlook", "sectors", "esg", "hide"];
   var FULL_EXTRA = ["legal", "terms", "monthly", "risk", "size", "emerging", "rival", "country", "newtech", "age", "products", "carbon", "women"];
@@ -1101,7 +1100,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       row("Your investment", S.prefs.outlook ? esc(OUTLOOK[S.prefs.outlook]) : "Not answered") +
       row("Sectors", esc(sectorSummary() || "None")) + row("ESG", esc(ESG[S.prefs.esg])) + row("Hidden", esc(hidden)) +
       (S.prefs.setup === "full" ? row("Monthly budget", S.prefs.monthly ? esc(MONTHLY[S.prefs.monthly]) : "Skipped") +
-        row("Rivals back to back", S.prefs.rival ? "On" : "Off") + row("On cards", esc(cardExtras().join(", ") || "Essentials only")) : "") +
+        row("Rivals back to back", S.prefs.rival ? "On" : "Off") + row("On company pages", esc(cardExtras().join(", ") || "Essentials only")) : "") +
       row("Ticker and price", "Hidden until you swipe right") + "</dl>" +
       (S.prefs.setup === "quick" ? '<button class="panel-btn" type="button" data-action="moreQuestions"><span><strong>Answer ' + FULL_EXTRA.length + ' more for a sharper feed</strong><small>~2 min</small></span><span aria-hidden="true">›</span></button>' : "") +
       '<div class="spacer"></div><div class="btn-col"><button class="btn primary" type="button" data-action="startSwiping">Start swiping</button>' +
@@ -1144,8 +1143,10 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   function esgSection() {
     return soonSection("ESG rating", "Rating from an ESG data partner. Annual reports don’t give a comparable score, so we don’t guess one.");
   }
+  // The swipe card keeps the essentials. Segments, risks, ESG, controversies and the sources of the card's
+  // facts sit on the company page, under the price chart (companyDetails).
   function cardBody(c, meta) {
-    var f = c.front, b = c.back, p = b.profile, html = "";
+    var f = c.front, p = c.back.profile, html = "";
     function fact(label, value) {
       return '<div class="fact"><dt>' + esc(label) + "</dt>" + (value ? "<dd>" + esc(value) + "</dd>" : '<dd class="none">Not stated in the report</dd>') + "</div>";
     }
@@ -1155,16 +1156,22 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       (p.founder_led === "Yes" ? '<span class="chip soft">Founder-led</span>' : "") + "</div>" + (meta || "") +
       '<dl class="facts">' + fact("CEO", f.ceo) + fact("Staff", f.employees) + fact("HQ", f.headquarters) + fact("Founded", p.founded) + "</dl>";
     if (f.mission) html += '<figure class="quote-block"><p class="eyebrow">Mission</p><p>“' + esc(f.mission) + "”</p>" + source(c, "mission") + "</figure>";
-    html += '<p class="scroll-hint" aria-hidden="true">Scroll for more ↓</p>';
-    html += '<div class="back-section"><h3>At a glance</h3><p class="glance">Founded ' + esc(p.founded || "—") + " · Founder-led: " + esc(p.founder_led.toLowerCase()) + " · " + esc(p.size) + "</p></div>";
     if (f.what_they_do) html += '<div class="back-section"><h3>What they do</h3><p class="body-text">' + esc(f.what_they_do) + "</p>" + source(c, "what_they_do") + "</div>";
+    html += '<p class="fine center">No ticker or price yet. Swipe right to see them, with the key numbers and risks.</p>';
+    addWords(["10-K"]);
+    return html;
+  }
+  function risksSection(c) {
+    var risks = c.back.risks;
+    return risks.length ? '<div class="back-section"><h3>Risks the company lists</h3><ul class="items">' +
+      risks.map(function (r, i) { return "<li><span>" + esc(r) + "</span>" + source(c, "risks", i) + "</li>"; }).join("") + "</ul></div>" : "";
+  }
+  function companyDetails(c) {
+    var b = c.back, html = "";
     if (b.segments.length) html += '<div class="back-section"><h3>Business segments</h3><div class="chips">' +
       b.segments.map(function (s) { return '<span class="chip soft">' + esc(s) + "</span>"; }).join("") + "</div>" + source(c, "segments") + "</div>";
     if (S.prefs.esg === "lot") html += esgSection();
-    var risks = b.risks.length ? '<div class="back-section"><h3>Risks the company lists</h3><ul class="items">' +
-      b.risks.map(function (r, i) { return "<li><span>" + esc(r) + "</span>" + source(c, "risks", i) + "</li>"; }).join("") + "</ul></div>" : "";
-    var numbers = '<div class="back-section"><h3>Key numbers</h3>' + keyNumbers(c) + "</div>";
-    html += S.prefs.risk === "sell" ? risks + numbers : numbers + risks;
+    if (S.prefs.risk !== "sell") html += risksSection(c);  // "I'd sell" puts the risks right under the chart (reveal)
     if (S.prefs.esg === "bit") html += esgSection();
     if (S.prefs.carbon) html += soonSection("Carbon footprint", "Tonnes of CO₂ a year and the trend, from our ESG data partner.");
     if (S.prefs.women) html += soonSection("Women in leadership", "Share of women among executives and on the board, from our ESG data partner.");
@@ -1172,10 +1179,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       ? '<ul class="items">' + b.legal_matters.map(function (m, i) { return "<li><span>" + esc(m) + "</span>" + source(c, "legal_matters", i) + "</li>"; }).join("") + "</ul>"
       : '<p class="fine">No major case singled out in the report’s legal section.</p>') + "</div>";
     var origin = [["CEO", "ceo"], ["Staff", "employees"], ["Tagline", "tagline"]].filter(function (x) { return c.sources[x[1]]; });
-    if (origin.length) html += '<div class="back-section"><h3>Where the top of the card comes from</h3><ul class="items">' +
+    if (origin.length) html += '<div class="back-section"><h3>Where the card’s facts come from</h3><ul class="items">' +
       origin.map(function (x) { return "<li><span>" + x[0] + "</span>" + source(c, x[1]) + "</li>"; }).join("") + "</ul></div>";
-    html += '<p class="fine center">Still no ticker or price. Swipe right to see them.</p>';
-    addWords(["10-K"]);
     return html;
   }
   function cardHtml(c, why) {
@@ -1238,9 +1243,11 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     addWords(["Ticker"]);
     return '<section class="screen reveal"><div class="reveal-head"><p class="eyebrow match">♥ It’s a match</p>' + logo(c, true) +
       '<h2 class="display">' + esc(c.name) + '</h2><div class="ticker-line"><span class="ticker">' + esc(c.ticker) + "</span><span>" + esc(c.reveal.exchange || "") + "</span></div></div>" +
-      priceChart(c) +
-      keyNumbers(c) + (LIVE ? '<div id="history"><p class="fine">Loading 5 years from the API…</p></div>' : "") +
+      priceChart(c) + (S.prefs.risk === "sell" ? risksSection(c) : "") +
+      '<div class="back-section"><h3>Key numbers</h3>' + keyNumbers(c) + "</div>" +
+      (LIVE ? '<div id="history"><p class="fine">Loading 5 years from the API…</p></div>' : "") +
       '<dl class="rows">' + row("Size", esc(c.back.profile.size)) + row("Dividend", div ? esc(div) : "Not in our data") + "</dl>" +
+      companyDetails(c) +
       '<p class="notice">Shown because of your answers, not a recommendation. Not financial advice. You can lose money.</p>' +
       '<div class="btn-row"><button class="btn" type="button" data-action="wish"' + (inList ? " disabled" : "") + ">" + (inList ? "✓ Wishlist" : "♡ Wishlist") + "</button>" +
       '<button class="btn primary" type="button" data-action="buy">Buy</button></div>' +
