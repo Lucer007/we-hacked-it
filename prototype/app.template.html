@@ -703,6 +703,17 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   var CONSUMER = ["AAPL", "AMZN", "WMT", "KO", "GOOGL", "MSFT", "TSLA"];     // products people use every day
   var RIVALS = { NVDA: "AMD", AMD: "NVDA", WMT: "AMZN", AMZN: "WMT", AAPL: "MSFT", MSFT: "AAPL" };
   var MONTHLY = { lt50: "Under €50", "50-200": "€50–200", "200-1000": "€200–1,000", gt1000: "Over €1,000" };
+  // Values questions. The labels are the team's wording; a mission moves its sub-sectors up in the feed.
+  var VISION = { sustainability: "Sustainability", innovation: "Innovation", social: "Social impact", growth: "Long-term growth" };
+  var MISSION = { climate: "Climate action", health: "Health and science", tech: "Accessible technology", education: "Education and knowledge", fair: "Fair and inclusive society" };
+  var MISSION_SUBS = {
+    climate: ["Power producers, including renewables", "Electricity", "Cars"],
+    health: ["Pharmaceuticals", "Biotech", "Medical devices and health services"],
+    tech: ["Software", "Hardware and devices", "Search and social media"],
+    education: ["Search and social media", "Software", "Entertainment and streaming"],
+    fair: ["Banks", "Payments and financial services", "Supermarkets and everyday retail"]
+  };
+  var OUTLOOK = { commitment: "Long-term commitment", strategy: "Clear strategy", transparency: "Full transparency", both: "Purpose and performance" };
   var ASSET = { Companies: "Companies", ETFs: "ETFs", Funds: "Mutual funds" };
 
   var GLOSSARY = {
@@ -755,7 +766,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
   var S = {
     screen: "welcome", step: 0,
     user: { name: "", email: "", terms: false, verified: false, kyc: false },
-    prefs: { setup: "quick", level: "new", assets: ["Companies"], sectors: ["Software", "Semiconductors and chip equipment", "Pharmaceuticals", "Food and drinks"], esg: "lot", risk: null,
+    prefs: { setup: "quick", level: "new", assets: ["Companies"], vision: null, mission: [], outlook: null, sectors: ["Software", "Semiconductors and chip equipment", "Pharmaceuticals", "Food and drinks"], esg: "lot", risk: null,
              terms: true, monthly: null, size: ["Large", "Mid-size", "Small"], emerging: null, rival: false, country: null, newtech: null,
              age: null, products: null, productsText: "", carbon: false, women: false,
              hide: HIDEABLE.slice(), legal: true, founder: null, popups: true, shareAmounts: false },
@@ -772,7 +783,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     bot: null, reportShown: false, reportFresh: false
   };
   var PREF_DEFAULTS = JSON.stringify(S.prefs);  // "Skip" on a question puts its default answer back
-  var SKIP_FROM = 8;  // questions 9 and later can be skipped
+  function canSkip(key) { return FULL_EXTRA.indexOf(key) >= FULL_EXTRA.indexOf("risk"); }  // the risk question and the ones after it
 
   /* ---------------------------------------------------------------- backend (when served by the FastAPI app) */
   // On claude.ai the page runs on its embedded data. Served by backend/app.py it uses the API:
@@ -875,6 +886,8 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     if (S.prefs.emerging === "no" && EMERGING.indexOf(c.id) >= 0) w *= 0.5;
     if (S.prefs.products === "yes" && CONSUMER.indexOf(c.id) >= 0) w *= 1.2;
     if (productHit(c.id)) w *= 1.8;
+    if (S.prefs.vision === "innovation" && INNOVATION.indexOf(c.id) >= 0) w *= 1.2;
+    if (S.prefs.mission.some(function (m) { return MISSION_SUBS[m].indexOf(c.subsector) >= 0; })) w *= 1.4;
     return w * (0.6 + Math.random() * 0.8);  // a little randomness keeps other sectors in view
   }
   function pickNext() {
@@ -966,6 +979,12 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       options: [["new", "No, never", "Beginner mode"], ["basics", "Yes, a little", "Only explain the tricky stuff"], ["pro", "Yes, I’m experienced", "No pop-ups, more data"]] },
     assets: { title: "What do you want to swipe?", help: "Pick one or more.", multi: true,
       options: [["Companies", "Companies", "One business, one share"], ["ETFs", "ETFs", "A basket of companies in one share"], ["Funds", "Mutual funds", "A basket picked by a fund manager"]] },
+    vision: { title: "What matters most in a company’s vision?",
+      options: Object.keys(VISION).map(function (k) { return [k, VISION[k], ""]; }) },
+    mission: { title: "Which mission would you back?", help: "Pick one or more. Companies working on them move up in your feed.", multi: true,
+      options: Object.keys(MISSION).map(function (k) { return [k, MISSION[k], ""]; }) },
+    outlook: { title: "How do you see your investment?", note: "No right answer. It never changes which companies you see.",
+      options: Object.keys(OUTLOOK).map(function (k) { return [k, OUTLOOK[k], ""]; }) },
     sectors: { title: "Which sectors do you want to see?", help: "Tap a sector to see its sub-sectors, then pick as many as you like. You’ll still see a few others now and then." },
     esg: { title: "Are you interested in ESG investing?",
       helpHtml: '<strong>ESG</strong> = <span class="hl">Environment</span>, <span class="hl">Social</span>, <span class="hl">Governance</span>: ' +
@@ -996,7 +1015,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     carbon: { title: "Do you want to see each company’s carbon footprint?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] },
     women: { title: "Do you want to see the share of women in leadership?", options: [[true, "Yes", "Shown on the company card"], [false, "No", ""]] }
   };
-  var QUICK_STEPS = ["level", "assets", "sectors", "esg", "hide"];
+  var QUICK_STEPS = ["level", "assets", "vision", "mission", "outlook", "sectors", "esg", "hide"];
   var FULL_EXTRA = ["legal", "terms", "monthly", "risk", "size", "emerging", "rival", "country", "newtech", "age", "products", "carbon", "women"];
   function steps() { return S.prefs.setup === "full" ? QUICK_STEPS.concat(FULL_EXTRA) : QUICK_STEPS; }
   function setup() {
@@ -1063,7 +1082,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     quizPct = pct;
     return '<section class="screen' + (JUST.step ? " step-in" + (JUST.step === "back" ? " back" : "") : "") + '">' +
       '<div class="progress"><div class="progress-top"><p class="eyebrow">' + (S.step + 1) + " / " + list.length + "</p>" +
-      (S.step >= SKIP_FROM ? '<button class="link-btn skip-q" type="button" data-action="skipQuestion">Skip</button>' : "") + "</div>" +
+      (canSkip(key) ? '<button class="link-btn skip-q" type="button" data-action="skipQuestion">Skip</button>' : "") + "</div>" +
       '<div class="progress-track"><div class="progress-fill" style="width:' + from + '%" data-grow="' + pct + '%"></div></div></div>' +
       '<h2 class="display">' + esc(q.title) + "</h2>" +
       (q.helpHtml ? '<p class="lead def">' + q.helpHtml + "</p>" : q.help ? '<p class="lead">' + esc(q.help) + "</p>" : "") + body +
@@ -1077,6 +1096,9 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       '<p class="lead">Here’s what shapes it. Your swipes keep adjusting it.</p><dl class="rows">' +
       row("Level", esc(LEVEL[S.prefs.level]) + (S.prefs.popups ? " · pop-ups on" : "")) +
       row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
+      row("What matters most", S.prefs.vision ? esc(VISION[S.prefs.vision]) : "Not answered") +
+      row("Missions", esc(S.prefs.mission.map(function (m) { return MISSION[m]; }).join(", ") || "None")) +
+      row("Your investment", S.prefs.outlook ? esc(OUTLOOK[S.prefs.outlook]) : "Not answered") +
       row("Sectors", esc(sectorSummary() || "None")) + row("ESG", esc(ESG[S.prefs.esg])) + row("Hidden", esc(hidden)) +
       (S.prefs.setup === "full" ? row("Monthly budget", S.prefs.monthly ? esc(MONTHLY[S.prefs.monthly]) : "Skipped") +
         row("Rivals back to back", S.prefs.rival ? "On" : "Off") + row("On cards", esc(cardExtras().join(", ") || "Essentials only")) : "") +
@@ -1755,7 +1777,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       '<h3 class="section-title">My feed answers</h3><dl class="rows">' +
       row("Setup length", S.prefs.setup === "quick" ? 'Quick (' + QUICK_STEPS.length + ') · <button class="link-btn" type="button" data-action="moreQuestions">Switch to full</button>' : "Full (" + (QUICK_STEPS.length + FULL_EXTRA.length) + ")") +
       row("How new am I", esc(LEVEL[S.prefs.level])) + row("Swiping", esc(S.prefs.assets.map(function (a) { return ASSET[a]; }).join(", "))) +
-      row("Sectors, ESG, risk…", '<button class="link-btn" type="button" data-action="editAnswers">Edit ›</button>') + "</dl>" +
+      row("Values, sectors, ESG…", '<button class="link-btn" type="button" data-action="editAnswers">Edit ›</button>') + "</dl>" +
       '<h3 class="section-title">App</h3><dl class="rows">' + row("Theme", "Dark") + row("Concept pop-ups", switchBtn("togglePopups", S.prefs.popups, "Concept pop-ups")) + "</dl>" +
       '<h3 class="section-title">Identity check</h3><dl class="rows">' + row("Status", S.user.kyc ? "Done (demo)" : "Not done yet") + "</dl>" +
       '<div class="btn-col"><button class="btn ghost" type="button" data-action="about">How the cards are made</button>' +

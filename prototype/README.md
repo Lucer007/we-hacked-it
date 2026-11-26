@@ -7,8 +7,11 @@ Screens follow the wireframe v2 (https://claude.ai/artifact/24yQRUjVSvunEx8p1i6B
 
 1. Welcome → Create account (Apple / Google / email, front-end only) → Verify email (any 6 digits).
    "I already have an account" signs in a demo user (Camille) and goes straight to the feed: handy for the video.
-2. Quick (6) or Full (8) setup: how new, what to swipe, sectors, ESG, risk (€100 → €80), hidden sectors
-   (+ controversies and founder-led in Full) → Feed ready → How it works (brand-new users).
+2. Quick (8) or Full (21) setup: how new, what to swipe, values (what matters most in a company's vision,
+   which mission you'd back, how you see your investment), sectors, ESG, hidden sectors (+ 13 more in Full:
+   controversies, risk, budget, rivals…) → Feed ready → How it works (brand-new users).
+   A mission moves its sub-sectors up in the feed (`MISSION_SUBS` in the template); "How do you see your
+   investment?" changes nothing in the ranking.
 3. Discover: filter chips, one card you scroll down (no flip), pass/undo, Tune your feed.
 4. Reveal + "New word" pop-up → amount → ID check (first buy, demo) → review with the risk checkbox →
    share with friends → Social.
