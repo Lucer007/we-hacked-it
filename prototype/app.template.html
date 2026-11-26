@@ -958,7 +958,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
     S.owned = {}; Object.keys(DEMO_PORTFOLIO).forEach(function (t) { S.owned[t] = DEMO_PORTFOLIO[t]; });
     S.portfolio = null; S.expanded = {};
     resetFeed(); S.current = pickNext();
-    go("wishlist");
+    go("discover");
     toast("Signed in as Warren (demo account).", false);
   }
   function verify() {

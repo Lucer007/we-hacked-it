@@ -6,7 +6,7 @@
 Screens follow the wireframe v2 (https://claude.ai/artifact/24yQRUjVSvunEx8p1i6BbY):
 
 1. Welcome → Create account (Apple / Google / email, front-end only) → Verify email (any 6 digits).
-   "I already have an account" signs in a demo user (Camille) and goes straight to the feed: handy for the video.
+   "I already have an account" signs in the demo user (Warren / admin) and goes straight to the feed: handy for the video.
 2. Quick (8) or Full (21) setup: how new, what to swipe, values (what matters most in a company's vision,
    which mission you'd back, how you see your investment), sectors, ESG, hidden sectors (+ 13 more in Full:
    controversies, risk, budget, rivals…) → Feed ready → How it works (brand-new users).
