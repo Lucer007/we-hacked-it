@@ -1,0 +1,11 @@
+# Netlify serves the standalone prototype page (prototype/index.html, built from app.template.html
+# by build_prototype.py and committed). No build step: the page embeds its data and falls back to it
+# when the FastAPI backend is not there.
+[build]
+  publish = "prototype"
+  command = ""
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
