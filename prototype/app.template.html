@@ -620,6 +620,18 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 .discover.immersive .actions .round { pointer-events: auto; }
 .card-meta { display: flex; flex-direction: column; gap: 3px; }
 .app:has(.discover.immersive .actions) .toast { bottom: 176px; }  /* above the floating swipe buttons */
+/* No margin around the card: on Discover it runs edge to edge, from the header down to the tabs. The header,
+   the tabs and the filters keep the usual side margin (--gutter), so nothing moves when you switch tabs. */
+.app { --gutter: 16px; }
+body:has(.discover.immersive) { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.app:has(.discover.immersive) { padding-inline: 0; }
+.app:has(.discover.immersive) .topbar, .app:has(.discover.immersive) .tabs { margin-inline: var(--gutter); }
+.app:has(.discover.immersive) .toast { left: var(--gutter); right: var(--gutter); }
+main#view:has(.discover.immersive) { padding-block: 0; }
+.discover.immersive .card { border-radius: 0; border-width: 0; box-shadow: none; }
+.discover.immersive .card-body { padding-inline: var(--gutter); }
+.discover.immersive .filters { left: var(--gutter); right: var(--gutter); }
+@media (min-width: 720px) and (min-height: 600px) { .app { --gutter: 18px; } }
 .card-meta .why { text-align: left; }
 
 /* Short phone screens (iPhone SE, a browser with both toolbars showing): slimmer header, tabs and swipe
@@ -1154,7 +1166,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       (f.tagline ? '<p class="tagline">' + esc(f.tagline) + "</p>" : "") + "</div></div>" +
       '<div class="chips"><span class="chip">' + esc(c.sector) + '</span><span class="chip soft">' + esc(c.subsector) + "</span>" +
       (p.founder_led === "Yes" ? '<span class="chip soft">Founder-led</span>' : "") + "</div>" + (meta || "") +
-      '<dl class="facts">' + fact("CEO", f.ceo) + fact("Staff", f.employees) + fact("HQ", f.headquarters) + fact("Founded", p.founded) + "</dl>";
+      '<dl class="facts">' + fact("CEO", f.ceo) + fact("HQ", f.headquarters) + "</dl>";  // staff and founding year: company page
     if (f.mission) html += '<figure class="quote-block"><p class="eyebrow">Mission</p><p>“' + esc(f.mission) + "”</p>" + source(c, "mission") + "</figure>";
     if (f.what_they_do) html += '<div class="back-section"><h3>What they do</h3><p class="body-text">' + esc(f.what_they_do) + "</p>" + source(c, "what_they_do") + "</div>";
     html += '<p class="fine center">No ticker or price yet. Swipe right to see them, with the key numbers and risks.</p>';
@@ -1179,7 +1191,7 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       ? '<ul class="items">' + b.legal_matters.map(function (m, i) { return "<li><span>" + esc(m) + "</span>" + source(c, "legal_matters", i) + "</li>"; }).join("") + "</ul>"
       : '<p class="fine">No major case singled out in the report’s legal section.</p>') + "</div>";
     var origin = [["CEO", "ceo"], ["Staff", "employees"], ["Tagline", "tagline"]].filter(function (x) { return c.sources[x[1]]; });
-    if (origin.length) html += '<div class="back-section"><h3>Where the card’s facts come from</h3><ul class="items">' +
+    if (origin.length) html += '<div class="back-section"><h3>Where the company facts come from</h3><ul class="items">' +
       origin.map(function (x) { return "<li><span>" + x[0] + "</span>" + source(c, x[1]) + "</li>"; }).join("") + "</ul></div>";
     return html;
   }
@@ -1246,7 +1258,9 @@ canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
       priceChart(c) + (S.prefs.risk === "sell" ? risksSection(c) : "") +
       '<div class="back-section"><h3>Key numbers</h3>' + keyNumbers(c) + "</div>" +
       (LIVE ? '<div id="history"><p class="fine">Loading 5 years from the API…</p></div>' : "") +
-      '<dl class="rows">' + row("Size", esc(c.back.profile.size)) + row("Dividend", div ? esc(div) : "Not in our data") + "</dl>" +
+      '<dl class="rows">' + row("Staff", c.front.employees ? esc(c.front.employees) : "Not stated in the report") +
+      row("Founded", c.back.profile.founded ? esc(c.back.profile.founded) : "Not stated in the report") +
+      row("Size", esc(c.back.profile.size)) + row("Dividend", div ? esc(div) : "Not in our data") + "</dl>" +
       companyDetails(c) +
       '<p class="notice">Shown because of your answers, not a recommendation. Not financial advice. You can lose money.</p>' +
       '<div class="btn-row"><button class="btn" type="button" data-action="wish"' + (inList ? " disabled" : "") + ">" + (inList ? "✓ Wishlist" : "♡ Wishlist") + "</button>" +
